@@ -11,6 +11,7 @@ class ProfileList(generics.ListAPIView):
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     '''
+    Profile data can be updated
     '''
     serializer_class = ProfileSerializer
     queryset = Profile.objects.all()
