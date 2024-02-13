@@ -39,6 +39,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['8000-mbilalqures-versusdrfm5-4cxk4y1ngbb.ws-us108.gitpod.io']
 
+CSRF_TRUSTED_ORIGINS=['https://8000-mbilalqures-versusdrfm5-4cxk4y1ngbb.ws-us108.gitpod.io']
 
 # Application definition
 
