@@ -27,3 +27,11 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ['id', 'owner', 'is_owner', 'profile_id', 'profile_image', 'product', 'created_at', 'updated_at', 'content']
+
+class CommentDetailSerializer(CommentSerializer):
+    """
+    Serializer for the Comment model used in Detail view
+    Product is a read only field so that we dont have to set it on each update
+    product is already in comment model so direct associan. we'll say like product.id
+    """
+    product = serializers.ReadOnlyField(source='product.id')
