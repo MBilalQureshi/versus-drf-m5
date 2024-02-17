@@ -42,8 +42,24 @@ ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOST')]
 
 CSRF_TRUSTED_ORIGINS=[os.environ.get('CSRF_TRUSTED_ORIGINS')]
 
+# use session if in development, use JWT Tokens IF IN PRODUCTION
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [(
+        'rest_framework.authentication.SessionAuthentication'
+        if 'DEV' in os.environ
+        else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
+    )],
+    }
+
+REST_USE_JWT = True
+JWT_AUTH_SECURE = True
+JWT_AUTH_COOKIE = 'my-app-auth'
+JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
+
 # Now that we have the two parts of our application within the same workspace, the CORS issues with the original separate projects are no longer a problem. This is because both parts of the project will come from the same base URL. Therefore, we can remove most of the code in the Django project relating to CORS.
-# CORS_ALLOWED_ORIGINS = [os.environ.get('CLIENT_ORIGIN')]
+CORS_ALLOWED_ORIGINS = [os.environ.get('CLIENT_ORIGIN')]
+
+SITE_ID = 1
 
 # Application definition
 
@@ -57,6 +73,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'rest_framework',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
 
     'profiles',
     'products',
