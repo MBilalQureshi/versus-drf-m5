@@ -43,7 +43,7 @@ ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOST')]
 CSRF_TRUSTED_ORIGINS=[os.environ.get('CSRF_TRUSTED_ORIGINS')]
 
 # Now that we have the two parts of our application within the same workspace, the CORS issues with the original separate projects are no longer a problem. This is because both parts of the project will come from the same base URL. Therefore, we can remove most of the code in the Django project relating to CORS.
-CORS_ALLOWED_ORIGINS = [os.environ.get('CLIENT_ORIGIN')]
+# CORS_ALLOWED_ORIGINS = [os.environ.get('CLIENT_ORIGIN')]
 
 # Application definition
 
