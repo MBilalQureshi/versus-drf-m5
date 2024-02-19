@@ -17,4 +17,4 @@ import axios from 'axios'
 // as this is the type of data our API will be expecting, and multipart because there is images other than text
 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data'
 // To avoid CORS errors while sending cookies
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true;

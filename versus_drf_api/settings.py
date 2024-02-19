@@ -42,6 +42,10 @@ ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOST'),'localhost']
 
 CSRF_TRUSTED_ORIGINS=[os.environ.get('CSRF_TRUSTED_ORIGINS')]
 
+# CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:8000/'
+# ]
+
 # use session if in development, use JWT Tokens IF IN PRODUCTION
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [(
@@ -101,6 +105,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'versus_drf_api.urls'
