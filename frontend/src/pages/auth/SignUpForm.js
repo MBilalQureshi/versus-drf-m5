@@ -36,11 +36,11 @@ const SignUpForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try{
-            const csrfToken = document.cookie.match(/csrftoken=([^ ;]+)/)[1];
-            await axios.post('/dj-rest-auth/registration/', signUpData,{
-                headers: {
-                'X-CSRFToken': csrfToken,
-                },})
+            // const csrfToken = document.cookie.match(/csrftoken=([^ ;]+)/)[1];
+            await axios.post('/dj-rest-auth/registration/', signUpData)//,{
+                // headers: {
+                // 'X-CSRFToken': csrfToken,
+                // },})
           history.push('/signin')
         } catch(err){
           // This code with the question mark is called  optional chaining. What it does is check if  

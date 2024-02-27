@@ -49,11 +49,11 @@ function SignInForm() {
         //so that the page doesn’t refresh.
         event.preventDefault()
         try{
-            const csrfToken = document.cookie.match(/csrftoken=([^ ;]+)/)[1];
-            await axios.post("/dj-rest-auth/login/", signInData,{
-                headers: {
-                'X-CSRFToken': csrfToken,
-                },})
+            // const csrfToken = document.cookie.match(/csrftoken=([^ ;]+)/)[1];
+            await axios.post("/dj-rest-auth/login/", signInData)//,{
+                // headers: {
+                // 'X-CSRFToken': csrfToken,
+                // },})
             // const {data} = await axios.post('/dj-rest-auth/login/',signInData)
             // setting curent user value fetched from drf API
             // setCurrentUser(data.user)
@@ -86,7 +86,7 @@ function SignInForm() {
                 value={username} />
             </Form.Group>
             {errors.username?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>message</Alert>
+                <Alert variant="warning" key={idx}>{message}</Alert>
             ))}
 
             <Form.Group controlId="password">
@@ -96,7 +96,7 @@ function SignInForm() {
                 value={password} />
             </Form.Group>
             {errors.password?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>message</Alert>
+                <Alert variant="warning" key={idx}>{message}</Alert>
             ))}
 
             <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`} variant="primary" type="submit">
