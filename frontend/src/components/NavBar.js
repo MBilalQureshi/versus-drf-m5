@@ -8,11 +8,32 @@ import Nav from 'react-bootstrap/Nav'
 import logo from '../assets/versus-logo.png'
 import styles from '../styles/NavBar.module.css'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
-import { useCurrentUserContext } from '../contexts/CurrentUserContext'
+import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext'
+import axios from 'axios'
 
 const NavBar = () => {
-  const currentUser = useCurrentUserContext()
-  const loggedInIcons = <>{currentUser?.username}</>
+  const currentUser = useCurrentUser()
+  const setCurrentUser = useSetCurrentUser()
+  const handleSignOut = async() => {
+    try{
+      const csrfToken = document.cookie.match(/csrftoken=([^ ;]+)/)[1];
+      axios.post('dj-rest-auth/logout/', {
+        headers: {
+          'X-CSRFToken': csrfToken,
+        },
+      })
+      setCurrentUser(null)
+    }catch(err){
+      console.log(err.response?.data)
+    }
+  }
+  // const loggedInIcons = <>{currentUser?.username}</>
+  const loggedInIcons = (
+    <>
+      {/* Add remaining links after logout task */}
+      <NavLink to='/' className={styles.NavLink} activeClassName={styles.Active} onClick={handleSignOut}>Sign out</NavLink>
+    </>
+    )
   const loggedOutIcons = (
     <>
       <NavLink to='/signin' className={styles.NavLink} activeClassName={styles.Active}>Sign in</NavLink>

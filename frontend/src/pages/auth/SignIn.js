@@ -14,7 +14,7 @@ import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import axios from "axios";
-import { useSetCurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 // import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 // import { useRedirect } from "../../hooks/useRedirect";
 // import { setTokenTimestamp } from "../../utils/utils";
@@ -23,7 +23,7 @@ function SignInForm() {
 
     // const setCurrentUser = useContext(SetCurrentUserContext)
     //we'll change above code to below as its now defined in CurrentUserContext.js
-    const setCurrentUser = useSetCurrentUserContext()
+    const setCurrentUser = useSetCurrentUser()
 
     /**
      * So, in the SignInForm component, we’ll auto-import our useRedirect

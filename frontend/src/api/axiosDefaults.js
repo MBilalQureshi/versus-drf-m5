@@ -18,6 +18,8 @@ import axios from 'axios'
 axios.defaults.headers.post['Content-Type'] = 'multipart/form-data'
 // To avoid CORS errors while sending cookies
 axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
 
 export const axiosRes = axios.create();
 
