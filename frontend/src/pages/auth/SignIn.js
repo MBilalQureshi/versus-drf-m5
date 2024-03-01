@@ -14,6 +14,7 @@ import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import axios from "axios";
+import { useSetCurrentUserContext } from "../../contexts/CurrentUserContext";
 // import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 // import { useRedirect } from "../../hooks/useRedirect";
 // import { setTokenTimestamp } from "../../utils/utils";
@@ -22,7 +23,7 @@ function SignInForm() {
 
     // const setCurrentUser = useContext(SetCurrentUserContext)
     //we'll change above code to below as its now defined in CurrentUserContext.js
-    // const setCurrentUser = useSetCurrentUser()
+    const setCurrentUser = useSetCurrentUserContext()
 
     /**
      * So, in the SignInForm component, we’ll auto-import our useRedirect
@@ -50,13 +51,13 @@ function SignInForm() {
         event.preventDefault()
         try{
             // const csrfToken = document.cookie.match(/csrftoken=([^ ;]+)/)[1];
-            await axios.post("/dj-rest-auth/login/", signInData)//,{
+            // await axios.post("/dj-rest-auth/login/", signInData)//,{
                 // headers: {
                 // 'X-CSRFToken': csrfToken,
                 // },})
-            // const {data} = await axios.post('/dj-rest-auth/login/',signInData)
+            const {data} = await axios.post('/dj-rest-auth/login/',signInData)
             // setting curent user value fetched from drf API
-            // setCurrentUser(data.user)
+            setCurrentUser(data.user)
 
             // Now this function should extract the expiry date from the access token and save it to the user's browser in local storage.
             // setTokenTimestamp(data);

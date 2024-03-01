@@ -8,8 +8,17 @@ import Nav from 'react-bootstrap/Nav'
 import logo from '../assets/versus-logo.png'
 import styles from '../styles/NavBar.module.css'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
+import { useCurrentUserContext } from '../contexts/CurrentUserContext'
 
 const NavBar = () => {
+  const currentUser = useCurrentUserContext()
+  const loggedInIcons = <>{currentUser?.username}</>
+  const loggedOutIcons = (
+    <>
+      <NavLink to='/signin' className={styles.NavLink} activeClassName={styles.Active}>Sign in</NavLink>
+      <NavLink to='/signup' className={styles.NavLink} activeClassName={styles.Active}>Sign up</NavLink>
+    </>
+  )
   return (
       <Navbar className={styles.NavBar} expand="md" fixed='top'>
           <Container>
@@ -22,8 +31,7 @@ const NavBar = () => {
               <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="ml-auto text-left">
                       <NavLink exact to='/' className={styles.NavLink} activeClassName={styles.Active}>Home</NavLink>
-                      <NavLink to='/signin' className={styles.NavLink} activeClassName={styles.Active}>Sign in</NavLink>
-                      <NavLink to='/signup' className={styles.NavLink} activeClassName={styles.Active}>Sign up</NavLink>
+                      {currentUser ? loggedInIcons : loggedOutIcons}
                       <NavLink to='' className={styles.NavLink} activeClassName={styles.Active}>Contact</NavLink>
                       <NavLink to='' className={styles.NavLink} activeClassName={styles.Active}>About Us</NavLink>
                   </Nav>

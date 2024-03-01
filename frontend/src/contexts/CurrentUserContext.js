@@ -1,5 +1,5 @@
 import axios from "axios"
-import { createContext, useContext, useEffect } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 
 export const CurrentUserContext = createContext()
 export const SetCurrentUserContext = createContext()
@@ -15,7 +15,7 @@ export const CurrentUserProvider = ({children}) => {
             const {data} = await axios.get('dj-rest-auth/user/')
             setCurrentUser(data)
         } catch(err){
-            console.log(err)
+            console.log(err.response?.data)
         }
     }
 
@@ -25,9 +25,9 @@ export const CurrentUserProvider = ({children}) => {
 
     return(
         <CurrentUserContext.Provider value={currentUser}>
-            <SetCurrentUserContext>
+            <SetCurrentUserContext.Provider value={setCurrentUser}>
                 {children}
-            </SetCurrentUserContext>
+            </SetCurrentUserContext.Provider>
         </CurrentUserContext.Provider>
     )
 }
