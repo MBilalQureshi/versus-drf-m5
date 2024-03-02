@@ -40,7 +40,7 @@ DEBUG = 'DEBUG' in os.environ
 
 ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOST'),'localhost']
 
-CSRF_TRUSTED_ORIGINS=[os.environ.get('CSRF_TRUSTED_ORIGINS')]
+CSRF_TRUSTED_ORIGINS=[os.environ.get('CSRF_TRUSTED_ORIGINS'),'http://localhost:8000/']
 
 # CORS_ORIGIN_WHITELIST = [
 #     'http://localhost:8000/'

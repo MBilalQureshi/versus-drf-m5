@@ -16,18 +16,17 @@ const NavBar = () => {
   const setCurrentUser = useSetCurrentUser()
   const handleSignOut = async() => {
     try{
-      const csrfToken = document.cookie.match(/csrftoken=([^ ;]+)/)[1];
-      axios.post('dj-rest-auth/logout/', {
-        headers: {
-          'X-CSRFToken': csrfToken,
-        },
-      })
+      await axios.post('dj-rest-auth/logout/')
       setCurrentUser(null)
     }catch(err){
       console.log(err.response?.data)
     }
   }
-  // const loggedInIcons = <>{currentUser?.username}</>
+
+  const addPostIcon = (
+    <NavLink className={styles.NavLink} activeClassName={styles.Active} to='/posts/create'><i className="far fa-plus-square"></i>Add Post</NavLink>
+  ) 
+
   const loggedInIcons = (
     <>
       {/* Add remaining links after logout task */}
@@ -48,18 +47,16 @@ const NavBar = () => {
                 <img src={logo} alt='versus logo' height={75} width={75}/>
               </Navbar.Brand>
               </NavLink>
+
+              {/* Current logged in user Icon */}
+              {currentUser && addPostIcon}
+
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="ml-auto text-left">
                       <NavLink exact to='/' className={styles.NavLink} activeClassName={styles.Active}>Home</NavLink>
                       {currentUser ? loggedInIcons : loggedOutIcons}
-                      <NavLink to='' className={styles.NavLink} activeClassName={styles.Active}>Contact</NavLink>
-                      <NavLink to='' className={styles.NavLink} activeClassName={styles.Active}>About Us</NavLink>
                   </Nav>
-                  {/* <Form inline> */}
-                    {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" /> */}
-                    {/* <Button variant="outline-success"><i class="fa-solid fa-magnifying-glass"></i></Button> */}
-                  {/* </Form> */}
               </Navbar.Collapse>
           </Container>
       </Navbar>
