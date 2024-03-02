@@ -30,15 +30,16 @@ const NavBar = () => {
 
   const loggedInIcons = (
     <>
-      {/* Add remaining links after logout task */}
-      <NavLink to='/' className={styles.NavLink} activeClassName={styles.Active} onClick={handleSignOut}>Sign out</NavLink>
+      <NavLink className={styles.NavLink} activeClassName={styles.Active} to='/feed'><i className="fas fa-stream"></i>Feed</NavLink>
+      <NavLink className={styles.NavLink} activeClassName={styles.Active} to='/voted'><i className="fas fa-heart"></i>Voted</NavLink>
+      <NavLink to='/' className={styles.NavLink} activeClassName={styles.Active} onClick={handleSignOut}><i className="fas fa-sign-out-alt"></i>Sign out</NavLink>
       <NavLink className={styles.NavLink} to={`/profiles/${currentUser?.profile_id}`}><Avatar src={currentUser?.profile_image} text={currentUser?.username} height={40} /></NavLink>
     </>
     )
   const loggedOutIcons = (
     <>
-      <NavLink to='/signin' className={styles.NavLink} activeClassName={styles.Active}>Sign in</NavLink>
-      <NavLink to='/signup' className={styles.NavLink} activeClassName={styles.Active}>Sign up</NavLink>
+      <NavLink to='/signin' className={styles.NavLink} activeClassName={styles.Active}><i className="fa-solid fa-right-to-bracket"></i>Sign in</NavLink>
+      <NavLink to='/signup' className={styles.NavLink} activeClassName={styles.Active}><i className="fa-solid fa-user-plus"></i>Sign up</NavLink>
     </>
   )
   return (
@@ -56,7 +57,7 @@ const NavBar = () => {
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="ml-auto text-left">
-                      <NavLink exact to='/' className={styles.NavLink} activeClassName={styles.Active}>Home</NavLink>
+                      <NavLink exact to='/' className={styles.NavLink} activeClassName={styles.Active}><i className="fa-solid fa-house"></i>Home</NavLink>
                       {currentUser ? loggedInIcons : loggedOutIcons}
                   </Nav>
               </Navbar.Collapse>
