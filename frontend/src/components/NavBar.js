@@ -10,6 +10,7 @@ import styles from '../styles/NavBar.module.css'
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext'
 import axios from 'axios'
+import Avatar from './Avatar'
 
 const NavBar = () => {
   const currentUser = useCurrentUser()
@@ -31,6 +32,7 @@ const NavBar = () => {
     <>
       {/* Add remaining links after logout task */}
       <NavLink to='/' className={styles.NavLink} activeClassName={styles.Active} onClick={handleSignOut}>Sign out</NavLink>
+      <NavLink className={styles.NavLink} to={`/profiles/${currentUser?.profile_id}`}><Avatar src={currentUser?.profile_image} text={currentUser?.username} height={40} /></NavLink>
     </>
     )
   const loggedOutIcons = (

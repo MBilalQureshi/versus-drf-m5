@@ -62,7 +62,7 @@ JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 
 # overrides default USER_DETAILS_SERIALIZER
 REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'drf_api.serializers.CurrentUserSerializer'
+    'USER_DETAILS_SERIALIZER': 'versus_drf_api.serializers.CurrentUserSerializer'
 }
 
 # Now that we have the two parts of our application within the same workspace, the CORS issues with the original separate projects are no longer a problem. This is because both parts of the project will come from the same base URL. Therefore, we can remove most of the code in the Django project relating to CORS.
