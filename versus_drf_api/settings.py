@@ -60,8 +60,9 @@ JWT_AUTH_SECURE = True
 JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 
-# overrides default USER_DETAILS_SERIALIZER
-REST_AUTH_SERIALIZERS = {
+# overrides default USER_DETAILS_SERIALIZER https://dj-rest-auth.readthedocs.io/en/latest/configuration.html
+REST_AUTH = {
+    # 'USER_DETAILS_SERIALIZER': 'dj_rest_auth.serializers.UserDetailsSerializer',
     'USER_DETAILS_SERIALIZER': 'versus_drf_api.serializers.CurrentUserSerializer'
 }
 

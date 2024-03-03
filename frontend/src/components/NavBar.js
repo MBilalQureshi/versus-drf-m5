@@ -32,10 +32,10 @@ const NavBar = () => {
     <>
       <NavLink className={styles.NavLink} activeClassName={styles.Active} to='/feed'><i className="fas fa-stream"></i>Feed</NavLink>
       <NavLink className={styles.NavLink} activeClassName={styles.Active} to='/voted'><i className="fas fa-heart"></i>Voted</NavLink>
-      <NavLink to='/' className={styles.NavLink} activeClassName={styles.Active} onClick={handleSignOut}><i className="fas fa-sign-out-alt"></i>Sign out</NavLink>
+      <NavLink to='/' className={styles.NavLink} onClick={handleSignOut}><i className="fas fa-sign-out-alt"></i>Sign out</NavLink>
       <NavLink className={styles.NavLink} to={`/profiles/${currentUser?.profile_id}`}><Avatar src={currentUser?.profile_image} text={currentUser?.username} height={40} /></NavLink>
     </>
-    )
+  )
   const loggedOutIcons = (
     <>
       <NavLink to='/signin' className={styles.NavLink} activeClassName={styles.Active}><i className="fa-solid fa-right-to-bracket"></i>Sign in</NavLink>
