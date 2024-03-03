@@ -57,13 +57,16 @@ REST_FRAMEWORK = {
 
 REST_USE_JWT = True
 JWT_AUTH_SECURE = True
-JWT_AUTH_COOKIE = 'my-app-auth'
-JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
+# JWT_AUTH_COOKIE = 'my-app-auth'
+# JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 
 # overrides default USER_DETAILS_SERIALIZER https://dj-rest-auth.readthedocs.io/en/latest/configuration.html
 REST_AUTH = {
     # 'USER_DETAILS_SERIALIZER': 'dj_rest_auth.serializers.UserDetailsSerializer',
-    'USER_DETAILS_SERIALIZER': 'versus_drf_api.serializers.CurrentUserSerializer'
+    'USE_JWT': True,
+    'USER_DETAILS_SERIALIZER': 'versus_drf_api.serializers.CurrentUserSerializer',
+    'JWT_AUTH_COOKIE': 'my-app-auth',
+    'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',
 }
 
 # Now that we have the two parts of our application within the same workspace, the CORS issues with the original separate projects are no longer a problem. This is because both parts of the project will come from the same base URL. Therefore, we can remove most of the code in the Django project relating to CORS.

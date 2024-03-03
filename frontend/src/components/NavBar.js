@@ -24,8 +24,10 @@ const NavBar = () => {
     }
   }
 
+  // console.log(currentUser)
+
   const addPostIcon = (
-    <NavLink className={styles.NavLink} activeClassName={styles.Active} to='/posts/create'><i className="far fa-plus-square"></i>Add Post</NavLink>
+    <NavLink className={styles.NavLink} activeClassName={styles.Active} to='/posts/create'><i className="far fa-plus-square"></i>Add Product</NavLink>
   ) 
 
   const loggedInIcons = (
