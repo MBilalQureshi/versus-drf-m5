@@ -50,6 +50,7 @@ function SignInForm() {
         //so that the page doesn’t refresh.
         event.preventDefault()
         try{
+          console.log('signInData: ', signInData)
             // const csrfToken = document.cookie.match(/csrftoken=([^ ;]+)/)[1];
             // await axios.post("/dj-rest-auth/login/", signInData)//,{
                 // headers: {
@@ -70,8 +71,8 @@ function SignInForm() {
             // history.goBack()
         }
         catch(err){
+          console.log(err.response?.data.detail)
             setErrors(err.response?.data)
-            console.log(err.response?.data.detail)
         }
     }
   return (

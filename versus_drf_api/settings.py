@@ -55,8 +55,8 @@ REST_FRAMEWORK = {
     )],
     }
 
-REST_USE_JWT = True
-JWT_AUTH_SECURE = True
+# REST_USE_JWT = True
+# JWT_AUTH_SECURE = True
 # JWT_AUTH_COOKIE = 'my-app-auth'
 # JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 
@@ -64,6 +64,7 @@ JWT_AUTH_SECURE = True
 REST_AUTH = {
     # 'USER_DETAILS_SERIALIZER': 'dj_rest_auth.serializers.UserDetailsSerializer',
     'USE_JWT': True,
+    'JWT_AUTH_SECURE': True,
     'USER_DETAILS_SERIALIZER': 'versus_drf_api.serializers.CurrentUserSerializer',
     'JWT_AUTH_COOKIE': 'my-app-auth',
     'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',
