@@ -53,6 +53,14 @@ REST_FRAMEWORK = {
         if 'DEV' in os.environ
         else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
     )],
+    # Pagination is really easy to set up  with REST Framework. In settings.py, 
+    # I’ll set it to PageNumberPagination with the page  size set to ten inside the REST_FRAMEWORK object.
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE' : 10,
+    # e.g 02 Aug 2024 https://www.django-rest-framework.org/api-guide/settings/#date-and-time-formatting
+    # https://docs.python.org/3/library/time.html#time.strftime
+    'DATETIME_FORMAT' : '%d %b %Y'
     }
 
 # REST_USE_JWT = True
