@@ -16,7 +16,7 @@ import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
+
 
 function PostCreateForm() {
   const [errors, setErrors] = useState({});
@@ -88,21 +88,13 @@ const handleChangeImage = (event) => {
   })
 }
 
-const handleCategoryChange = (event) => {
-  console.log(event.target.name)
-  console.log(event.target.value)
-  setPostData({
-    ...postData,
-    category: event.target.name
-  })
-}
   const textFields = (
     <div className="text-center">
         <Form.Group controlId="title">
             <Form.Label>
                 Title
             </Form.Label>
-            <Form.Control type="text" name="title"
+            <Form.Control type="text" name="title" maxLength={35}
             value={title}
             onChange={handleChange} />
         </Form.Group>
@@ -114,7 +106,7 @@ const handleCategoryChange = (event) => {
             <Form.Label>
                 Content
             </Form.Label>
-            <Form.Control as="textarea" rows={6} name="content"
+            <Form.Control as="textarea" rows={6} name="content" maxLength={500}
             value={content}
             onChange={handleChange} />
         </Form.Group>
@@ -127,7 +119,7 @@ const handleCategoryChange = (event) => {
   <Form.Control as="select" name="category" value={category} onChange={handleChange}>
     {categories ? (
       Object.entries(categories).map(([value, label]) => (
-        <option key={value} value={value}>{value},{label}</option>
+        <option key={value} value={value}>{label}</option>
       ))
     ) : (
       <option>Loading...</option>
