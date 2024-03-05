@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -19,18 +19,31 @@ import { axiosReq } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 function PostCreateForm() {
-  const currentUser = useCurrentUser()
-  console.log(currentUser)
   const [errors, setErrors] = useState({});
   const [postData, setPostData] = useState({
     title: '',
     content: '',
     image: '',
+    category: '',
   })
-  const {title, content, image} = postData
+  const [categories, setCategories] = useState()
+  const {title, content, image, category} = postData
   const history = useHistory()
   // we need to create a  reference to our Form.File component so that we can access the image  file when we submit our form.  
   const imageInput = useRef(null)
+
+  const handleMount = async() => {
+    try{
+      const {data} = await axiosReq.get('/categories/')
+      setCategories(data)
+      
+    }catch(err){
+      console.log(err)
+    }
+  }
+  useEffect(()=>{
+    handleMount()
+  },[])
 
   const handleChange = (event) => {
     setPostData({
@@ -38,7 +51,7 @@ function PostCreateForm() {
         [event.target.name]: event.target.value,
     })
   }
-
+  console.log(categories)
   const handleSubmit = async (event) => {
     event.preventDefault()
     // https://developer.mozilla.org/en-US/docs/Web/API/FormData
@@ -47,11 +60,13 @@ function PostCreateForm() {
     formData.append('content', content)
     // get first file in image attribute files array
     formData.append('image',imageInput.current.files[0])
+    formData.append('category',category)
+    console.log(postData.category)
 
     //refresh user access token before making post request
     try{
-        const {data} = await axiosReq.post('/posts/', formData)
-        history.push(`/posts/${data.id}`)
+        const {data} = await axiosReq.post('/products/', formData)
+        history.push(`/products/${data.id}`)
     }catch(err){
         console.log(err)
         if(err.response?.status !== 401){
@@ -73,6 +88,14 @@ const handleChangeImage = (event) => {
   })
 }
 
+const handleCategoryChange = (event) => {
+  console.log(event.target.name)
+  console.log(event.target.value)
+  setPostData({
+    ...postData,
+    category: event.target.name
+  })
+}
   const textFields = (
     <div className="text-center">
         <Form.Group controlId="title">
@@ -99,7 +122,18 @@ const handleChangeImage = (event) => {
             <Alert variant="warning" key={idx}>{message}</Alert>
         ))}
 
-
+<Form.Group controlId="category">
+  <Form.Label>Select Post category</Form.Label>
+  <Form.Control as="select" name="category" value={category} onChange={handleChange}>
+    {categories ? (
+      Object.entries(categories).map(([value, label]) => (
+        <option key={value} value={value}>{value},{label}</option>
+      ))
+    ) : (
+      <option>Loading...</option>
+    )}
+  </Form.Control>
+</Form.Group>
 
     
     

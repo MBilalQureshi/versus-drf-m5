@@ -2,6 +2,7 @@ from rest_framework import generics, filters, permissions
 from .models import Product
 from .serializers import ProductSerializer
 from versus_drf_api.permissions import IsOwnerOrReadOnly
+from django.http import JsonResponse
 
 class ProductList(generics.ListCreateAPIView):
     '''
@@ -27,3 +28,6 @@ class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = ProductSerializer
 
+def categories_list(request):
+    categories = dict(Product.CATEGORIES)
+    return JsonResponse(categories)
