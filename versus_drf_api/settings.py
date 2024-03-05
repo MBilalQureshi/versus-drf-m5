@@ -61,7 +61,13 @@ REST_FRAMEWORK = {
     # e.g 02 Aug 2024 https://www.django-rest-framework.org/api-guide/settings/#date-and-time-formatting
     # https://docs.python.org/3/library/time.html#time.strftime
     'DATETIME_FORMAT' : '%d %b %Y'
-    }
+}  
+
+# Ensure only JSON is rendered in Development
+if 'DEV' not in os.environ:
+REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
+    'rest_framework.renderers.JSONRenderer',
+]
 
 # REST_USE_JWT = True
 # JWT_AUTH_SECURE = True
