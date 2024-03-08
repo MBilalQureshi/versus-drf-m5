@@ -15,7 +15,7 @@ import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { axiosReq } from "../../api/axiosDefaults";
+import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 
 
 function PostCreateForm() {
@@ -34,7 +34,7 @@ function PostCreateForm() {
 
   const handleMount = async() => {
     try{
-      const {data} = await axiosReq.get('/categories/')
+      const {data} = await axiosRes.get('/categories/')
       setCategories(data)
       
     }catch(err){
