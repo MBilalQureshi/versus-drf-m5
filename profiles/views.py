@@ -1,14 +1,32 @@
+from django.db.models import Count
 from rest_framework import generics, filters
 from .models import Profile
 from .serializers import ProfileSerializer
 from versus_drf_api.permissions import IsOwnerOrReadOnly
+# from django_filters.rest_framework import DjangoFilterBackend
 
 class ProfileList(generics.ListAPIView):
     '''
     List all profiles data
     '''
+    # queryset = Profile.objects.all()
+    queryset = Profile.objects.annotate(
+        posts_count = Count('owner__product', distict=True)
+    ).order_by('-created_at')
     serializer_class = ProfileSerializer
-    queryset = Profile.objects.all()
+
+    filter_backends = [
+        filters.OrderingFilter,
+        # DjangoFilterBackend,
+    ]
+
+    ordering_fields = [
+        'posts_count',
+        # As these are regular database fields, I  don’t need to add them to the queryset,  
+        # but I still have to add them  to the ordering_fields list.
+        # 'owner__following__created_at',
+        # 'owner__followed__created_at'
+    ]
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     '''
@@ -16,7 +34,10 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
     '''
     # ISSUE: in case of 404 the fields are still showing
     # can't logout so downgraded to django 4.2.3 ---remove this line later
-    queryset = Profile.objects.all()
+    # queryset = Profile.objects.all()
+    queryset = Profile.objects.annotate(
+        posts_count = Count('owner__product', distict=True)
+    ).order_by('-created_at')
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = ProfileSerializer
 
