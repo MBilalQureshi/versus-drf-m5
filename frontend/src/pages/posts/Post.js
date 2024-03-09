@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../styles/Post.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Card, Media, OverlayTrigger, Table, Tooltip } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -9,7 +9,8 @@ import { axiosRes } from "../../api/axiosDefaults";
 
 const Post = (props) => {
     const {id, owner, category, category_name, content, created_at, down_vote_id,
-    image, profile_id, profile_image, title, up_vote_id, updated_at,PostPage,setPosts} = props
+    image, profile_id, profile_image, title, up_vote_id, updated_at,PostPage,
+    down_votes_count, up_votes_count, comments_count, setPosts} = props
     
     const currentUser = useCurrentUser()
     const is_owner = currentUser?.username === owner
@@ -83,29 +84,29 @@ const Post = (props) => {
               placement="top"
               overlay={<Tooltip>You can't vote on your own post!</Tooltip>}
             >
-              <i className="fa-solid fa-arrow-up-long" />
+              <i className="fa-solid fa-thumbs-up" />
             </OverlayTrigger>
           ) : up_vote_id && !down_vote_id ? (
 
             <span onClick={() => {}}>
-              <i className={`fa-solid fa-arrow-up-long ${styles.Heart}`} />
+              <i className={`fa-solid fa-thumbs-up ${styles.Heart}`} />
             </span>
           ) : currentUser && !up_vote_id && !down_vote_id ? (
             // have not up voted yet
             <span onClick={handleUpVote} value="upVote">
-              <i className={`fa-solid fa-arrow-up-long ${styles.HeartOutline}`} />
+              <i className={`fa-solid fa-thumbs-up ${styles.HeartOutline}`} />
             </span>
           ) : !up_vote_id && down_vote_id ? (
             // already upvoted
             <span>
-              <i className="fa-solid fa-arrow-up-long" />
+              <i className="fa-solid fa-thumbs-up" />
             </span>
           ): (
             <OverlayTrigger
               placement="top"
               overlay={<Tooltip>Log in to vote on posts!</Tooltip>}
             >
-              <i className="fa-solid fa-arrow-up-long" />
+              <i className="fa-solid fa-thumbs-up" />
             </OverlayTrigger>
           )}
           
@@ -146,27 +147,27 @@ const Post = (props) => {
               placement="top"
               overlay={<Tooltip>You can't vote on your own post!</Tooltip>}
             >
-              <i className="fa-solid fa-arrow-down-long" />
+              <i className="fa-solid fa-thumbs-down" />
             </OverlayTrigger>
           ) : down_vote_id && !up_vote_id ? (
             <span onClick={() => {}}>
-              <i className={`fa-solid fa-arrow-down-long ${styles.Heart}`} />
+              <i className={`fa-solid fa-thumbs-down ${styles.Heart}`} />
             </span>
           ) : currentUser && ! down_vote_id && !up_vote_id? (
             <span onClick={handleDownVote}>
-              <i className={`fa-solid fa-arrow-down-long ${styles.HeartOutline}`} />
+              <i className={`fa-solid fa-thumbs-down ${styles.HeartOutline}`} />
             </span>
           ): up_vote_id && !down_vote_id ? (
             // already upvoted
             <span>
-              <i className="fa-solid fa-arrow-down-long" />
+              <i className="fa-solid fa-thumbs-down" />
             </span>
           ) : (
             <OverlayTrigger
               placement="top"
               overlay={<Tooltip>Log in to vote on posts!</Tooltip>}
             >
-              <i className="fa-solid fa-arrow-down-long" />
+              <i className="fa-solid fa-thumbs-down" />
             </OverlayTrigger>
           )}
           
@@ -175,11 +176,24 @@ const Post = (props) => {
 
 
         <div>
-          {/* {likes_count} */}
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Up votes</th>
+                <th>Down votes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{up_votes_count}</td>
+                <td>{down_votes_count}</td>
+              </tr>
+            </tbody>
+          </Table>
           <Link to={`/posts/${id}`}>
             <i className="far fa-comments" />
           </Link>
-          {/* {comments_count} */}
+          {comments_count}
         </div>
       </Card.Body>
     </Card>
