@@ -68,5 +68,5 @@ class ProductSerializer(serializers.ModelSerializer):
             'profile_image', 'created_at', 'updated_at',
             'title', 'category' ,'content', 'image','up_vote_id',
             'down_vote_id','category_name','up_votes_count','down_votes_count'
-            ,'comments_count'
+            ,'comments_count', 'price' ,'location'
         ]

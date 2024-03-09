@@ -35,6 +35,10 @@ class Product(models.Model):
         upload_to='images/', default='../default_post_vzxkyq', blank=True
     )
     category = models.IntegerField(choices=CATEGORIES, default=0)
+    price = models.DecimalField(max_digits=6, decimal_places=2, blank=False)
+    location = models.CharField(max_length=80, blank=False)
+    # features = models.CharField(max_length=250, blank=False)
+
     
     class Meta:
         ordering = ['-created_at']
