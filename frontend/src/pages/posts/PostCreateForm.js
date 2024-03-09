@@ -65,8 +65,8 @@ function PostCreateForm() {
 
     //refresh user access token before making post request
     try{
-        const {data} = await axiosReq.post('/products/', formData)
-        history.push(`/products/${data.id}`)
+        const {data} = await axiosReq.post('/products/posts/', formData)
+        history.push(`/products/posts/${data.id}`)
     }catch(err){
         console.log(err)
         if(err.response?.status !== 401){

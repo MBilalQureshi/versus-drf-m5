@@ -16,7 +16,7 @@ const Post = (props) => {
     const is_owner = currentUser?.username === owner
     const history = useHistory()
     const handleEdit = () => {
-      history.push(`/posts/${id}/edit`)
+      history.push(`products/posts/${id}/edit`)
     }
     const handleUpVote = async () => {
       try{
