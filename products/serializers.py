@@ -10,6 +10,9 @@ class ProductSerializer(serializers.ModelSerializer):
     up_vote_id = serializers.SerializerMethodField()
     down_vote_id = serializers.SerializerMethodField()
     category_name = serializers.SerializerMethodField()
+    up_votes_count = serializers.ReadOnlyField()
+    down_votes_count = serializers.ReadOnlyField()
+    comments_count = serializers.ReadOnlyField()
 
     def get_category_name(self, obj):
         category_id = obj.category
@@ -64,5 +67,6 @@ class ProductSerializer(serializers.ModelSerializer):
             'id', 'owner', 'is_owner', 'profile_id',
             'profile_image', 'created_at', 'updated_at',
             'title', 'category' ,'content', 'image','up_vote_id',
-            'down_vote_id','category_name'
+            'down_vote_id','category_name','up_votes_count','down_votes_count'
+            ,'comments_count'
         ]
