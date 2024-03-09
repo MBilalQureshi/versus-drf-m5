@@ -10,7 +10,7 @@ import { axiosRes } from "../../api/axiosDefaults";
 const Post = (props) => {
     const {id, owner, category, category_name, content, created_at, down_vote_id,
     image, profile_id, profile_image, title, up_vote_id, updated_at,PostPage,
-    down_votes_count, up_votes_count, comments_count, setPosts} = props
+    down_votes_count, up_votes_count, comments_count, location, price, setPosts} = props
     
     const currentUser = useCurrentUser()
     const is_owner = currentUser?.username === owner
@@ -71,13 +71,15 @@ const Post = (props) => {
           </div>
         </Media>
       </Card.Body>
-      <Link to={`/posts/${id}`}>
+      <Link to={`products/posts/${id}`}>
         <Card.Img src={image} alt={title} />
       </Link>
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
-        {content && <Card.Text>{content}</Card.Text>}
-        {category_name && <Card.Text>Selected post category is "{category_name}"</Card.Text>}
+        {content && <Card.Text>Description: {content}</Card.Text>}
+        {category_name && <Card.Text>Catgory: {category_name}</Card.Text>}
+        {price && <Card.Text>Price: {price} &#8364;</Card.Text>}
+        {location && <Card.Text>Location: {location}</Card.Text>}
         <span className={`mr-5 ${styles.PostBar}`}>
           {is_owner ? (
             <OverlayTrigger

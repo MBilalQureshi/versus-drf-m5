@@ -25,9 +25,11 @@ function PostCreateForm() {
     content: '',
     image: '',
     category: '',
+    price:0,
+    location:''
   })
   const [categories, setCategories] = useState()
-  const {title, content, image, category} = postData
+  const {title, content, image, category,price,location} = postData
   const history = useHistory()
   // we need to create a  reference to our Form.File component so that we can access the image  file when we submit our form.  
   const imageInput = useRef(null)
@@ -58,6 +60,8 @@ function PostCreateForm() {
     const formData = new FormData()
     formData.append('title', title)
     formData.append('content', content)
+    formData.append('price',price)
+     formData.append('location',location)
     // get first file in image attribute files array
     formData.append('image',imageInput.current.files[0])
     formData.append('category',category)
@@ -111,6 +115,31 @@ const handleChangeImage = (event) => {
             onChange={handleChange} />
         </Form.Group>
         {errors.content?.map((message, idx)=>(
+            <Alert variant="warning" key={idx}>{message}</Alert>
+        ))}
+
+          <Form.Group controlId="price">
+            <Form.Label>
+                Price
+            </Form.Label>
+            <Form.Control type="number" name="price" maxLength={8}
+            value={price}
+            min={0}
+            onChange={handleChange} />
+        </Form.Group>
+        {errors.price?.map((message, idx)=>(
+            <Alert variant="warning" key={idx}>{message}</Alert>
+        ))}
+
+        <Form.Group controlId="location">
+            <Form.Label>
+                Location
+            </Form.Label>
+            <Form.Control type="text" name="location" maxLength={35}
+            value={location}
+            onChange={handleChange} />
+        </Form.Group>
+        {errors.location?.map((message, idx)=>(
             <Alert variant="warning" key={idx}>{message}</Alert>
         ))}
 
