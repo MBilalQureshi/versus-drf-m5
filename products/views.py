@@ -23,8 +23,19 @@ class ProductList(generics.ListCreateAPIView):
     ).order_by('-created_at')
 
     filter_backends = [
-        filters.OrderingFilter
+        filters.OrderingFilter,
+        filters.SearchFilter,
     ]
+
+    search_fields = [
+        'owner__username',
+        'title',
+        'price',
+        'category',
+        'location',
+        'content',
+    ]
+
     ordering_fields = [
         'up_votes_count',
         'comments_count',
