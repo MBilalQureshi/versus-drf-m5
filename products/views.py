@@ -5,6 +5,7 @@ from .serializers import ProductSerializer
 from versus_drf_api.permissions import IsOwnerOrReadOnly
 from django.http import JsonResponse
 from django.db.models import Count, Case, When, IntegerField
+from django_filters.rest_framework import DjangoFilterBackend
 
 class ProductList(generics.ListCreateAPIView):
     '''
@@ -25,6 +26,7 @@ class ProductList(generics.ListCreateAPIView):
     filter_backends = [
         filters.OrderingFilter,
         filters.SearchFilter,
+        DjangoFilterBackend,
     ]
 
     search_fields = [
@@ -42,6 +44,13 @@ class ProductList(generics.ListCreateAPIView):
         'comments_count',
         'down_votes_count',
         # 'votes__created_at',
+    ]
+    # posts current user had voted on
+    # profiles current user had voted on
+    # your top five best wor
+    filterset_fields = [
+        # 'owner__profile',
+        # "vote__owner__profile"
     ]
 
     def perform_create(self, serializer):
