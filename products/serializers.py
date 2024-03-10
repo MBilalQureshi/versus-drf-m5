@@ -9,17 +9,18 @@ class ProductSerializer(serializers.ModelSerializer):
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     up_vote_id = serializers.SerializerMethodField()
     down_vote_id = serializers.SerializerMethodField()
-    category_name = serializers.SerializerMethodField()
+    # category_name = serializers.SerializerMethodField()
     up_votes_count = serializers.ReadOnlyField()
     down_votes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
+    category_name = serializers.CharField(source='get_category_display', read_only=True)
 
-    def get_category_name(self, obj):
-        category_id = obj.category
-        for category_tuple in Product.CATEGORIES:
-            if category_tuple[0] == category_id:
-                return category_tuple[1]
-        return None
+    # def get_category_name(self, obj):
+    #     category_id = obj.category
+    #     for category_tuple in Product.CATEGORIES:
+    #         if category_tuple[0] == category_id:
+    #             return category_tuple[1]
+    #     return None
 
     def get_up_vote_id(self, obj):
         user = self.context['request'].user

@@ -33,10 +33,11 @@ class ProductList(generics.ListCreateAPIView):
         'owner__username',
         'title',
         'price',
-        'category',
+        'category_name',
         'location',
         'content',
         'created_at',
+        # Product.CATEGORIES,
     ]
 
     ordering_fields = [
