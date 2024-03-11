@@ -6,18 +6,30 @@ import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosRes } from "../../api/axiosDefaults";
+import { MoreDropdown } from "../../components/MoreDropdown";
 
 const Post = (props) => {
     const {id, owner, category, category_name, content, created_at, down_vote_id,
-    image, profile_id, profile_image, title, up_vote_id, updated_at,PostPage,
+    image, profile_id, profile_image, title, up_vote_id, updated_at,postPage,
     down_votes_count, up_votes_count, comments_count, location, price, setPosts} = props
     
     const currentUser = useCurrentUser()
     const is_owner = currentUser?.username === owner
     const history = useHistory()
+
     const handleEdit = () => {
-      history.push(`products/posts/${id}/edit`)
+      history.push(`/products/posts/${id}/edit`)
     }
+
+    const handleDelete = async () => {
+      try {
+        await axiosRes.delete(`/products/posts/${id}/`);
+        history.goBack();
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
     const handleUpVote = async () => {
       try{
         const postData = {
@@ -38,7 +50,7 @@ const Post = (props) => {
       }
     }
   
-    const handleDelete = async () => {
+    const handleVoteDelete = async () => {
       try{
         let vote_id = 0
         if (up_vote_id === null){
@@ -91,7 +103,12 @@ const Post = (props) => {
           </Link>
           <div className="d-flex align-items-center">
             <span>{updated_at}</span>
-            {is_owner && PostPage && "..."}
+            {is_owner && postPage && (
+              <MoreDropdown
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+              />
+            )}
           </div>
         </Media>
       </Card.Body>
@@ -148,7 +165,7 @@ const Post = (props) => {
               <i className="fa-solid fa-xmark" />
             </OverlayTrigger>
           ) : up_vote_id  || down_vote_id ? (
-            <span onClick={handleDelete}>
+            <span onClick={handleVoteDelete}>
               Remove vote<i className={`fa-solid fa-xmark`} />{/** ${styles.Heart} */}
             </span>
           ) : !up_vote_id  || !down_vote_id ? (
