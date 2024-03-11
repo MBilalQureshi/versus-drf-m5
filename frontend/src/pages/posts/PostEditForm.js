@@ -8,17 +8,16 @@ import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import Image from "react-bootstrap/Image";
 
-import Upload from "../../assets/upload.png";
 
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-import Asset from "../../components/Asset";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 
 
 function PostEditForm() {
+    const { id } = useParams();
   const [errors, setErrors] = useState({});
   const [postData, setPostData] = useState({
     title: '',
@@ -34,18 +33,23 @@ function PostEditForm() {
   // we need to create a  reference to our Form.File component so that we can access the image  file when we submit our form.  
   const imageInput = useRef(null)
 
+  
   const handleMount = async() => {
     try{
-      const {data} = await axiosRes.get('/categories/')
-      setCategories(data)
-      
+        const [{data: categories},{data:postData}] = await Promise.all([
+            axiosRes.get('/categories/'),
+            axiosReq.get(`/products/posts/${id}/`)
+          ])
+      const {title, content, image, is_owner, category, price, location} = postData
+      setCategories(categories)
+      is_owner ? setPostData({title, content, image, is_owner, category, price, location}) : history.push('/')
     }catch(err){
       console.log(err)
     }
   }
   useEffect(()=>{
     handleMount()
-  },[])
+  },[history,id])
 
   const handleChange = (event) => {
     setPostData({
@@ -61,16 +65,17 @@ function PostEditForm() {
     formData.append('title', title)
     formData.append('content', content)
     formData.append('price',price)
-     formData.append('location',location)
-    // get first file in image attribute files array
-    formData.append('image',imageInput.current.files[0])
+    formData.append('location',location)
+    if(imageInput?.current?.files[0]){
+        formData.append('image',imageInput.current.files[0]);
+    }
     formData.append('category',category)
     console.log(postData.category)
 
     //refresh user access token before making post request
     try{
-        const {data} = await axiosReq.post('/products/posts/', formData)
-        history.push(`/products/posts/${data.id}`)
+        await axiosReq.put(`/products/posts/${id}/`, formData)
+        history.push(`/products/posts/${id}`)
     }catch(err){
         console.log(err)
         if(err.response?.status !== 401){
@@ -165,7 +170,7 @@ const handleChangeImage = (event) => {
         cancel
       </Button>
       <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-        create
+        save
       </Button>
     </div>
   );
@@ -178,8 +183,7 @@ const handleChangeImage = (event) => {
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
             <Form.Group className="text-center">
-                {image ? (
-                    <>
+                
                         <figure>
                             <Image className={appStyles.Image} src={image} rounded/>
                         </figure>
@@ -188,14 +192,7 @@ const handleChangeImage = (event) => {
                                 Change the image
                             </Form.Label>
                         </div>
-                    </>
-                ) : (
-                    <Form.Label
-                    className="d-flex justify-content-center"
-                    htmlFor="image-upload">
-                    <Asset src={Upload} message="Click or tap to upload an image" />
-                </Form.Label>
-                )}
+                    
                 {/* Image upload '/*' so that only images are accepted */}
                 <Form.File
                     id="image-upload" accept="image/*"
