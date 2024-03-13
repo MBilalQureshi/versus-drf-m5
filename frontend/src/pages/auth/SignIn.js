@@ -15,8 +15,8 @@ import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import axios from "axios";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
+import { useRedirect } from "../../hooks/useRedirect";
 // import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
-// import { useRedirect } from "../../hooks/useRedirect";
 // import { setTokenTimestamp } from "../../utils/utils";
 
 function SignInForm() {
@@ -30,7 +30,7 @@ function SignInForm() {
       hook at the top of our component code. And pass it the “loggedIn” string,
       as we want to redirect our users away from this page if they are already logged in.
      */
-    // useRedirect('loggedIn')
+    useRedirect('loggedIn')
     
     const [signInData, setSignInData] = useState({
         username : '',
@@ -67,8 +67,8 @@ function SignInForm() {
 
             /*Let’s now update the redirect on successful sign in to send the user back rather than
             have them redirected to the home page.*/
-            history.push('/')
-            // history.goBack()
+            // history.push('/')
+            history.goBack()
         }
         catch(err){
           console.log(err.response?.data.detail)
