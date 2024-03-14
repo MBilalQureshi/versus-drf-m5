@@ -4,8 +4,9 @@ from .models import Product
 from .serializers import ProductSerializer
 from versus_drf_api.permissions import IsOwnerOrReadOnly
 from django.http import JsonResponse
-from django.db.models import Count, Case, When, IntegerField, F
+from django.db.models import Count, Case, When, IntegerField, Subquery, OuterRef
 from django_filters.rest_framework import DjangoFilterBackend
+from votes.models import Vote
 
 class ProductList(generics.ListCreateAPIView):
     '''
@@ -17,16 +18,13 @@ class ProductList(generics.ListCreateAPIView):
         permissions.IsAuthenticatedOrReadOnly
     ]
     # queryset = Product.objects.all()
+    up_votes_subquery = Vote.objects.filter(product=OuterRef('pk'), up_vote=True).values('product').annotate(up_vote_count=Count('pk')).values('up_vote_count')
     queryset = Product.objects.annotate(
-        up_votes_count=Count(Case(When(vote__up_vote=True, then=1), output_field=IntegerField()), distinct=True),
+        up_votes_count=Subquery(up_votes_subquery, output_field=IntegerField()),
         down_votes_count=Count(Case(When(vote__down_vote=True, then=1), output_field=IntegerField()), distinct=True),
         comments_count=Count('comment', distinct=True)
     ).order_by('-created_at')
 
-    # Annotate up_votes_count with a different alias
-    queryset = queryset.annotate(
-        total_up_votes=Count(Case(When(vote__up_vote=True, then=1), output_field=IntegerField()))
-    )
     filter_backends = [
         filters.OrderingFilter,
         filters.SearchFilter,
@@ -67,10 +65,11 @@ class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     '''
     # ISSUE: in case of 404 the fields are still showing
     # queryset = Product.objects.all()
+    up_votes_subquery = Vote.objects.filter(product=OuterRef('pk'), up_vote=True).values('product').annotate(up_vote_count=Count('pk')).values('up_vote_count')
     queryset = Product.objects.annotate(
-        up_votes_count=Count(Case(When(vote__up_vote=True, then=1), output_field=IntegerField()), distinct=True),
+        up_votes_count=Subquery(up_votes_subquery, output_field=IntegerField()),
         down_votes_count=Count(Case(When(vote__down_vote=True, then=1), output_field=IntegerField()), distinct=True),
-        comments_count=Count('comment', distinct=True),
+        comments_count=Count('comment', distinct=True)
     ).order_by('-created_at')
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = ProductSerializer
