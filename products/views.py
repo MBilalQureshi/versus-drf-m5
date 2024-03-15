@@ -52,7 +52,8 @@ class ProductList(generics.ListCreateAPIView):
     # profiles current user had voted on
     # your top five best wor
     filterset_fields = [
-        "vote__owner__profile"
+        "vote__owner__profile",
+        'owner__profile',
     ]
 
     def perform_create(self, serializer):
