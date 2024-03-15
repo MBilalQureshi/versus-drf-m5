@@ -11,15 +11,24 @@ class ProfileList(generics.ListAPIView):
     '''
     List all profiles data
     '''
+    # queryset = Profile.objects.annotate(
+    #     posts_count=Count('owner__product', distinct=True),
+    #     total_upvotes=Coalesce(Subquery(
+    #         Vote.objects.filter(owner=OuterRef('owner'), up_vote=True)
+    #                     .values('owner')
+    #                     .annotate(total_upvotes=Count('pk'))
+    #                     .values('total_upvotes')
+    #     ), 0)
+    # ).order_by('-created_at')
     queryset = Profile.objects.annotate(
         posts_count=Count('owner__product', distinct=True),
         total_upvotes=Coalesce(Subquery(
-            Vote.objects.filter(owner=OuterRef('owner'), up_vote=True)
-                        .values('owner')
+            Vote.objects.filter(product__owner=OuterRef('owner'), up_vote=True)
+                        .values('product__owner')
                         .annotate(total_upvotes=Count('pk'))
                         .values('total_upvotes')
         ), 0)
-    ).order_by('-created_at')
+    ).order_by('-total_upvotes')
     serializer_class = ProfileSerializer
     filter_backends = [filters.OrderingFilter]
     serializer_class = ProfileSerializer
