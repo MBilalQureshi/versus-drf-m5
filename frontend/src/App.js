@@ -28,7 +28,7 @@ function App() {
           <Route exact path='/posts/create' render={() => <PostCreateForm />}></Route>
           <Route exact path='/products/posts/:id' render={() => <PostPage />}></Route>
           <Route exact path='/products/posts/:id/edit' render={()=> <PostEditForm />}></Route>
-          <Route exact path='/profiles/:id' render= {() => <ProfilePage />}></Route>
+          {/* <Route exact path='/profiles/:id' render= {() => <ProfilePage />}></Route> */}
           <Route render={() => <NotFound />}/>
         </Switch>
       </Container>
