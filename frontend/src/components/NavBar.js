@@ -32,8 +32,8 @@ const NavBar = () => {
 
   const loggedInIcons = (
     <>
-      <NavLink className={styles.NavLink} activeClassName={styles.Active} to='/feed'><i className="fas fa-stream"></i>Feed</NavLink>
-      <NavLink className={styles.NavLink} activeClassName={styles.Active} to='/voted'><i className="fas fa-heart"></i>Voted</NavLink>
+      <NavLink className={styles.NavLink} activeClassName={styles.Active} to='/trending'><i className="fa-solid fa-arrow-trend-up"></i>Trending</NavLink>
+      <NavLink className={styles.NavLink} activeClassName={styles.Active} to='/voted'><i className="fa-solid fa-square-poll-vertical"></i>Voted</NavLink>
       <NavLink to='/' className={styles.NavLink} onClick={handleSignOut}><i className="fas fa-sign-out-alt"></i>Sign out</NavLink>
       <NavLink className={styles.NavLink} to={`/profiles/${currentUser?.profile_id}`}><Avatar src={currentUser?.profile_image} text={currentUser?.username} height={40} /></NavLink>
     </>

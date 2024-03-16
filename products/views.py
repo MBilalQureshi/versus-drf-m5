@@ -1,5 +1,6 @@
 from django.db.models import Count
 from rest_framework import generics, filters, permissions
+from django.db.models.functions import Coalesce  
 from .models import Product
 from .serializers import ProductSerializer
 from versus_drf_api.permissions import IsOwnerOrReadOnly
@@ -19,8 +20,9 @@ class ProductList(generics.ListCreateAPIView):
     ]
     # queryset = Product.objects.all()
     up_votes_subquery = Vote.objects.filter(product=OuterRef('pk'), up_vote=True).values('product').annotate(up_vote_count=Count('pk')).values('up_vote_count')
+    # up_votes_count = Coalesce(up_votes_subquery, 0)
     queryset = Product.objects.annotate(
-        up_votes_count=Subquery(up_votes_subquery, output_field=IntegerField()),
+        up_votes_count=Coalesce(Subquery(up_votes_subquery, output_field=IntegerField()),0),
         down_votes_count=Count(Case(When(vote__down_vote=True, then=1), output_field=IntegerField()), distinct=True),
         comments_count=Count('comment', distinct=True)
     ).order_by('-created_at')

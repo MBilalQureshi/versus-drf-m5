@@ -18,7 +18,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import PopularProfiles from "../profiles/PopularProfiles";
 
-function PostsPage({ message, filter = "" }) {
+function PostsPage({ topVote, message, filter = "" }) {
   const [posts, setPosts] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
@@ -27,13 +27,21 @@ function PostsPage({ message, filter = "" }) {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      try {
-        const { data } = await axiosReq.get(`/products/posts/?${filter}search=${query}`);
-        setPosts(data);
-        setHasLoaded(true);
-      } catch (err) {
-        console.log(err);
-      }
+      let responseData;
+        try {
+            if (topVote) {
+                const response = await axiosReq.get(`/products/posts/?${filter}`);
+                responseData = response.data;
+            } else {
+                const response = await axiosReq.get(`/products/posts/?${filter}search=${query}`);
+                responseData = response.data;
+            }
+            console.log(responseData)
+            setPosts(responseData);
+            setHasLoaded(true);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     setHasLoaded(false);
