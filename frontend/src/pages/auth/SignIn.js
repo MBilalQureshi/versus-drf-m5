@@ -16,8 +16,7 @@ import appStyles from "../../App.module.css";
 import axios from "axios";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { useRedirect } from "../../hooks/useRedirect";
-// import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
-// import { setTokenTimestamp } from "../../utils/utils";
+import { setTokenTimestamp } from "../../utils/utils";
 
 function SignInForm() {
 
