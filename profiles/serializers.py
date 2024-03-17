@@ -47,7 +47,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             # Aggregate downvotes for the post
             downvotes_for_post = Vote.objects.filter(product=post, down_vote=True).count()
             total_downvotes += downvotes_for_post
-        return 
+        return total_downvotes
 
     def get_is_owner(self, obj):
         request = self.context['request']

@@ -13,10 +13,9 @@ This is because the combined workspace will receive the JSON from the API from t
  // Setting a baseURL before you reach deployment will cause errors
 */
 
-import axios from 'axios';
+import axios from 'axios'
 // as this is the type of data our API will be expecting, and multipart because there is images other than text
-axios.defaults.baseURL = '/api';
-axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+axios.defaults.headers.post['Content-Type'] = 'multipart/form-data'
 // To avoid CORS errors while sending cookies
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfCookieName = 'csrftoken';
