@@ -27,8 +27,8 @@ function PostPage() {
     const handleMount = async () => {
       try {
         const [{data: post}, {data: comments}] = await Promise.all([
-          axiosReq.get(`products/posts/${id}`),
-          axiosReq.get(`comments/?product=${id}`)
+          axiosReq.get(`/products/posts/${id}/`),
+          axiosReq.get(`/comments/?product=${id}`)
         ])
         setPost({ results: [post] });
         setComments(comments)
