@@ -71,7 +71,7 @@ function ProfilePage() {
           />
         </Col>
         <Col lg={6}>
-          <h3 className="m-2">{profile?.owner}</h3>
+          <h3 className="m-2 text-lg-center">{profile?.owner}</h3>
           <Row className="justify-content-center no-gutters">
             <Col xs={3} className="my-2">
               <div>{profile?.posts_count}</div>
@@ -87,6 +87,7 @@ function ProfilePage() {
             </Col>
           </Row>
         </Col>
+        <Col lg={3} className="text-lg-right"></Col>
         {/* <Col lg={3} className="text-lg-right">
           {currentUser &&
             !is_owner &&
