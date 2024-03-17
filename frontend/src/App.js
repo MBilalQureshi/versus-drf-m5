@@ -24,7 +24,7 @@ function App() {
       <Container className={styles.Main}>
         <Switch>
         <Route exact path='/' render={() => <PostsPage message="No results found. Ajdust the search keyword." />} />
-          <Route exact path='/trending' render={() => <PostsPage message="No results found. Ajdust the search keyword or follow a user." filter={'&ordering=-up_votes_count'} topVote/>} />
+          <Route exact path='/trending' render={() => <PostsPage message="No results found. Ajdust the search keyword or follow a user." filter={'&ordering=-up_votes_count&'}/>} />
           <Route exact path='/voted' render={() => <PostsPage message="No results found. Ajdust the search keyword or vote on a post." filter={`vote__owner__profile=${profile_id}&ordering=-likes__created_at&`} />} />
           <Route exact path='/signin' render={() => <SignInForm/> }></Route>
           <Route exact path='/signup' render={() => <SignUpForm /> }></Route>

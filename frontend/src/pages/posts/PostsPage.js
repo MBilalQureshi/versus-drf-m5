@@ -29,18 +29,11 @@ function PostsPage({ topVote, message, filter = "" }) {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      let responseData;
         try {
-            if (topVote) {
-                const response = await axiosReq.get(`/products/posts/?${filter}`);
-                responseData = response.data;
-            } else {
-                const response = await axiosReq.get(`/products/posts/?${filter}search=${query}`);
-                responseData = response.data;
-            }
-            console.log(responseData)
-            setPosts(responseData);
-            setHasLoaded(true);
+          const {data} = await axiosReq.get(`/products/posts/?${filter}search=${query}`);
+          console.log(data)
+          setPosts(data);
+          setHasLoaded(true);
         } catch (err) {
             console.log(err);
         }
