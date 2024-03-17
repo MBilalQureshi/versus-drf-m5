@@ -19,7 +19,7 @@ const PopularProfiles = ({ mobile }) => {
         >
           {popularProfiles.results.length ? (
             <>
-              <p>Most followed profiles.</p>
+              <p>Most up voted profiles.</p>
               {mobile ? (
                 <div className="d-flex justify-content-around">
                     {/* for mobile */}

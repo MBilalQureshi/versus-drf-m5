@@ -20,7 +20,7 @@ const Profile = (props) => {
     // const {handleFollow, handleUnfollow} = useSetProfileData()
 
   return (
-    <div className={`my-3 d-flex align-items-center ${mobile && "flex-coloumn"}`}>
+    <div className={`my-3 d-flex align-items-center ${mobile && "flex-column"}`}>
         <div>
             <Link to={`/profiles/${id}`} className='align-self-center'>
                 <Avatar src={image} height={imageSize} />
@@ -29,7 +29,7 @@ const Profile = (props) => {
         {/* profile owner */}
         <div className={`mx-2 ${styles.WordBreak}`}>
             <strong>
-                {owner}, {total_upvotes} up votes
+                {owner}{/*, {total_upvotes} up votes*/}
             </strong>
         </div>
         

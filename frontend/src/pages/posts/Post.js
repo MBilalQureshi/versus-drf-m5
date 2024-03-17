@@ -112,7 +112,7 @@ const Post = (props) => {
           </div>
         </Media>
       </Card.Body>
-      <Link to={`products/posts/${id}`}>
+      <Link to={`/products/posts/${id}`}>
         <Card.Img src={image} alt={title} />
       </Link>
       <Card.Body>
@@ -233,7 +233,7 @@ const Post = (props) => {
               </tr>
             </tbody>
           </Table>
-          <Link to={`/posts/${id}`}>
+          <Link to={`/products/posts/${id}`}>
             <i className="far fa-comments" />
           </Link>
           {comments_count}
