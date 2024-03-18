@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
@@ -7,34 +7,46 @@ import Nav from 'react-bootstrap/Nav'
 // import FormControl from 'react-bootstrap/FormControl'
 import logo from '../assets/versus-logo.png'
 import styles from '../styles/NavBar.module.css'
-import { NavLink } from 'react-router-dom/cjs/react-router-dom.min'
+import { NavLink, useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext'
 import axios from 'axios'
 import Avatar from './Avatar'
+import { Modal } from 'react-bootstrap'
+import Button from 'react-bootstrap/Button';
 
 const NavBar = () => {
   const currentUser = useCurrentUser()
   const setCurrentUser = useSetCurrentUser()
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = (event) => {
+    event.preventDefault();
+    setShow(true)
+  };
+  const history = useHistory()
+
   const handleSignOut = async() => {
     try{
       await axios.post('/dj-rest-auth/logout/')
       setCurrentUser(null)
+      history.push('/')
     }catch(err){
       console.log(err.response?.data)
     }
+    handleClose();
   }
 
   // console.log(currentUser)
 
   const addPostIcon = (
     <NavLink className={styles.NavLink} activeClassName={styles.Active} to='/posts/create'><i className="far fa-plus-square"></i>Add Post</NavLink>
-  ) 
+  )
 
   const loggedInIcons = (
     <>
       <NavLink className={styles.NavLink} activeClassName={styles.Active} to='/trending'><i className="fa-solid fa-arrow-trend-up"></i>Trending</NavLink>
       <NavLink className={styles.NavLink} activeClassName={styles.Active} to='/voted'><i className="fa-solid fa-square-poll-vertical"></i>Voted</NavLink>
-      <NavLink to='/' className={styles.NavLink} onClick={handleSignOut}><i className="fas fa-sign-out-alt"></i>Sign out</NavLink>
+      <NavLink className={styles.NavLink} onClick={handleShow} to=''><i className="fas fa-sign-out-alt"></i>Sign out</NavLink>
       <NavLink className={styles.NavLink} to={`/profiles/${currentUser?.profile_id}`}><Avatar src={currentUser?.profile_image} text={currentUser?.username} height={40} /></NavLink>
     </>
   )
@@ -45,6 +57,7 @@ const NavBar = () => {
     </>
   )
   return (
+    <div>
       <Navbar className={styles.NavBar} expand="md" fixed='top'>
           <Container>
             <NavLink to='/'>
@@ -65,6 +78,24 @@ const NavBar = () => {
               </Navbar.Collapse>
           </Container>
       </Navbar>
+
+      <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton className="bg-light text-dark">
+        <Modal.Title>Sign Out</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <p className="text-dark">Are you sure you want to sign out?</p>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="outline-secondary" onClick={handleClose}>
+          Cancel
+        </Button>
+        <Button variant="danger" onClick={handleSignOut}>
+          Sign Out
+        </Button>
+      </Modal.Footer>
+    </Modal>
+      </div>
   )
 }
 
