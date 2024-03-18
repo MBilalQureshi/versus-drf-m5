@@ -96,7 +96,7 @@ The user stories seen above are based on the items mentioned on the project boar
 
 ## Testing
 
-Testing and results can be found [here](/TESTING.md)
+Testing and results can be found [here](/FRONTEND_TESTING.md)
 
 ## Features
 
