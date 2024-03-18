@@ -81,3 +81,68 @@ This milestone covers Signup/ Sign-up.
 GitHub Projects was used to manage the development process using the agile approach. To ensure streamlined organization, all User Stories were grouped into Milestones, representing the corresponding Epics, following the MOSCOW prioritization technique. For a comprehensive overview of the project's progress and workflow, I invite you to explore our dynamic Kanban board. [here](https://github.com/users/MBilalQureshi/projects/8).
 
 The user stories seen above are based on the items mentioned on the project board.
+
+### Design
+
+#### Colour Scheme
+
+#### Imagery
+
+#### Fonts
+
+#### Wireframes
+
+## Data Model
+
+## Testing
+
+Testing and results can be found [here](/TESTING.md)
+
+## Features
+
+## Libraries and Technologies Used
+### Languages
+- Python
+- HTML
+- CSS
+- Javascript
+
+### Frameworks - Libraries - Programs Used
+- [ReatJS]()
+- [Django REST framework]()
+- [GitHub](https://github.com/) is used to host the repository and agile tool.
+- [GitPod](https://gitpod.io/) is used to develop project and organize version control.
+- [Heroku](https://www.heroku.com/) used to deploy the live project.
+- [PEP8 Online](https://pep8ci.herokuapp.com/#) used to validate all the Python code.
+- [Google Fonts](https://fonts.google.com/) is used to change the fonts of the project.
+- [W3C](https://www.w3.org/) - Used for HTML & CSS Validation.
+- [Jshint](https://jshint.com/) - used to validate javascript.
+- [Django](https://www.djangoproject.com/) framework is used for the development of this project.
+- [Django-allauth](https://django-allauth.readthedocs.io/en/latest/installation.html) is the authentication library used to create the user accounts.
+- [Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/) used to manage Django Forms.
+- [Cloudinary](https://cloudinary.com/) is used as an image hosting service. Product images are uploaded there.
+- [PostgreSQL](https://www.postgresql.org/) is used as the database for this project.
+- [Bootstrap 5](https://getbootstrap.com/docs/4.6/getting-started/introduction/): is a CSS framwork and is used for styling in project.
+- [Summernote](https://summernote.org/) editor is mainly used when adding product details on the admin panel which is to be later seen on the product details page.
+- [Balsamiq](https://balsamiq.com/) is used to generate wireframe images for this project.
+- [Techsini](https://techsini.com/multi-mockup/index.php) is used for generating site mockup.
+- [Coolors](https://coolors.co/) is used to create a color palette.
+- [Drawio](https://app.diagrams.net/) is used to make database schema.
+- [Favicon](https://favicon.io/) is used to create the favicon.
+- [Responsinator](http://www.responsinator.com/) is used to verify the responsiveness of the website on different devices.
+- [Chrome Dev Tools](https://developer.chrome.com/docs/devtools/) is used for overall development and bug locating/fixing, including testing responsiveness, performance, and confirming the webpage's accessibility using lighthouse.
+- [Font Awesome](https://fontawesome.com/) is used for icons used all over the project.
+- [Grammerly](https://app.grammarly.com/) is used to proofread the README.md and testing.md.
+- [Gunicorn](https://gunicorn.org/) is a Python WSGI HTTP Server for our project.
+- [freeformatter](https://www.freeformatter.com/) is used to format html.
+
+## Deployment
+### Heroku
+
+
+### Forking the GitHub Repository
+
+### Making a Local Clone
+
+## Credits
+### Extra Help
