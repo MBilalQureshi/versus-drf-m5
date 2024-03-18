@@ -33,8 +33,8 @@ function PostCreateForm() {
   })
   const [categories, setCategories] = useState()
   const {title, content, image, category,price,location} = postData
-  const [rules, SetRules] = useState({'Image Size':'Image Size must not increase 2MB','Title': 'Maximum length of title is 35',
-  'Content':'Maximum Content length is 500', 'Price':'Ensure that there are no more than 6 digits in total.','Location':'Make sure the location is a correct place.','Category':'User must select a category, else others is set for default.',
+  const [rules, SetRules] = useState({'Image Size':'Image size must not increase 2MB.','Title': 'Maximum length of title is 35.',
+  'Content':'Maximum content length is 500.', 'Price':'Ensure that there are no more than 6 digits in total.','Location':'Make sure a location is a correct place.','Category':'User must select a category, else others are set by default.',
   'Post':'The posts must be related to products and products only.'})
   const [showModal, SetShowModal] = useState(false)
   // const handleModalClose = () => SetShowModal(false);
