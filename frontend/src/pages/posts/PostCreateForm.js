@@ -17,6 +17,7 @@ import Asset from "../../components/Asset";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { useRedirect } from "../../hooks/useRedirect";
+import ModalHandler from "../../components/ModalHandler";
 
 
 function PostCreateForm() {
@@ -32,6 +33,12 @@ function PostCreateForm() {
   })
   const [categories, setCategories] = useState()
   const {title, content, image, category,price,location} = postData
+  const [rules, SetRules] = useState({'Image Size':'Image Size must not increase 2MB','Title': 'Maximum length of title is 35',
+  'Content':'Maximum Content length is 500', 'Price':'Ensure that there are no more than 6 digits in total.','Location':'Make sure the location is a correct place.','Category':'User must select a category, else others is set for default.',
+  'Post':'The posts must be related to products and products only.'})
+  const [showModal, SetShowModal] = useState(false)
+  // const handleModalClose = () => SetShowModal(false);
+  // const handleModalShow = () => SetShowModal(true);
   const history = useHistory()
   // we need to create a  reference to our Form.File component so that we can access the image  file when we submit our form.  
   const imageInput = useRef(null)
@@ -158,8 +165,13 @@ const handleChangeImage = (event) => {
   </Form.Control>
 </Form.Group>
 
-    
-    
+{/* className={modalStyles.RulesContainer} */}
+      <div>
+        <Button className={`${btnStyles.Button} ${btnStyles.Black} mb-2`} onClick={()=>SetShowModal(true)}>
+          Post creation rules
+        </Button>
+        <ModalHandler show={showModal} close={() => SetShowModal(false)} rules={rules} title="Post creation rules"/>
+      </div>
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
         onClick={() => history.goBack()}

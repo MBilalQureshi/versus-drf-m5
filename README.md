@@ -60,6 +60,7 @@ Users can create posts in which they can add an image, content add a post title 
 - As a user, I can add content for a post so that others can read what the product is in detail.
 - As a user, I can select the category of the post that best defines it so that others can understand which category the product belongs to.
 - As a user, I can upload an image in a post so that others can upvote/downvote by viewing it.
+- As a user, I must know the rules for adding a post so that I can add a post without any validation errors or interruptions.
 
 ### EPIC: User Navbar
 Users can interact with the nav bar icons and redirect to other web pages. Users can also sign out by clicking its icon.
