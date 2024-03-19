@@ -25,10 +25,11 @@ function PostEditForm() {
     image: '',
     category: '',
     price:0,
-    location:''
+    location:'',
+    privacy: 0,
   })
   const [categories, setCategories] = useState()
-  const {title, content, image, category,price,location} = postData
+  const {title, content, image, category, price, location, privacy} = postData
   const history = useHistory()
   // we need to create a  reference to our Form.File component so that we can access the image  file when we submit our form.  
   const imageInput = useRef(null)
@@ -51,12 +52,20 @@ function PostEditForm() {
     handleMount()
   },[history,id])
 
+  // const handleChange = (event) => {
+  //   setPostData({
+  //       ...postData,
+  //       [event.target.name]: event.target.value,
+  //   })
+  // }
   const handleChange = (event) => {
+    const { name, value, checked, type } = event.target;
+    const newValue = type === 'checkbox' ? checked : value;
     setPostData({
         ...postData,
-        [event.target.name]: event.target.value,
-    })
-  }
+        [name]: newValue,
+    });
+};
   console.log(categories)
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -70,6 +79,7 @@ function PostEditForm() {
         formData.append('image',imageInput.current.files[0]);
     }
     formData.append('category',category)
+    formData.append('privacy',privacy)
     console.log(postData.category)
 
     //refresh user access token before making post request
@@ -147,7 +157,15 @@ const handleChangeImage = (event) => {
         {errors.location?.map((message, idx)=>(
             <Alert variant="warning" key={idx}>{message}</Alert>
         ))}
-
+<Form.Group controlId="privacy">
+            <Form.Check 
+            type="switch"
+            id="privacy"
+            name="privacy"
+            label="Private Post ?"
+            value={privacy}
+            onChange={handleChange} />
+        </Form.Group>
 <Form.Group controlId="category">
   <Form.Label>Select Post category</Form.Label>
   <Form.Control as="select" name="category" value={category} onChange={handleChange}>

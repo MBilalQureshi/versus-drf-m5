@@ -11,7 +11,7 @@ import { MoreDropdown } from "../../components/MoreDropdown";
 const Post = (props) => {
     const {id, owner, category, category_name, content, created_at, down_vote_id,
     image, profile_id, profile_image, title, up_vote_id, updated_at,postPage,
-    down_votes_count, up_votes_count, comments_count, location, price, setPosts} = props
+    down_votes_count, up_votes_count, comments_count, location, price, setPosts, privacy} = props
     
     const currentUser = useCurrentUser()
     const is_owner = currentUser?.username === owner
@@ -121,6 +121,7 @@ const Post = (props) => {
         {category_name && <Card.Text>Catgory: {category_name}</Card.Text>}
         {price && <Card.Text>Price: {price} &#8364;</Card.Text>}
         {location && <Card.Text>Location: {location}</Card.Text>}
+        {privacy===true ? (<Card.Text>Private post: Yes</Card.Text>):(<Card.Text>Private post: No</Card.Text>)}
         <span className={`mr-5 ${styles.PostBar}`}>
           {is_owner ? (
             <OverlayTrigger

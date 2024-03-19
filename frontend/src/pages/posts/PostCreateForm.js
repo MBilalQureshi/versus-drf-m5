@@ -29,10 +29,11 @@ function PostCreateForm() {
     image: '',
     category: '',
     price:0,
-    location:''
+    location:'',
+    privacy: 0,
   })
   const [categories, setCategories] = useState()
-  const {title, content, image, category,price,location} = postData
+  const {title, content, image, category, price, location, privacy} = postData
   const [rules, SetRules] = useState({'Image Size':'Image size must not increase 2MB.','Title': 'Maximum length of title is 35.',
   'Content':'Maximum content length is 500.', 'Price':'Ensure that there are no more than 6 digits in total.','Location':'Make sure a location is a correct place.','Category':'User must select a category, else others are set by default.',
   'Post':'The posts must be related to products and products only.'})
@@ -56,12 +57,21 @@ function PostCreateForm() {
     handleMount()
   },[])
 
+  // const handleChange = (event) => {
+  //   setPostData({
+  //       ...postData,
+  //       [event.target.name]: event.target.value,
+  //   })
+  // }
+
   const handleChange = (event) => {
+    const { name, value, checked, type } = event.target;
+    const newValue = type === 'checkbox' ? checked : value;
     setPostData({
         ...postData,
-        [event.target.name]: event.target.value,
-    })
-  }
+        [name]: newValue,
+    });
+};
   console.log(categories)
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -70,11 +80,12 @@ function PostCreateForm() {
     formData.append('title', title)
     formData.append('content', content)
     formData.append('price',price)
-     formData.append('location',location)
+    formData.append('location',location)
     // get first file in image attribute files array
     formData.append('image',imageInput.current.files[0])
     formData.append('category',category)
-    console.log(postData.category)
+    formData.append('privacy',privacy)
+    console.log(postData.privacy)
 
     //refresh user access token before making post request
     try{
@@ -151,6 +162,15 @@ const handleChangeImage = (event) => {
         {errors.location?.map((message, idx)=>(
             <Alert variant="warning" key={idx}>{message}</Alert>
         ))}
+        <Form.Group controlId="privacy">
+            <Form.Check 
+            type="switch"
+            id="privacy"
+            name="privacy"
+            label="Private Post ?"
+            value={privacy}
+            onChange={handleChange} />
+        </Form.Group>
 
 <Form.Group controlId="category">
   <Form.Label>Select Post category</Form.Label>
