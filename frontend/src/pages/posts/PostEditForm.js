@@ -41,9 +41,10 @@ function PostEditForm() {
             axiosRes.get('/categories/'),
             axiosReq.get(`/products/posts/${id}/`)
           ])
-      const {title, content, image, is_owner, category, price, location} = postData
+      const {title, content, image, is_owner, category, price, location, privacy} = postData
+      console.log(privacy)
       setCategories(categories)
-      is_owner ? setPostData({title, content, image, is_owner, category, price, location}) : history.push('/')
+      is_owner ? setPostData({title, content, image, is_owner, category, price, location,  privacy  }) : history.push('/')
     }catch(err){
       console.log(err)
     }
@@ -157,15 +158,7 @@ const handleChangeImage = (event) => {
         {errors.location?.map((message, idx)=>(
             <Alert variant="warning" key={idx}>{message}</Alert>
         ))}
-<Form.Group controlId="privacy">
-            <Form.Check 
-            type="switch"
-            id="privacy"
-            name="privacy"
-            label="Private Post ?"
-            value={privacy}
-            onChange={handleChange} />
-        </Form.Group>
+
 <Form.Group controlId="category">
   <Form.Label>Select Post category</Form.Label>
   <Form.Control as="select" name="category" value={category} onChange={handleChange}>
@@ -195,6 +188,20 @@ const handleChangeImage = (event) => {
 
   return (
     <Form onSubmit={handleSubmit}>
+      <Row className="mt-4">
+        <Col>
+        <Form.Group controlId="privacy" className={`${appStyles.Content} text-center`}>
+            <Form.Check 
+            type="switch"
+            id="privacy"
+            name="privacy"
+            label="Private Post ?"
+            checked={privacy}
+            value={privacy}
+            onChange={handleChange} />
+            </Form.Group>
+        </Col>
+      </Row>
       <Row>
         <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
           <Container
