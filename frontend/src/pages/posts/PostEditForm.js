@@ -44,7 +44,7 @@ function PostEditForm() {
       const {title, content, image, is_owner, category, price, location, privacy} = postData
       console.log(privacy)
       setCategories(categories)
-      is_owner ? setPostData({title, content, image, is_owner, category, price, location,  privacy  }) : history.push('/')
+      is_owner ? setPostData({ title, content, image, is_owner, category, price, location,  privacy }) : history.push('/')
     }catch(err){
       console.log(err)
     }
