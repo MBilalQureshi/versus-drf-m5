@@ -30,4 +30,5 @@ urlpatterns = [
     path('', include('products.urls')),
     path('', include('comments.urls')),
     path('', include('votes.urls')),
+    path('', include('friends.urls')),
 ]
