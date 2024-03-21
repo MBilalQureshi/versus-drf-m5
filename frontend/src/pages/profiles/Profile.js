@@ -10,14 +10,14 @@ import { useSetProfileData } from '../../contexts/ProfileDataContext'
 const Profile = (props) => {
     const {profile, mobile, imageSize=55} = props
     // now destructure data from profile
-    const {id, total_upvotes, image, owner} = profile
+    const {id, sender_id ,total_upvotes, image, owner} = profile
 
     // is current user is owner of profile
-    // const currentUser = useCurrentUser()
-    // const is_owner = currentUser?.username === owner
+    const currentUser = useCurrentUser()
+    const is_owner = currentUser?.username === owner
 
     //well also import handleFollow function as well from userProfileData to hande follow
-    // const {handleFollow, handleUnfollow} = useSetProfileData()
+    const {handleFollow, handleUnfollow} = useSetProfileData()
 
   return (
     <div className={`my-3 d-flex align-items-center ${mobile && "flex-column"}`}>
@@ -33,7 +33,7 @@ const Profile = (props) => {
             </strong>
         </div>
         
-        {/* <div className={`text-right ${!mobile && 'ml-auto'}`}> */}
+        <div className={`text-right ${!mobile && 'ml-auto'}`}>
             {/* ternary conditions + logical operators combined */}
             {/* We are only going to show our follow/unfollow  buttons in the desktop version of the  
                 PopularProfiles component. We also only want to  show these buttons to users who are logged in.  
@@ -47,14 +47,14 @@ const Profile = (props) => {
                 from our API response won’t be null, so we can use  this in a ternary. If the following_id does exist,  
                 we'll display our unfollow button,  auto-importing that from react-bootstrap.  
                 And if the following_id doesn’t  exist we’ll show the follow button. */}
-            {/* {!mobile && currentUser && !is_owner && (
-                following_id ? (
-                    <Button className={`${btnStyles.Button} ${btnStyles.BlackOutline}`} onClick={()=>handleUnfollow(profile)}>unfollow</Button>
+            {!mobile && currentUser && !is_owner && (
+                sender_id ? (
+                    <Button className={`${btnStyles.Button} ${btnStyles.BlackOutline}`} onClick={()=>handleUnfollow(profile)}>Remove Friend</Button>
                 ) : (
-                    <Button className={`${btnStyles.Button} ${btnStyles.Black}`} onClick={()=>handleFollow(profile)}>follow</Button>
+                    <Button className={`${btnStyles.Button} ${btnStyles.Black}`} onClick={()=>handleFollow(profile)}>Add Friend</Button>
                 )
             )}
-        </div> */}
+        </div>
     </div>
   )
 }

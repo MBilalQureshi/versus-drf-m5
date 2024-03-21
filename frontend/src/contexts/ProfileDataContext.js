@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { axiosReq } from "../api/axiosDefaults";
+import { axiosReq, axiosRes } from "../api/axiosDefaults";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
+import { followHelper, unfollowHelper } from "../utils/utils";
 
 const ProfileDataContext = createContext();
 const SetProfileDataContext = createContext();
@@ -35,10 +36,51 @@ export const ProfileDataProvider = ({ children }) => {
 
     handleMount();
   }, [currentUser]);
+  const handleFollow = async (clickedProfile) => {
+    try{
+        // the data we'll send is what profile user just followed basically user id  -> followed: clickedProfile.id
+        const {data} = await axiosRes.post('/friends/',{request: clickedProfile.id})
+        
+        setProfileData(prevState => ({
+            // update page profile count and button
+            ...prevState,
+            pageProfile: {
+                results: prevState.pageProfile.results.map((profile) => followHelper(profile, clickedProfile, data.id)),
+            },
+            // we'll update popular profiles for now
+            popularProfiles : {
+                ...prevState.popularProfiles,
+                results: prevState.popularProfiles.results.map((profile) => followHelper(profile, clickedProfile, data.id)),
+            },
+        }))
+
+    }catch(err){
+        console.log(err)
+    }
+}
+
+  //handle unfollow
+  const handleUnfollow = async(clickedProfile) => {
+      try{
+          await axiosRes.delete(`/friends/${clickedProfile.sender_id}`)
+          setProfileData(prevState => ({
+              ...prevState,
+              pageProfile:{
+                  results: prevState.pageProfile.results.map((profile) => unfollowHelper(profile, clickedProfile)),
+              },
+              popularProfiles :{
+                  ...prevState.popularProfiles,
+                  results: prevState.popularProfiles.results.map((profile) => unfollowHelper(profile, clickedProfile)),
+              }
+          }))
+      }catch(err){
+          console.log(err)
+      }
+  }
 
   return (
     <ProfileDataContext.Provider value={profileData}>
-      <SetProfileDataContext.Provider value={setProfileData}>
+      <SetProfileDataContext.Provider value={{setProfileData, handleFollow, handleUnfollow}}>
         {children}
       </SetProfileDataContext.Provider>
     </ProfileDataContext.Provider>

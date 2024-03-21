@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Profile
 from votes.models import Vote
+from friends.models import Friend
 
 class ProfileSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
@@ -10,8 +11,20 @@ class ProfileSerializer(serializers.ModelSerializer):
     total_up_votes_received = serializers.SerializerMethodField()
     total_down_votes_given = serializers.SerializerMethodField()
     total_down_votes_received = serializers.SerializerMethodField()
-
     total_upvotes = serializers.ReadOnlyField()
+    sender_id = serializers.SerializerMethodField()
+
+    def get_sender_id(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            # check if user is following any other profiles using filter
+            following = Friend.objects.filter(
+                # if logged in user (owner=user) is following this profile (followed=obj.owner) an instance will be returned else None is returned
+                owner=user, request=obj.owner
+            ).first()
+            return following.id if following else None
+        # if not authenticated user return None
+        return None
 
     def get_total_up_votes_given(self, obj):
         # Fetch all votes made by the user
@@ -58,5 +71,5 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'owner', 'created_at', 'updated_at', 'name', 'content', 'image', 
             'is_owner', 'posts_count', 'total_upvotes', 'total_up_votes_given', 'total_up_votes_received',
-            'total_down_votes_given', 'total_down_votes_received',
+            'total_down_votes_given', 'total_down_votes_received', 'sender_id'
         ]

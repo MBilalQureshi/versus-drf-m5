@@ -32,11 +32,12 @@ function ProfilePage() {
   const currentUser = useCurrentUser();
   const { id } = useParams();
 
-  const setProfileData = useSetProfileData();
+  // const setProfileData = useSetProfileData();
   const { pageProfile } = useProfileData();
-
+  console.log(pageProfile)
   const [profile] = pageProfile.results;
   const is_owner = currentUser?.username === profile?.owner;
+  const {setProfileData, handleFollow, handleUnfollow} = useSetProfileData();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,7 +59,31 @@ function ProfilePage() {
     };
     fetchData();
   }, [id, setProfileData]);
-
+  const fetchDataRequest = async () => {
+    try {
+      const [{ data: pageProfile }, { data: profilePosts }] =
+        await Promise.all([
+          axiosReq.get(`/profiles/${id}/`),
+          axiosReq.get(`/products/posts/?vote__owner__profile=&owner__profile=${id}`),
+        ]);
+      setProfileData((prevState) => ({
+        ...prevState,
+        pageProfile: { results: [pageProfile] },
+      }));
+      setProfilePosts(profilePosts);
+      setHasLoaded(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleAddFriendClick = () => {
+    handleFollow(profile);
+    fetchDataRequest();
+  }
+  const handleRemoveFriendClick = () => {
+    handleUnfollow(profile);
+    fetchDataRequest();
+  }
   const mainProfile = (
     <>
     {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
@@ -87,26 +112,26 @@ function ProfilePage() {
             </Col>
           </Row>
         </Col>
-        <Col lg={3} className="text-lg-right"></Col>
-        {/* <Col lg={3} className="text-lg-right">
+        {/* <Col lg={3} className="text-lg-right"></Col> */}
+        <Col lg={3} className="text-lg-right">
           {currentUser &&
             !is_owner &&
-            (profile?.following_id ? (
+            (profile?.sender_id ? (
               <Button
                 className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
-                onClick={() => {}}
+                onClick={()=>handleRemoveFriendClick()}
               >
-                unfollow
+                Remove Friend
               </Button>
             ) : (
               <Button
                 className={`${btnStyles.Button} ${btnStyles.Black}`}
-                onClick={() => {}}
+                onClick={()=>handleAddFriendClick()}
               >
-                follow
+                Add Friend
               </Button>
             ))}
-        </Col> */}
+        </Col>
         {profile?.content && <Col className="p-3">{profile.content}</Col>}
       </Row>
     </>
