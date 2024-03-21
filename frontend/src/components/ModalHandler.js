@@ -15,15 +15,15 @@ const ModalHandler = (props) => {
 
   return (
     <Modal show={show} onHide={close}>
-      <Modal.Header closeButton>
+      <Modal.Header closeButton className={modalStyles.header}>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className={modalStyles.body}>
         <div className={modalStyles.RuleList}>
           {ruleItems}
         </div>
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer className={modalStyles.footer}>
         <Button onClick={close} variant="secondary">Close</Button>
       </Modal.Footer>
     </Modal>

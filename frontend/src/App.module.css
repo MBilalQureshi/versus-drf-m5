@@ -1,6 +1,8 @@
 .App {
   font-family: "DM Sans", sans-serif;
   /* background-color: #f8f8f8; */
+  /* background-color: #F4A261; */
+  background-color: #FEFAE0;
   min-height: 100vh;
 }
 
@@ -9,7 +11,8 @@
 }
 
 .Content {
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
+  background-color: #FAEDCD;
   padding: 10px;
   border-radius: 2px;
   border: 1px solid #dadadf;
@@ -38,6 +41,7 @@ a {
 
 a:hover {
   text-decoration: none;
+  color: #313030;
 }
 
 a:hover i {
@@ -59,7 +63,8 @@ i {
 i:hover {
   cursor: pointer;
   transition: color ease-in-out 0.3s;
-  color: #2142b2;
+  /* color: #2142b2; */
+  color: #000000;
 }
 
 figure {

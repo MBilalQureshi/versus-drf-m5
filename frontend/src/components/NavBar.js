@@ -13,6 +13,7 @@ import axios from 'axios'
 import Avatar from './Avatar'
 import { Modal } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button';
+import modalStyles from '../styles/Modal.module.css';
 
 const NavBar = () => {
   const currentUser = useCurrentUser()
@@ -80,13 +81,13 @@ const NavBar = () => {
       </Navbar>
 
       <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton className="bg-light text-dark">
+      <Modal.Header closeButton className={modalStyles.header}>
         <Modal.Title>Sign Out</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className={modalStyles.body}>
         <p className="text-dark">Are you sure you want to sign out?</p>
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer className={modalStyles.footer}>
         <Button variant="outline-secondary" onClick={handleClose}>
           Cancel
         </Button>

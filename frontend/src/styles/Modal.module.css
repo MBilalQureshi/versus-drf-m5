@@ -1,8 +1,16 @@
 .RuleList {
-  max-height: calc(100vh - 200px); /* Adjust the value as needed */
-  overflow-y: auto; /* Add scroll if content overflows */
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
 }
-
+.header{
+  background-color: #D4A373;
+}
+.body{
+  background-color: #FEFAE0;
+}
+.footer{
+  background-color: #FAEDCD;
+}
 .RuleItem {
   border: 1px solid #ccc;
   border-radius: 5px;

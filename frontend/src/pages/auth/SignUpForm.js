@@ -15,6 +15,7 @@ import Container from "react-bootstrap/Container";
 
 import axios from "axios";
 import { useRedirect } from "../../hooks/useRedirect";
+import ModalHandler from "../../components/ModalHandler";
 
 const SignUpForm = () => {
   useRedirect('loggedIn')
@@ -23,6 +24,10 @@ const SignUpForm = () => {
         password1: '',
         password2: '',
     });
+    const [rules, SetRules] = useState({'Images':'Images should only be products related.',
+    'Comments':'Everone must be respectable towards what other have to say about products.','Abusive Language': 'Any abusive language will not be tolerated and will end up in account being revoked.',
+    'Images Ownership':'User who upload other images must credit them in content.','Account Security':'Every user is responsible for their own accounts security.'})
+    const [showModal, SetShowModal] = useState(false)
     const { username, password1, password2} = signUpData
     const [errors, setErrors] = useState({});
     const history = useHistory();
@@ -107,6 +112,12 @@ const SignUpForm = () => {
           <Link className={styles.Link} to="/signin">
             Already have an account? <span>Sign in</span>
           </Link>
+          <div className="text-center my-3">
+              <Button className={`${btnStyles.Button} ${btnStyles.Black} mb-2`} onClick={()=>SetShowModal(true)}>
+                Click here to see rules
+              </Button>
+              <ModalHandler show={showModal} close={() => SetShowModal(false)} rules={rules} title="Rules Guide"/>
+            </div>
         </Container>
       </Col>
       <Col
@@ -115,9 +126,7 @@ const SignUpForm = () => {
       >
         <Image
           className={`${appStyles.FillerImage}`}
-          src={
-            "https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero2.jpg"
-          }
+          src={'https://miro.medium.com/v2/resize:fit:720/format:webp/1*ypN4LtX6QxMqQW4FT2lNyQ.png'}
         />
       </Col>
     </Row>
