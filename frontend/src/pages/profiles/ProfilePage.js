@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
-
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-
 import Asset from "../../components/Asset";
-
 import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
@@ -28,11 +25,8 @@ import { ProfileEditDropdown } from "../../components/MoreDropdown";
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [profilePosts, setProfilePosts] = useState({ results: [] });
-
   const currentUser = useCurrentUser();
   const { id } = useParams();
-
-  // const setProfileData = useSetProfileData();
   const { pageProfile } = useProfileData();
   console.log(pageProfile)
   const [profile] = pageProfile.results;
@@ -112,7 +106,6 @@ function ProfilePage() {
             </Col>
           </Row>
         </Col>
-        {/* <Col lg={3} className="text-lg-right"></Col> */}
         <Col lg={3} className="text-lg-right">
           {currentUser &&
             !is_owner &&

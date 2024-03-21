@@ -42,15 +42,9 @@ const SignUpForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try{
-            // const csrfToken = document.cookie.match(/csrftoken=([^ ;]+)/)[1];
             await axios.post('/dj-rest-auth/registration/', signUpData)//,{
-                // headers: {
-                // 'X-CSRFToken': csrfToken,
-                // },})
           history.push('/signin')
         } catch(err){
-          // This code with the question mark is called  optional chaining. What it does is check if  
-          // response is defined before looking for the data.  So if response isn’t defined, it won’t throw an error.
           setErrors(err.response?.data);
           console.log(err.response?.data.detail)
         }
@@ -100,8 +94,6 @@ const SignUpForm = () => {
                     <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`} type="submit">
                         Sign Up
                     </Button>
-
-                    {/* Add non_fields_erros like if password does not match */}
                     {errors.non_field_errors?.map((message, idx) => (
                         <Alert variant="warning" key={idx} className="mt-3">{message}</Alert>
                     ))}

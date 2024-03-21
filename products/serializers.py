@@ -9,24 +9,15 @@ class ProductSerializer(serializers.ModelSerializer):
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     up_vote_id = serializers.SerializerMethodField()
     down_vote_id = serializers.SerializerMethodField()
-    # category_name = serializers.SerializerMethodField()
     up_votes_count = serializers.ReadOnlyField()
     down_votes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
     category_name = serializers.CharField(source='get_category_display', read_only=True)
 
-    # def get_category_name(self, obj):
-    #     category_id = obj.category
-    #     for category_tuple in Product.CATEGORIES:
-    #         if category_tuple[0] == category_id:
-    #             return category_tuple[1]
-    #     return None
-
     def get_up_vote_id(self, obj):
         user = self.context['request'].user
         if user.is_authenticated:
             like = Vote.objects.filter(
-                # see if currently logged in user is the user who liked the post we are trying to retrieve
                 owner=user, product=obj, up_vote=True
             ).first()
             return like.id if like else None
@@ -36,7 +27,6 @@ class ProductSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         if user.is_authenticated:
             like = Vote.objects.filter(
-                # see if currently logged in user is the user who liked the post we are trying to retrieve
                 owner=user, product=obj, down_vote=True
             ).first()
             return like.id if like else None
@@ -44,7 +34,6 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def get_is_owner(self, obj):
         request = self.context['request']
-        # Logged in as admin, Admin == Admin 2 hence is_owner = False
         return request.user == obj.owner
 
     def validate_image(self, value):

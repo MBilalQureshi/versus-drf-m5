@@ -26,29 +26,6 @@ class Product(models.Model):
     (19, 'Art & Crafts'),
     (20, 'Garden & Outdoor Living'),
     ]
-#     CATEGORIES = [
-#     ('Others', 'Others'),
-#     ('Electronics', 'Electronics'),
-#     ('Clothing', 'Clothing'),
-#     ('Books', 'Books'),
-#     ('Home & Kitchen', 'Home & Kitchen'),
-#     ('Sports & Outdoors', 'Sports & Outdoors'),
-#     ('Beauty & Personal Care', 'Beauty & Personal Care'),
-#     ('Health & Wellness', 'Health & Wellness'),
-#     ('Toys & Games', 'Toys & Games'),
-#     ('Automotive', 'Automotive'),
-#     ('Food & Grocery', 'Food & Grocery'),
-#     ('Furniture', 'Furniture'),
-#     ('Office & Stationery', 'Office & Stationery'),
-#     ('Pets', 'Pets'),
-#     ('Tools & Home Improvement', 'Tools & Home Improvement'),
-#     ('Travel & Luggage', 'Travel & Luggage'),
-#     ('Musical Instruments', 'Musical Instruments'),
-#     ('Baby & Kids', 'Baby & Kids'),
-#     ('Jewelry & Watches', 'Jewelry & Watches'),
-#     ('Art & Crafts', 'Art & Crafts'),
-#     ('Garden & Outdoor Living', 'Garden & Outdoor Living'),
-# ]
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -71,6 +48,5 @@ class Product(models.Model):
         return f'{self.id} {self.title}'
 
     def save(self, *args, **kwargs):
-        # Update the category_name field whenever the category field changes
         self.category_name = dict(self.CATEGORIES).get(self.category)
         super().save(*args, **kwargs)

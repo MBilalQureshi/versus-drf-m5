@@ -37,7 +37,6 @@ const NavBar = () => {
     handleClose();
   }
 
-  // console.log(currentUser)
 
   const addPostIcon = (
     <NavLink className={styles.NavLink} activeClassName={styles.Active} to='/posts/create'><i className="far fa-plus-square"></i>Add Post</NavLink>
@@ -67,7 +66,6 @@ const NavBar = () => {
               </Navbar.Brand>
               </NavLink>
 
-              {/* Current logged in user Icon */}
               {currentUser && addPostIcon}
 
               <Navbar.Toggle aria-controls="basic-navbar-nav" />

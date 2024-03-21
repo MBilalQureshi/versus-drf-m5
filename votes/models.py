@@ -14,7 +14,6 @@ class Vote(models.Model):
 
     class Meta:
         ordering = ['-created_at']
-        # this is to avoid the product to be liked multiple time but same user and will cause integrity error
         unique_together = ['owner', 'product']
 
     def __str__(self):

@@ -38,10 +38,7 @@ function PostCreateForm() {
   'Content':'Maximum content length is 500.', 'Price':'Ensure that there are no more than 6 digits in total.','Location':'Make sure a location is a correct place.','Category':'User must select a category, else others are set by default.',
   'Post':'The posts must be related to products and products only.'})
   const [showModal, SetShowModal] = useState(false)
-  // const handleModalClose = () => SetShowModal(false);
-  // const handleModalShow = () => SetShowModal(true);
   const history = useHistory()
-  // we need to create a  reference to our Form.File component so that we can access the image  file when we submit our form.  
   const imageInput = useRef(null)
 
   const handleMount = async() => {
@@ -57,13 +54,6 @@ function PostCreateForm() {
     handleMount()
   },[])
 
-  // const handleChange = (event) => {
-  //   setPostData({
-  //       ...postData,
-  //       [event.target.name]: event.target.value,
-  //   })
-  // }
-
   const handleChange = (event) => {
     const { name, value, checked, type } = event.target;
     const newValue = type === 'checkbox' ? checked : value;
@@ -75,19 +65,15 @@ function PostCreateForm() {
   console.log(categories)
   const handleSubmit = async (event) => {
     event.preventDefault()
-    // https://developer.mozilla.org/en-US/docs/Web/API/FormData
     const formData = new FormData()
     formData.append('title', title)
     formData.append('content', content)
     formData.append('price',price)
     formData.append('location',location)
-    // get first file in image attribute files array
     formData.append('image',imageInput.current.files[0])
     formData.append('category',category)
     formData.append('privacy',privacy)
-    console.log(postData.privacy)
 
-    //refresh user access token before making post request
     try{
         const {data} = await axiosReq.post('/products/posts/', formData)
         history.push(`/products/posts/${data.id}`)
@@ -99,15 +85,10 @@ function PostCreateForm() {
     }
   }
 
-  //https://developer.mozilla.org/en-US/docs/Web/API/URL
 const handleChangeImage = (event) => {
-  //incase user wants to change the image link after addig on we need to revokeObjectURL_static to clear browser refrence to previous file
-  // https://developer.mozilla.org/en-US/docs/Web/API/URL/revokeObjectURL_static
   URL.revokeObjectURL(image)
   setPostData({
       ...postData,
-      // createObjectURL: https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL_static creates 
-      // a local link to the file passed into it, files[0] choose the first files passed to it
       image: URL.createObjectURL(event.target.files[0],),
   })
 }
@@ -176,7 +157,6 @@ const handleChangeImage = (event) => {
   </Form.Control>
 </Form.Group>
 
-{/* className={modalStyles.RulesContainer} */}
       <div>
         <Button className={`${btnStyles.Button} ${btnStyles.Black} mb-2`} onClick={()=>SetShowModal(true)}>
           Post creation rules
@@ -234,7 +214,6 @@ const handleChangeImage = (event) => {
                     <Asset src={Upload} message="Click or tap to upload an image" />
                 </Form.Label>
                 )}
-                {/* Image upload '/*' so that only images are accepted */}
                 <Form.File
                     id="image-upload" accept="image/*"
                     onChange={handleChangeImage} 

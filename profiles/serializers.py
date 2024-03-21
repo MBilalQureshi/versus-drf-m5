@@ -17,47 +17,34 @@ class ProfileSerializer(serializers.ModelSerializer):
     def get_sender_id(self, obj):
         user = self.context['request'].user
         if user.is_authenticated:
-            # check if user is following any other profiles using filter
             following = Friend.objects.filter(
-                # if logged in user (owner=user) is following this profile (followed=obj.owner) an instance will be returned else None is returned
                 owner=user, request=obj.owner
             ).first()
             return following.id if following else None
-        # if not authenticated user return None
         return None
 
     def get_total_up_votes_given(self, obj):
-        # Fetch all votes made by the user
         user_votes = Vote.objects.filter(owner=obj.owner)
-        # Calculate the total number of upvotes
         total_upvotes = user_votes.filter(up_vote=True).count()
         return total_upvotes
 
     def get_total_up_votes_received(self, obj):
-        # Fetch all posts of the user
         user_posts = obj.owner.product_set.all()
         total_upvotes = 0
-        # Iterate through each post and calculate total upvotes
         for post in user_posts:
-            # Aggregate upvotes for the post
             upvotes_for_post = Vote.objects.filter(product=post, up_vote=True).count()
             total_upvotes += upvotes_for_post
         return total_upvotes
 
     def get_total_down_votes_given(self, obj):
-        # Fetch all votes made by the user
         user_votes = Vote.objects.filter(owner=obj.owner)
-        # Calculate the total number of downvotes
         total_downvotes = user_votes.filter(down_vote=True).count()
         return total_downvotes
 
     def get_total_down_votes_received(self, obj):
-        # Fetch all posts of the user
         user_posts = obj.owner.product_set.all()
         total_downvotes = 0
-        # Iterate through each post and calculate total downvotes
         for post in user_posts:
-            # Aggregate downvotes for the post
             downvotes_for_post = Vote.objects.filter(product=post, down_vote=True).count()
             total_downvotes += downvotes_for_post
         return total_downvotes

@@ -8,7 +8,6 @@ class VoteList(generics.ListCreateAPIView):
     List Vote or create a Vote if logged in.
     """
     serializer_class = VoteSerializer
-    # we don't want anonymous users to vote
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Vote.objects.all()
     

@@ -9,7 +9,7 @@ import { axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
 
 const Post = (props) => {
-    const {id, owner, category, category_name, content, created_at, down_vote_id,
+    const {id, owner, category_name, content, down_vote_id,
     image, profile_id, profile_image, title, up_vote_id, updated_at,postPage,
     down_votes_count, up_votes_count, comments_count, location, price, setPosts, privacy} = props
     
@@ -33,9 +33,9 @@ const Post = (props) => {
     const handleUpVote = async () => {
       try{
         const postData = {
-          product: id, // Assuming you have product object passed as a prop
+          product: id,
           up_vote:  true,
-          down_vote: false, // Set to false as it's an upvote
+          down_vote: false,
         };
         const {data} = await axiosRes.post('/votes/', postData)
         setPosts((prevPosts)=>({
@@ -136,12 +136,10 @@ const Post = (props) => {
               <i className={`fa-solid fa-thumbs-up ${styles.Heart}`} />
             </span>
           ) : currentUser && !up_vote_id && !down_vote_id ? (
-            // have not up voted yet
             <span onClick={handleUpVote} value="upVote">
               <i className={`fa-solid fa-thumbs-up ${styles.HeartOutline}`} />
             </span>
           ) : !up_vote_id && down_vote_id ? (
-            // already upvoted
             <span>
               <i className="fa-solid fa-thumbs-up" />
             </span>
@@ -167,11 +165,11 @@ const Post = (props) => {
             </OverlayTrigger>
           ) : up_vote_id  || down_vote_id ? (
             <span onClick={handleVoteDelete}>
-              Remove vote<i className={`fa-solid fa-xmark`} />{/** ${styles.Heart} */}
+              Remove vote<i className={`fa-solid fa-xmark`} />
             </span>
           ) : !up_vote_id  || !down_vote_id ? (
             <span>
-              Remove vote<i className={`fa-solid fa-xmark`} />{/** ${styles.Heart} */}
+              Remove vote<i className={`fa-solid fa-xmark`} />
             </span>
           ) : (
             <OverlayTrigger

@@ -4,7 +4,7 @@ from products.models import Product
 
 class Comment(models.Model):
     """
-    Comment model, related to User and Product
+    Comment model, related to User and Product post
     """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

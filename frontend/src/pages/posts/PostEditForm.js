@@ -31,7 +31,6 @@ function PostEditForm() {
   const [categories, setCategories] = useState()
   const {title, content, image, category, price, location, privacy} = postData
   const history = useHistory()
-  // we need to create a  reference to our Form.File component so that we can access the image  file when we submit our form.  
   const imageInput = useRef(null)
 
   
@@ -53,12 +52,6 @@ function PostEditForm() {
     handleMount()
   },[history,id])
 
-  // const handleChange = (event) => {
-  //   setPostData({
-  //       ...postData,
-  //       [event.target.name]: event.target.value,
-  //   })
-  // }
   const handleChange = (event) => {
     const { name, value, checked, type } = event.target;
     const newValue = type === 'checkbox' ? checked : value;
@@ -70,7 +63,6 @@ function PostEditForm() {
   console.log(categories)
   const handleSubmit = async (event) => {
     event.preventDefault()
-    // https://developer.mozilla.org/en-US/docs/Web/API/FormData
     const formData = new FormData()
     formData.append('title', title)
     formData.append('content', content)
@@ -83,7 +75,6 @@ function PostEditForm() {
     formData.append('privacy',privacy)
     console.log(postData.category)
 
-    //refresh user access token before making post request
     try{
         await axiosReq.put(`/products/posts/${id}/`, formData)
         history.push(`/products/posts/${id}`)
@@ -95,15 +86,10 @@ function PostEditForm() {
     }
   }
 
-  //https://developer.mozilla.org/en-US/docs/Web/API/URL
 const handleChangeImage = (event) => {
-  //incase user wants to change the image link after addig on we need to revokeObjectURL_static to clear browser refrence to previous file
-  // https://developer.mozilla.org/en-US/docs/Web/API/URL/revokeObjectURL_static
   URL.revokeObjectURL(image)
   setPostData({
       ...postData,
-      // createObjectURL: https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL_static creates 
-      // a local link to the file passed into it, files[0] choose the first files passed to it
       image: URL.createObjectURL(event.target.files[0],),
   })
 }
@@ -218,7 +204,6 @@ const handleChangeImage = (event) => {
                             </Form.Label>
                         </div>
                     
-                {/* Image upload '/*' so that only images are accepted */}
                 <Form.File
                     id="image-upload" accept="image/*"
                     onChange={handleChangeImage} 

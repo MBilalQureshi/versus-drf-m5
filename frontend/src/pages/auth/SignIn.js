@@ -19,23 +19,12 @@ import { useRedirect } from "../../hooks/useRedirect";
 import { setTokenTimestamp } from "../../utils/utils";
 
 function SignInForm() {
-
-    // const setCurrentUser = useContext(SetCurrentUserContext)
-    //we'll change above code to below as its now defined in CurrentUserContext.js
     const setCurrentUser = useSetCurrentUser()
-
-    /**
-     * So, in the SignInForm component, we’ll auto-import our useRedirect
-      hook at the top of our component code. And pass it the “loggedIn” string,
-      as we want to redirect our users away from this page if they are already logged in.
-     */
     useRedirect('loggedIn')
-    
     const [signInData, setSignInData] = useState({
         username : '',
         password : ''
     })
-    // Destructure username and password from signInData
     const {username, password} = signInData
     const history = useHistory();
     const [errors, setErrors] = useState({})
@@ -46,27 +35,13 @@ function SignInForm() {
         })
     }
     const handleSubmit = async (event) => {
-        //so that the page doesn’t refresh.
         event.preventDefault()
         try{
           console.log('signInData: ', signInData)
-            // const csrfToken = document.cookie.match(/csrftoken=([^ ;]+)/)[1];
-            // await axios.post("/dj-rest-auth/login/", signInData)//,{
-                // headers: {
-                // 'X-CSRFToken': csrfToken,
-                // },})
             const {data} = await axios.post('/dj-rest-auth/login/',signInData)
-            // setting curent user value fetched from drf API
             setCurrentUser(data.user)
             console.log(data)
-            // console.log(data.user)
-
-            // Now this function should extract the expiry date from the access token and save it to the user's browser in local storage.
             setTokenTimestamp(data);
-
-            /*Let’s now update the redirect on successful sign in to send the user back rather than
-            have them redirected to the home page.*/
-            // history.push('/')
             history.goBack()
         }
         catch(err){
@@ -79,8 +54,6 @@ function SignInForm() {
       <Col className="my-auto p-0 p-md-2" md={6}>
         <Container className={`${appStyles.Content} p-4 `}>
           <h1 className={styles.Header}>sign in</h1>
-
-          
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="username">
                 <Form.Label className="d-none">username</Form.Label>
@@ -105,7 +78,6 @@ function SignInForm() {
             <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`} variant="primary" type="submit">
                 Sign in
             </Button>
-            {/* Add non_fields_erros like if password does not match */}
             {errors.non_field_errors?.map((message, idx)=>(
               <Alert variant="warning" key={idx} className="mt-3">{message}</Alert>
             ))}
