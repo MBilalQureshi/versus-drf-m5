@@ -27,7 +27,7 @@ export const ProfileDataProvider = ({ children }) => {
           ...prevState,
           popularProfiles: data,
         }));
-        console.log(data)
+        console.log(data);
       } catch (err) {
         console.log(err);
       }
@@ -36,45 +36,56 @@ export const ProfileDataProvider = ({ children }) => {
     handleMount();
   }, [currentUser]);
   const handleFollow = async (clickedProfile) => {
-    try{
-        const {data} = await axiosRes.post('/friends/',{request: clickedProfile.id})
-        
-        setProfileData(prevState => ({
-            ...prevState,
-            pageProfile: {
-                results: prevState.pageProfile.results.map((profile) => followHelper(profile, clickedProfile, data.id)),
-            },
-            popularProfiles : {
-                ...prevState.popularProfiles,
-                results: prevState.popularProfiles.results.map((profile) => followHelper(profile, clickedProfile, data.id)),
-            },
-        }))
+    try {
+      const { data } = await axiosRes.post("/friends/", {
+        request: clickedProfile.id,
+      });
 
-    }catch(err){
-        console.log(err)
+      setProfileData((prevState) => ({
+        ...prevState,
+        pageProfile: {
+          results: prevState.pageProfile.results.map((profile) =>
+            followHelper(profile, clickedProfile, data.id)
+          ),
+        },
+        popularProfiles: {
+          ...prevState.popularProfiles,
+          results: prevState.popularProfiles.results.map((profile) =>
+            followHelper(profile, clickedProfile, data.id)
+          ),
+        },
+      }));
+    } catch (err) {
+      console.log(err);
     }
-}
-  const handleUnfollow = async(clickedProfile) => {
-      try{
-          await axiosRes.delete(`/friends/${clickedProfile.sender_id}`)
-          setProfileData(prevState => ({
-              ...prevState,
-              pageProfile:{
-                  results: prevState.pageProfile.results.map((profile) => unfollowHelper(profile, clickedProfile)),
-              },
-              popularProfiles :{
-                  ...prevState.popularProfiles,
-                  results: prevState.popularProfiles.results.map((profile) => unfollowHelper(profile, clickedProfile)),
-              }
-          }))
-      }catch(err){
-          console.log(err)
-      }
-  }
+  };
+  const handleUnfollow = async (clickedProfile) => {
+    try {
+      await axiosRes.delete(`/friends/${clickedProfile.sender_id}`);
+      setProfileData((prevState) => ({
+        ...prevState,
+        pageProfile: {
+          results: prevState.pageProfile.results.map((profile) =>
+            unfollowHelper(profile, clickedProfile)
+          ),
+        },
+        popularProfiles: {
+          ...prevState.popularProfiles,
+          results: prevState.popularProfiles.results.map((profile) =>
+            unfollowHelper(profile, clickedProfile)
+          ),
+        },
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <ProfileDataContext.Provider value={profileData}>
-      <SetProfileDataContext.Provider value={{setProfileData, handleFollow, handleUnfollow}}>
+      <SetProfileDataContext.Provider
+        value={{ setProfileData, handleFollow, handleUnfollow }}
+      >
         {children}
       </SetProfileDataContext.Provider>
     </ProfileDataContext.Provider>

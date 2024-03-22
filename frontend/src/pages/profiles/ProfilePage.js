@@ -6,7 +6,6 @@ import Asset from "../../components/Asset";
 import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-
 import PopularProfiles from "./PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { useParams } from "react-router";
@@ -28,10 +27,10 @@ function ProfilePage() {
   const currentUser = useCurrentUser();
   const { id } = useParams();
   const { pageProfile } = useProfileData();
-  console.log(pageProfile)
+  console.log(pageProfile);
   const [profile] = pageProfile.results;
   const is_owner = currentUser?.username === profile?.owner;
-  const {setProfileData, handleFollow, handleUnfollow} = useSetProfileData();
+  const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +38,9 @@ function ProfilePage() {
         const [{ data: pageProfile }, { data: profilePosts }] =
           await Promise.all([
             axiosReq.get(`/profiles/${id}/`),
-            axiosReq.get(`/products/posts/?vote__owner__profile=&owner__profile=${id}`),
+            axiosReq.get(
+              `/products/posts/?vote__owner__profile=&owner__profile=${id}`
+            ),
           ]);
         setProfileData((prevState) => ({
           ...prevState,
@@ -55,11 +56,14 @@ function ProfilePage() {
   }, [id, setProfileData]);
   const fetchDataRequest = async () => {
     try {
-      const [{ data: pageProfile }, { data: profilePosts }] =
-        await Promise.all([
+      const [{ data: pageProfile }, { data: profilePosts }] = await Promise.all(
+        [
           axiosReq.get(`/profiles/${id}/`),
-          axiosReq.get(`/products/posts/?vote__owner__profile=&owner__profile=${id}`),
-        ]);
+          axiosReq.get(
+            `/products/posts/?vote__owner__profile=&owner__profile=${id}`
+          ),
+        ]
+      );
       setProfileData((prevState) => ({
         ...prevState,
         pageProfile: { results: [pageProfile] },
@@ -73,14 +77,14 @@ function ProfilePage() {
   const handleAddFriendClick = () => {
     handleFollow(profile);
     fetchDataRequest();
-  }
+  };
   const handleRemoveFriendClick = () => {
     handleUnfollow(profile);
     fetchDataRequest();
-  }
+  };
   const mainProfile = (
     <>
-    {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
+      {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
       <Row noGutters className="px-3 text-center">
         <Col lg={3} className="text-lg-left">
           <Image
@@ -97,11 +101,19 @@ function ProfilePage() {
               <div>posts</div>
             </Col>
             <Col xs={3} className="my-2">
-            <div>{!profile?.total_up_votes_received ? (0):(profile?.total_up_votes_received)}</div>
-              <div>Up votes</div> 
+              <div>
+                {!profile?.total_up_votes_received
+                  ? 0
+                  : profile?.total_up_votes_received}
+              </div>
+              <div>Up votes</div>
             </Col>
             <Col xs={4} className="my-2">
-              <div>{!profile?.total_down_votes_received ? (0):(profile?.total_down_votes_received)}</div>
+              <div>
+                {!profile?.total_down_votes_received
+                  ? 0
+                  : profile?.total_down_votes_received}
+              </div>
               <div>Down Votes</div>
             </Col>
           </Row>
@@ -112,14 +124,14 @@ function ProfilePage() {
             (profile?.sender_id ? (
               <Button
                 className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
-                onClick={()=>handleRemoveFriendClick()}
+                onClick={() => handleRemoveFriendClick()}
               >
                 Remove Friend
               </Button>
             ) : (
               <Button
                 className={`${btnStyles.Button} ${btnStyles.Black}`}
-                onClick={()=>handleAddFriendClick()}
+                onClick={() => handleAddFriendClick()}
               >
                 Add Friend
               </Button>

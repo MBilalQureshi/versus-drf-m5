@@ -9,89 +9,125 @@ import { axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
 
 const Post = (props) => {
-    const {id, owner, category_name, content, down_vote_id,
-    image, profile_id, profile_image, title, up_vote_id, updated_at,postPage,
-    down_votes_count, up_votes_count, comments_count, location, price, setPosts, privacy} = props
-    
-    const currentUser = useCurrentUser()
-    const is_owner = currentUser?.username === owner
-    const history = useHistory()
+  const {
+    id,
+    owner,
+    category_name,
+    content,
+    down_vote_id,
+    image,
+    profile_id,
+    profile_image,
+    title,
+    up_vote_id,
+    updated_at,
+    postPage,
+    down_votes_count,
+    up_votes_count,
+    comments_count,
+    location,
+    price,
+    setPosts,
+    privacy,
+  } = props;
 
-    const handleEdit = () => {
-      history.push(`/products/posts/${id}/edit`)
+  const currentUser = useCurrentUser();
+  const is_owner = currentUser?.username === owner;
+  const history = useHistory();
+
+  const handleEdit = () => {
+    history.push(`/products/posts/${id}/edit`);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axiosRes.delete(`/products/posts/${id}/`);
+      history.goBack();
+    } catch (err) {
+      console.log(err);
     }
+  };
 
-    const handleDelete = async () => {
-      try {
-        await axiosRes.delete(`/products/posts/${id}/`);
-        history.goBack();
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    const handleUpVote = async () => {
-      try{
-        const postData = {
-          product: id,
-          up_vote:  true,
-          down_vote: false,
-        };
-        const {data} = await axiosRes.post('/votes/', postData)
-        setPosts((prevPosts)=>({
-          ...prevPosts,
-          results: prevPosts.results.map((post) => {
-            return post.id === id
-            ? {...post, up_votes_count: post.up_votes_count + 1, up_vote_id: data.id}: post;
-          })
-        }))
-      }catch(err){
-        console.log(err)
-      }
-    }
-  
-    const handleVoteDelete = async () => {
-      try{
-        let vote_id = 0
-        if (up_vote_id === null){
-          vote_id = down_vote_id
-        }else{
-          vote_id = up_vote_id
-        }
-        await axiosRes.delete(`/votes/${vote_id}/`)
-        setPosts((prevPosts)=>({
-          ...prevPosts,
-          results: prevPosts.results.map((post) => {
-            return post.id === id && up_vote_id
-            ? {...post, up_votes_count: post.up_votes_count - 1, up_vote_id: null}
-            : post.id === id && down_vote_id
-            ? {...post, down_votes_count: post.down_votes_count - 1, down_vote_id: null}
+  const handleUpVote = async () => {
+    try {
+      const postData = {
+        product: id,
+        up_vote: true,
+        down_vote: false,
+      };
+      const { data } = await axiosRes.post("/votes/", postData);
+      setPosts((prevPosts) => ({
+        ...prevPosts,
+        results: prevPosts.results.map((post) => {
+          return post.id === id
+            ? {
+                ...post,
+                up_votes_count: post.up_votes_count + 1,
+                up_vote_id: data.id,
+              }
             : post;
-          })
-        }))
-      }catch(err){
-        console.log(err)
-      }
+        }),
+      }));
+    } catch (err) {
+      console.log(err);
     }
-    const handleDownVote = async () => {
-      try{
-        const postData = {
-          product: id,
-          up_vote:  false,
-          down_vote: true,
-        };
-        const {data} = await axiosRes.post('/votes/', postData)
-        setPosts((prevPosts)=>({
-          ...prevPosts,
-          results: prevPosts.results.map((post) => {
-            return post.id === id
-            ? {...post, down_votes_count: post.down_votes_count + 1, down_vote_id: data.id}: post;
-          })
-        }))
-      }catch(err){
-        console.log(err)
+  };
+
+  const handleVoteDelete = async () => {
+    try {
+      let vote_id = 0;
+      if (up_vote_id === null) {
+        vote_id = down_vote_id;
+      } else {
+        vote_id = up_vote_id;
       }
+      await axiosRes.delete(`/votes/${vote_id}/`);
+      setPosts((prevPosts) => ({
+        ...prevPosts,
+        results: prevPosts.results.map((post) => {
+          return post.id === id && up_vote_id
+            ? {
+                ...post,
+                up_votes_count: post.up_votes_count - 1,
+                up_vote_id: null,
+              }
+            : post.id === id && down_vote_id
+            ? {
+                ...post,
+                down_votes_count: post.down_votes_count - 1,
+                down_vote_id: null,
+              }
+            : post;
+        }),
+      }));
+    } catch (err) {
+      console.log(err);
     }
+  };
+  const handleDownVote = async () => {
+    try {
+      const postData = {
+        product: id,
+        up_vote: false,
+        down_vote: true,
+      };
+      const { data } = await axiosRes.post("/votes/", postData);
+      setPosts((prevPosts) => ({
+        ...prevPosts,
+        results: prevPosts.results.map((post) => {
+          return post.id === id
+            ? {
+                ...post,
+                down_votes_count: post.down_votes_count + 1,
+                down_vote_id: data.id,
+              }
+            : post;
+        }),
+      }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Card className={styles.Post}>
@@ -121,7 +157,11 @@ const Post = (props) => {
         {category_name && <Card.Text>Catgory: {category_name}</Card.Text>}
         {price && <Card.Text>Price: {price} &#8364;</Card.Text>}
         {location && <Card.Text>Location: {location}</Card.Text>}
-        {privacy===true ? (<Card.Text>Private post: Yes</Card.Text>):(<Card.Text>Private post: No</Card.Text>)}
+        {privacy === true ? (
+          <Card.Text>Private post: Yes</Card.Text>
+        ) : (
+          <Card.Text>Private post: No</Card.Text>
+        )}
         <span className={`mr-5 ${styles.PostBar}`}>
           {is_owner ? (
             <OverlayTrigger
@@ -131,7 +171,6 @@ const Post = (props) => {
               <i className="fa-solid fa-thumbs-up" />
             </OverlayTrigger>
           ) : up_vote_id && !down_vote_id ? (
-
             <span onClick={() => {}}>
               <i className={`fa-solid fa-thumbs-up ${styles.Heart}`} />
             </span>
@@ -143,7 +182,7 @@ const Post = (props) => {
             <span>
               <i className="fa-solid fa-thumbs-up" />
             </span>
-          ): (
+          ) : (
             <OverlayTrigger
               placement="top"
               overlay={<Tooltip>Log in to vote on posts!</Tooltip>}
@@ -151,8 +190,6 @@ const Post = (props) => {
               <i className="fa-solid fa-thumbs-up" />
             </OverlayTrigger>
           )}
-          
-
         </span>
 
         <span className={styles.PostBar}>
@@ -163,13 +200,15 @@ const Post = (props) => {
             >
               <i className="fa-solid fa-xmark" />
             </OverlayTrigger>
-          ) : up_vote_id  || down_vote_id ? (
+          ) : up_vote_id || down_vote_id ? (
             <span onClick={handleVoteDelete}>
-              Remove vote<i className={`fa-solid fa-xmark`} />
+              Remove vote
+              <i className={`fa-solid fa-xmark`} />
             </span>
-          ) : !up_vote_id  || !down_vote_id ? (
+          ) : !up_vote_id || !down_vote_id ? (
             <span>
-              Remove vote<i className={`fa-solid fa-xmark`} />
+              Remove vote
+              <i className={`fa-solid fa-xmark`} />
             </span>
           ) : (
             <OverlayTrigger
@@ -179,8 +218,6 @@ const Post = (props) => {
               <i className="fa-solid fa-xmark" />
             </OverlayTrigger>
           )}
-          
-
         </span>
 
         <span className={`ml-5 ${styles.PostBar}`}>
@@ -195,11 +232,11 @@ const Post = (props) => {
             <span onClick={() => {}}>
               <i className={`fa-solid fa-thumbs-down ${styles.Heart}`} />
             </span>
-          ) : currentUser && ! down_vote_id && !up_vote_id? (
+          ) : currentUser && !down_vote_id && !up_vote_id ? (
             <span onClick={handleDownVote}>
               <i className={`fa-solid fa-thumbs-down ${styles.HeartOutline}`} />
             </span>
-          ): up_vote_id && !down_vote_id ? (
+          ) : up_vote_id && !down_vote_id ? (
             // already upvoted
             <span>
               <i className="fa-solid fa-thumbs-down" />
@@ -212,10 +249,7 @@ const Post = (props) => {
               <i className="fa-solid fa-thumbs-down" />
             </OverlayTrigger>
           )}
-          
-
         </span>
-
 
         <div>
           <Table striped bordered hover>
