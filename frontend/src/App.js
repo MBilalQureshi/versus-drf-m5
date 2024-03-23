@@ -16,7 +16,10 @@ import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 
 function App() {
+  // Get current user from CurrentUserContext
   const currentUser = useCurrentUser();
+
+  // Get profile id if exist else empty string
   const profile_id = currentUser?.profile_id || "";
   return (
     <div className={styles.App}>

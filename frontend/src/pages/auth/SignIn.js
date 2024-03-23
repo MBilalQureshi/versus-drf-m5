@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
@@ -16,29 +15,41 @@ import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { useRedirect } from "../../hooks/useRedirect";
 import { setTokenTimestamp } from "../../utils/utils";
 
+// This component handles user's sign in
 function SignInForm() {
+  // Context hook to set current user
   const setCurrentUser = useSetCurrentUser();
+  
+  // Redirect user based on authentication status
   useRedirect("loggedIn");
   const [signInData, setSignInData] = useState({
     username: "",
     password: "",
   });
-  const { username, password } = signInData;
-  const history = useHistory();
+
+  //State to manage errors
   const [errors, setErrors] = useState({});
+  
+  // Destructring sign in form data
+  const { username, password } = signInData;
+
+  // This history hook handles navigation
+  const history = useHistory();
+
+  // Handle the chnages in form data
   const handleChange = (event) => {
     setSignInData({
       ...signInData,
       [event.target.name]: event.target.value,
     });
   };
+
+  // Handles the form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      console.log("signInData: ", signInData);
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       setCurrentUser(data.user);
-      console.log(data);
       setTokenTimestamp(data);
       history.goBack();
     } catch (err) {

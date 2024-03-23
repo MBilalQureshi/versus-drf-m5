@@ -8,7 +8,9 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
 
+// This component deals with a post data
 const Post = (props) => {
+  // Destructring the props
   const {
     id,
     owner,
@@ -31,14 +33,21 @@ const Post = (props) => {
     privacy,
   } = props;
 
+  // Fetch current user from CurrentUserContext
   const currentUser = useCurrentUser();
+
+  // Check if logged in user is also post owner
   const is_owner = currentUser?.username === owner;
+
+  // This history hook handles navigation
   const history = useHistory();
 
+  // This navigates page to post edit
   const handleEdit = () => {
     history.push(`/products/posts/${id}/edit`);
   };
 
+  // This function handles deletion of post
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/products/posts/${id}/`);
@@ -48,6 +57,7 @@ const Post = (props) => {
     }
   };
 
+  // This function handles if post is up voted
   const handleUpVote = async () => {
     try {
       const postData = {
@@ -73,6 +83,7 @@ const Post = (props) => {
     }
   };
 
+  // This function handles if post's vote is deleted
   const handleVoteDelete = async () => {
     try {
       let vote_id = 0;
@@ -104,6 +115,8 @@ const Post = (props) => {
       console.log(err);
     }
   };
+
+  // This function handles if post is down voted
   const handleDownVote = async () => {
     try {
       const postData = {

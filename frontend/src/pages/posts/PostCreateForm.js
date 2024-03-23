@@ -16,9 +16,15 @@ import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import { useRedirect } from "../../hooks/useRedirect";
 import ModalHandler from "../../components/ModalHandler";
 
+// This component handles the post creation
 function PostCreateForm() {
+  // Redirect user based on authentication status
   useRedirect("loggedOut");
+
+  // This takes care of error state 
   const [errors, setErrors] = useState({});
+
+  // This state sets the post creation form fields
   const [postData, setPostData] = useState({
     title: "",
     content: "",
@@ -28,9 +34,15 @@ function PostCreateForm() {
     location: "",
     privacy: 0,
   });
+
+  // Sets categories of product
   const [categories, setCategories] = useState();
+
+  // Destructring post data fields
   const { title, content, image, category, price, location, privacy } =
     postData;
+
+  // Setting modal rules
   const [rules, SetRules] = useState({
     "Private Post":
       "To keep post private, make sure to toggle Priavte Post section.",
@@ -42,10 +54,17 @@ function PostCreateForm() {
     Category: "User must select a category, else others are set by default.",
     Post: "The posts must be related to products and products only.",
   });
+
+  // This state handles modal state
   const [showModal, SetShowModal] = useState(false);
+
+  // History to navigate user to other parts of website
   const history = useHistory();
+
+  //Refernece the image element
   const imageInput = useRef(null);
 
+  // Set categories data once mounted on page load
   const handleMount = async () => {
     try {
       const { data } = await axiosRes.get("/categories/");
@@ -58,6 +77,7 @@ function PostCreateForm() {
     handleMount();
   }, []);
 
+  // Set fields data if had value, set toggle value if checked
   const handleChange = (event) => {
     const { name, value, checked, type } = event.target;
     const newValue = type === "checkbox" ? checked : value;
@@ -66,7 +86,8 @@ function PostCreateForm() {
       [name]: newValue,
     });
   };
-  console.log(categories);
+
+  // Handles form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -89,6 +110,7 @@ function PostCreateForm() {
     }
   };
 
+  // Handles if any change occurs in an image field
   const handleChangeImage = (event) => {
     URL.revokeObjectURL(image);
     setPostData({
@@ -97,6 +119,7 @@ function PostCreateForm() {
     });
   };
 
+  // Setting JSX for form data
   const textFields = (
     <div className="text-center">
       <Form.Group controlId="title">

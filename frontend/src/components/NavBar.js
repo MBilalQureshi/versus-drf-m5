@@ -15,17 +15,26 @@ import { Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import modalStyles from "../styles/Modal.module.css";
 
+// This component handles the navigation bar and redirecting user
 const NavBar = () => {
+  // Context hook to get current user
   const currentUser = useCurrentUser();
+
+  // Context hook to set current user
   const setCurrentUser = useSetCurrentUser();
+
+  // This state set's the signout modal
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = (event) => {
     event.preventDefault();
     setShow(true);
   };
+
+  // This history hook handles navigation
   const history = useHistory();
 
+  // Hnadles user logout
   const handleSignOut = async () => {
     try {
       await axios.post("/dj-rest-auth/logout/");
@@ -37,6 +46,7 @@ const NavBar = () => {
     handleClose();
   };
 
+  // Link to add new post
   const addPostIcon = (
     <NavLink
       className={styles.NavLink}
@@ -47,6 +57,7 @@ const NavBar = () => {
     </NavLink>
   );
 
+  // Logged in icons once user is logged in
   const loggedInIcons = (
     <>
       <NavLink
@@ -79,6 +90,7 @@ const NavBar = () => {
     </>
   );
 
+  // Logged out icons once user is logged out
   const loggedOutIcons = (
     <>
       <NavLink

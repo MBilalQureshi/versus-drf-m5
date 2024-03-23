@@ -5,7 +5,11 @@ import Asset from "../../components/Asset";
 import Profile from "./Profile";
 import { useProfileData } from "../../contexts/ProfileDataContext";
 
+// This parent component fetches popular profiles
 const PopularProfiles = ({ mobile }) => {
+  // 1- Mobile prop set the mobile view on page
+
+  // Fetch current user profile data from Profile data context
   const { popularProfiles } = useProfileData();
   return (
     <Container

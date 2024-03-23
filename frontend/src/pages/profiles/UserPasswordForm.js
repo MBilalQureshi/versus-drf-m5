@@ -11,17 +11,30 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 
+// This component handles password form
 const UserPasswordForm = () => {
+  // History to navigate user to other parts of website
   const history = useHistory();
+
+  // Fetches id from URL
   const { id } = useParams();
+
+  // Fetch current user from CurrentUserContext
   const currentUser = useCurrentUser();
+
+  // State to set password and repeat password fields
   const [userData, setUserData] = useState({
     new_password1: "",
     new_password2: "",
   });
+
+  // Destructring the user data
   const { new_password1, new_password2 } = userData;
+
+  // Set state for errors
   const [errors, setErrors] = useState({});
 
+  // Handle password fields on change
   const handleChange = (event) => {
     setUserData({
       ...userData,
@@ -29,12 +42,14 @@ const UserPasswordForm = () => {
     });
   };
 
+  // Check on page load if owner is making request to change password
   useEffect(() => {
     if (currentUser?.profile_id?.toString() !== id) {
       history.push("/");
     }
   }, [currentUser, history, id]);
 
+  // Handle submission of new password
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {

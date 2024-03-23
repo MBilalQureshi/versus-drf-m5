@@ -3,15 +3,20 @@ import Form from "react-bootstrap/Form";
 import { axiosRes } from "../../api/axiosDefaults";
 import styles from "../../styles/CommentCreateEditForm.module.css";
 
+// This component handles editing of a comment form
 function CommentEditForm(props) {
+  // Destructring the props
   const { id, content, setShowEditForm, setComments } = props;
 
+  // This state sets content of comment
   const [formContent, setFormContent] = useState(content);
 
+  // Handle the changes in form data
   const handleChange = (event) => {
     setFormContent(event.target.value);
   };
 
+  // Handle the form submission of comment
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {

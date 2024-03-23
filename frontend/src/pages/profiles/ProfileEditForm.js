@@ -15,22 +15,38 @@ import {
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 
+// This component handles editing of profile form
 const ProfileEditForm = () => {
+  // Fetch current user from CurrentUserContext
   const currentUser = useCurrentUser();
+
+  // Fetch set current user from CurrentUserContext
+  // for setting new values of current user
   const setCurrentUser = useSetCurrentUser();
+
+  // Fetches id from URL
   const { id } = useParams();
+
+  // History to navigate user to other parts of website
   const history = useHistory();
+
+  // Refernece the image element
   const imageFile = useRef();
 
+  // Set state once new profiles values are created
   const [profileData, setProfileData] = useState({
     name: "",
     content: "",
     image: "",
   });
+
+  // Destructring profileData
   const { name, content, image } = profileData;
 
+  // Set error state
   const [errors, setErrors] = useState({});
 
+  // Get profile data on mount on page load
   useEffect(() => {
     const handleMount = async () => {
       if (currentUser?.profile_id?.toString() === id) {
@@ -50,6 +66,7 @@ const ProfileEditForm = () => {
     handleMount();
   }, [currentUser, history, id]);
 
+  // Handle fields data on change trigger
   const handleChange = (event) => {
     setProfileData({
       ...profileData,
@@ -57,6 +74,7 @@ const ProfileEditForm = () => {
     });
   };
 
+  // Handle submission of form
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -80,6 +98,7 @@ const ProfileEditForm = () => {
     }
   };
 
+  // Setting JSX for form data
   const textFields = (
     <>
       <Form.Group>

@@ -7,12 +7,22 @@ import Avatar from "../../components/Avatar";
 import Button from "react-bootstrap/Button";
 import { useSetProfileData } from "../../contexts/ProfileDataContext";
 
+// This component set the profile page 
 const Profile = (props) => {
+  // Destructring the props
   const { profile, mobile, imageSize = 55 } = props;
+
+  // Destructring the profile
   const { id, sender_id, image, owner } = profile;
+
+  // Fetch current user from CurrentUserContext
   const currentUser = useCurrentUser();
+
+  // Check if logged in user is profile owner
   const is_owner = currentUser?.username === owner;
-  const { handleFollow, handleUnfollow } = useSetProfileData();
+
+  // Fetch handlers for adding and removing friends from ProfileDataContext
+  const { handleAddFriend, handleRemoveFriend } = useSetProfileData();
 
   return (
     <div
@@ -34,14 +44,14 @@ const Profile = (props) => {
           (sender_id ? (
             <Button
               className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
-              onClick={() => handleUnfollow(profile)}
+              onClick={() => handleRemoveFriend(profile)}
             >
               Remove Friend
             </Button>
           ) : (
             <Button
               className={`${btnStyles.Button} ${btnStyles.Black}`}
-              onClick={() => handleFollow(profile)}
+              onClick={() => handleAddFriend(profile)}
             >
               Add Friend
             </Button>

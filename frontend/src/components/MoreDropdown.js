@@ -3,6 +3,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/MoreDropdown.module.css";
 import { useHistory } from "react-router";
 
+// Custom component forr the  dropdown toggling
 const ThreeDots = React.forwardRef(({ onClick }, ref) => (
   <i
     className="fas fa-ellipsis-v"
@@ -14,6 +15,7 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
   />
 ));
 
+// This component handles the drop down options such as edit and delete
 export const MoreDropdown = ({ handleEdit, handleDelete }) => {
   return (
     <Dropdown className="ml-auto" drop="left">
@@ -42,6 +44,7 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
   );
 };
 
+// This component handles edit and deletion on profile page
 export function ProfileEditDropdown({ id }) {
   const history = useHistory();
   return (

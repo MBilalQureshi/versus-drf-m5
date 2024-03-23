@@ -15,21 +15,33 @@ import { fetchMoreData } from "../../utils/utils";
 import PopularProfiles from "../profiles/PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
-function PostsPage({ topVote, message, filter = "" }) {
+// This component shows all the possible posts
+function PostsPage({ message, filter = "" }) {
+  // 1- message prop is active when there is no post to show
+  // 2- filter is to apply which for showing posts, by default its empty string
+
+  // State sets posts, manages list of posts
   const [posts, setPosts] = useState({ results: [] });
+
+  // State loader as boolean
   const [hasLoaded, setHasLoaded] = useState(false);
+
+  // This history hook handles navigation
   const { pathname } = useLocation();
+
+  // Fetch current user from CurrentUserContext
   const currentUser = useCurrentUser();
 
+  // Set query state for searching posts
   const [query, setQuery] = useState("");
 
+  // Fetch posts on mount once page loads
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const { data } = await axiosReq.get(
           `/products/posts/?${filter}search=${query}`
         );
-        console.log(data);
         setPosts(data);
         setHasLoaded(true);
       } catch (err) {
@@ -37,11 +49,13 @@ function PostsPage({ topVote, message, filter = "" }) {
       }
     };
 
+    // Set post loading time while searching
     setHasLoaded(false);
     const timer = setTimeout(() => {
       fetchPosts();
     }, 1000);
 
+    // Clearing timeout
     return () => {
       clearTimeout(timer);
     };

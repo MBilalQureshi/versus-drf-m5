@@ -21,17 +21,33 @@ import { fetchMoreData } from "../../utils/utils";
 import NoResults from "../../assets/no-results.png";
 import { ProfileEditDropdown } from "../../components/MoreDropdown";
 
+// This component sets profile of user and posts
 function ProfilePage() {
+  // Set loader state as false
   const [hasLoaded, setHasLoaded] = useState(false);
-  const [profilePosts, setProfilePosts] = useState({ results: [] });
-  const currentUser = useCurrentUser();
-  const { id } = useParams();
-  const { pageProfile } = useProfileData();
-  console.log(pageProfile);
-  const [profile] = pageProfile.results;
-  const is_owner = currentUser?.username === profile?.owner;
-  const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
 
+  // Set profile posts state
+  const [profilePosts, setProfilePosts] = useState({ results: [] });
+
+  // Fetch current user from CurrentUserContext
+  const currentUser = useCurrentUser();
+
+  // Fetches id from URL
+  const { id } = useParams();
+
+  // Fetch user profile from ProfileDataContext
+  const { pageProfile } = useProfileData();
+
+  // Fetch pages profile result
+  const [profile] = pageProfile.results;
+
+  // Check if logged in user is also profile owner
+  const is_owner = currentUser?.username === profile?.owner;
+
+  // Destructure useSetProfileData to set it to new values as per every profile
+  const { setProfileData, handleAddFriend, handleRemoveFriend } = useSetProfileData();
+
+  // Fetch and set profile and posts based on user id 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -54,6 +70,8 @@ function ProfilePage() {
     };
     fetchData();
   }, [id, setProfileData]);
+
+  // Fetch and set profile and posts based on user id 
   const fetchDataRequest = async () => {
     try {
       const [{ data: pageProfile }, { data: profilePosts }] = await Promise.all(
@@ -74,14 +92,20 @@ function ProfilePage() {
       console.log(err);
     }
   };
+
+  // Add friend click handler
   const handleAddFriendClick = () => {
-    handleFollow(profile);
+    handleAddFriend(profile);
     fetchDataRequest();
   };
+
+  // Remove friend click handler
   const handleRemoveFriendClick = () => {
-    handleUnfollow(profile);
+    handleRemoveFriend(profile);
     fetchDataRequest();
   };
+
+  // JSX for profile
   const mainProfile = (
     <>
       {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}

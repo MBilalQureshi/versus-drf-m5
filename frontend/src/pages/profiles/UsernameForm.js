@@ -14,16 +14,28 @@ import {
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 
+// This component handles username form
 const UsernameForm = () => {
+  // State to set new username
   const [username, setUsername] = useState("");
+
+  // State to set errors
   const [errors, setErrors] = useState({});
 
+  // History to navigate user to other parts of website
   const history = useHistory();
+
+  // Fetches id from URL
   const { id } = useParams();
 
+  // Fetch current user from CurrentUserContext
   const currentUser = useCurrentUser();
+
+  // Fetch set current user from CurrentUserContext
+  // for setting new values of current user
   const setCurrentUser = useSetCurrentUser();
 
+  // Set username on page load
   useEffect(() => {
     if (currentUser?.profile_id?.toString() === id) {
       setUsername(currentUser.username);
@@ -32,6 +44,7 @@ const UsernameForm = () => {
     }
   }, [currentUser, history, id]);
 
+  // Handle submission of new username
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {

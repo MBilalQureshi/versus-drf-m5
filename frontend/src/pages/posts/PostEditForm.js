@@ -15,9 +15,15 @@ import {
 } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 
+// This component handles the post editing
 function PostEditForm() {
+  // Fetches id from URL
   const { id } = useParams();
+
+  // This takes care of error state
   const [errors, setErrors] = useState({});
+
+  // This state sets the post creation form fields
   const [postData, setPostData] = useState({
     title: "",
     content: "",
@@ -27,12 +33,21 @@ function PostEditForm() {
     location: "",
     privacy: 0,
   });
+
+  // Sets categories of product
   const [categories, setCategories] = useState();
+
+  // Destructring post data fields
   const { title, content, image, category, price, location, privacy } =
     postData;
+
+  // History to navigate user to other parts of website
   const history = useHistory();
+
+  //Refernece the image element
   const imageInput = useRef(null);
 
+  // Set categories data once mounted on page load
   const handleMount = async () => {
     try {
       const [{ data: categories }, { data: postData }] = await Promise.all([
@@ -49,7 +64,7 @@ function PostEditForm() {
         location,
         privacy,
       } = postData;
-      console.log(privacy);
+
       setCategories(categories);
       is_owner
         ? setPostData({
@@ -71,6 +86,7 @@ function PostEditForm() {
     handleMount();
   }, [history, id]);
 
+  // Set fields data if had value, set toggle value if checked
   const handleChange = (event) => {
     const { name, value, checked, type } = event.target;
     const newValue = type === "checkbox" ? checked : value;
@@ -79,7 +95,8 @@ function PostEditForm() {
       [name]: newValue,
     });
   };
-  console.log(categories);
+
+  // Handles form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -92,7 +109,6 @@ function PostEditForm() {
     }
     formData.append("category", category);
     formData.append("privacy", privacy);
-    console.log(postData.category);
 
     try {
       await axiosReq.put(`/products/posts/${id}/`, formData);
@@ -105,6 +121,7 @@ function PostEditForm() {
     }
   };
 
+  // Handles if any change occurs in an image field
   const handleChangeImage = (event) => {
     URL.revokeObjectURL(image);
     setPostData({
@@ -113,6 +130,7 @@ function PostEditForm() {
     });
   };
 
+  // Setting JSX for form data
   const textFields = (
     <div className="text-center">
       <Form.Group controlId="title">

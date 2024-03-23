@@ -14,13 +14,17 @@ import axios from "axios";
 import { useRedirect } from "../../hooks/useRedirect";
 import ModalHandler from "../../components/ModalHandler";
 
+// This component handles user's sign up
 const SignUpForm = () => {
+  // Redirect user based on authentication status
   useRedirect("loggedIn");
   const [signUpData, setSignUpData] = useState({
     username: "",
     password1: "",
     password2: "",
   });
+
+  // State to manage modal rules during sign up
   const [rules, SetRules] = useState({
     Images: "Images should only be products related.",
     Comments:
@@ -32,11 +36,20 @@ const SignUpForm = () => {
     "Account Security":
       "Every user is responsible for their own accounts security.",
   });
+
+  // State to manage custom Modal
   const [showModal, SetShowModal] = useState(false);
+
+  // Destructring sign up form data
   const { username, password1, password2 } = signUpData;
+
+  // State to manage errors
   const [errors, setErrors] = useState({});
+
+  // This history hook handles navigation
   const history = useHistory();
   
+  // Handle the chnages in form data
   const handleChange = (event) => {
     setSignUpData({
       ...signUpData,
@@ -44,6 +57,7 @@ const SignUpForm = () => {
     });
   };
 
+  // Handles the form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {

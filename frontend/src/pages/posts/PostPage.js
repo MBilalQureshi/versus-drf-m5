@@ -14,13 +14,25 @@ import Asset from "../../components/Asset";
 import { fetchMoreData } from "../../utils/utils";
 import PopularProfiles from "../profiles/PopularProfiles";
 
+// This component is parent post page which calls post and comment
+// to show complete post page
 function PostPage() {
+  // Fetch current user from CurrentUserContext
   const currentUser = useCurrentUser();
-  const profile_image = currentUser?.profile_image;
+
+  // Fetch profile image URL
+  const profileImage = currentUser?.profile_image;
+
+  // Set comments state
   const [comments, setComments] = useState({ results: [] });
+
+  // Fetches id from URL
   const { id } = useParams();
+
+  // Set post state
   const [post, setPost] = useState({ results: [] });
 
+  // Fetch post and comments datafor specific post
   useEffect(() => {
     const handleMount = async () => {
       try {
@@ -30,8 +42,6 @@ function PostPage() {
         ]);
         setPost({ results: [post] });
         setComments(comments);
-        console.log(post);
-        console.log(comments);
       } catch (err) {
         console.log(err);
       }
@@ -50,7 +60,7 @@ function PostPage() {
           {currentUser ? (
             <CommentCreateForm
               profile_id={currentUser.profile_id}
-              profileImage={profile_image}
+              profileImage={profileImage}
               post={id}
               setPost={setPost}
               setComments={setComments}
