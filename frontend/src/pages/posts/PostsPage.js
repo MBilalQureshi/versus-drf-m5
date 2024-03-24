@@ -3,12 +3,13 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
 import Post from "./Post";
 import Asset from "../../components/Asset";
 import appStyles from "../../App.module.css";
 import styles from "../../styles/PostsPage.module.css";
 import { useLocation } from "react-router";
-import { axiosReq } from "../../api/axiosDefaults";
+import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 import NoResults from "../../assets/no-results.png";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
@@ -19,6 +20,9 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 function PostsPage({ message, filter = "" }) {
   // 1- message prop is active when there is no post to show
   // 2- filter is to apply which for showing posts, by default its empty string
+
+  // State to set the categories
+  const [categories, setCategories] = useState();
 
   // State sets posts, manages list of posts
   const [posts, setPosts] = useState({ results: [] });
@@ -60,6 +64,32 @@ function PostsPage({ message, filter = "" }) {
       clearTimeout(timer);
     };
   }, [filter, query, pathname, currentUser]);
+
+  // Get all categories on page load
+  useEffect(() => {
+    // Set categories data once mounted on page load
+    const handleMount = async () => {
+      try {
+        const { data } = await axiosRes.get("/categories/");
+        setCategories(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    handleMount();
+  }, []);
+
+  // Function that fetches posts by category
+  const fetchPostByCategory = async (label) => {
+    try {
+      const { data } = await axiosReq.get(`/products/posts/?search=${label}`);
+      console.log("first");
+      setPosts(data);
+      setHasLoaded(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Row className="h-100">
@@ -105,6 +135,24 @@ function PostsPage({ message, filter = "" }) {
       </Col>
       <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
         <PopularProfiles />
+        <div className={`${appStyles.Content} mt-3`}>
+          <p>Filter by Category</p>
+          {categories ? (
+            Object.entries(categories).map(([value, label]) => (
+              <Button
+                className="mr-2 mt-2"
+                variant="outline-dark"
+                key={value}
+                value={value}
+                onClick={() => fetchPostByCategory(label)}
+              >
+                {label}
+              </Button>
+            ))
+          ) : (
+            <Asset spinner />
+          )}
+        </div>
       </Col>
     </Row>
   );
