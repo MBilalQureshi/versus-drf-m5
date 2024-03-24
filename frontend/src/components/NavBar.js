@@ -14,6 +14,8 @@ import Avatar from "./Avatar";
 import { Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import modalStyles from "../styles/Modal.module.css";
+import { removeTokenTimestamp } from "../utils/utils";
+import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 
 // This component handles the navigation bar and redirecting user
 const NavBar = () => {
@@ -31,6 +33,9 @@ const NavBar = () => {
     setShow(true);
   };
 
+  //well import our toggle custom hook here
+  const {expanded, setExpanded, ref} = useClickOutsideToggle();
+
   // This history hook handles navigation
   const history = useHistory();
 
@@ -39,7 +44,8 @@ const NavBar = () => {
     try {
       await axios.post("/dj-rest-auth/logout/");
       setCurrentUser(null);
-      history.push("/");
+      removeTokenTimestamp();
+      history.push('/');
     } catch (err) {
       console.log(err.response?.data);
     }
@@ -112,7 +118,7 @@ const NavBar = () => {
 
   return (
     <div>
-      <Navbar className={styles.NavBar} expand="md" fixed="top">
+      <Navbar expanded = {expanded} className={styles.NavBar} expand="md" fixed="top">
         <Container>
           <NavLink to="/">
             <Navbar.Brand>
@@ -120,7 +126,7 @@ const NavBar = () => {
             </Navbar.Brand>
           </NavLink>
           {currentUser && addPostIcon}
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle ref={ref} onClick={() => setExpanded(!expanded)} aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto text-left">
               <NavLink

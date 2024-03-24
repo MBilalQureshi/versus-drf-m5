@@ -47,7 +47,8 @@ function PostEditForm() {
   //Refernece the image element
   const imageInput = useRef(null);
 
-  // Set categories data once mounted on page load
+  useEffect(() => {
+    // Set categories data once mounted on page load
   const handleMount = async () => {
     try {
       const [{ data: categories }, { data: postData }] = await Promise.all([
@@ -82,7 +83,6 @@ function PostEditForm() {
       console.log(err);
     }
   };
-  useEffect(() => {
     handleMount();
   }, [history, id]);
 

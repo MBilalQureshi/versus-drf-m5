@@ -42,8 +42,8 @@ function PostCreateForm() {
   const { title, content, image, category, price, location, privacy } =
     postData;
 
-  // Setting modal rules
-  const [rules, SetRules] = useState({
+  // Rules list for modal during post creation
+  const rules = ({
     "Private Post":
       "To keep post private, make sure to toggle Priavte Post section.",
     "Image Size": "Image size must not increase 2MB.",

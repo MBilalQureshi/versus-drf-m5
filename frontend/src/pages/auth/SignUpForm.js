@@ -24,8 +24,8 @@ const SignUpForm = () => {
     password2: "",
   });
 
-  // State to manage modal rules during sign up
-  const [rules, SetRules] = useState({
+  // Rules list for modal during sign up
+  const rules = ({
     Images: "Images should only be products related.",
     Comments:
       "Everone must be respectable towards what other have to say about products.",
