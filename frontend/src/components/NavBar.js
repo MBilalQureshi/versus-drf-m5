@@ -47,7 +47,7 @@ const NavBar = () => {
       removeTokenTimestamp();
       history.push('/');
     } catch (err) {
-      console.log(err.response?.data);
+      console.log(err);
     }
     handleClose();
   };

@@ -53,7 +53,7 @@ function SignInForm() {
       setTokenTimestamp(data);
       history.goBack();
     } catch (err) {
-      console.log(err.response?.data.detail);
+      console.log(err);
       setErrors(err.response?.data);
     }
   };
