@@ -124,6 +124,22 @@ The database schema is designed using [Drawio](https://app.diagrams.net/).
 
 Testing and results can be found [here](/FRONTEND_TESTING.md)
 
+## Security Features and Defensive Design
+
+### Database Security
+The database URL and secret key are stored in the env file. This prevents unwanted connections to the database.
+
+### Custom error 404 page:
+Custom page 400 Bad request page is added in case the user tries to enter invalid URLs.
+
+### User Authentication
+- dj-rest-auth is used for Authentication purposes.
+- jwt refresh token is used for verifying if a user is still authenticated after a specified time, check if the refresh token is still valid.
+
+### Form Validation
+- The submit button will not work unless all the fields are filled with proper data and warning signs will also appear if data is not valid or fields are empty.
+- Based on the data entered, every form in the project will be validated before moving forward. Characters will only take characters, symbols and integers as input but only in their relevant fields.
+
 ## Features
 
 ## Libraries and Technologies Used
@@ -163,12 +179,58 @@ Testing and results can be found [here](/FRONTEND_TESTING.md)
 - [freeformatter](https://www.freeformatter.com/) is used to format html.
 
 ## Deployment
-### Heroku
 
+### Combining existing DRF and React projects into the same workspace
+
+1. I used the link mentioned below to make a unified react and DRF application.
+- [React and DRF unified app](https://code-institute-students.github.io/advfe-unified-workspace/creating-an-app-in-a-workspace/00-creating-an-app-in-a-workspace)
+
+2. Add in axiosDefaults.js to make unified projects work.
+
+```css
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
+```
+### Ready unified DRF and React before deployment
+The below link explains the steps to take before deployment to Heroku.
+- [Ready unified projects before deployment](https://code-institute-students.github.io/advfe-unified-workspace/deployment/00-deployment)
+
+### Heroku
+The site was deployed using Heroku and the live site can be found here: [Versus](https://versus-bac55e8730b2.herokuapp.com/).
+Note: Make sure to set DEBUG to False before deployment.
+1. Before actual deployment use Heroku "pip freeze > requirements.txt" on the Gitpod console. This will add all the dependencies in the requirements.txt file which will be needed by Heroku later during deployment.
+2. Log in to [Heroku](https://www.heroku.com/).
+3. On the main page there is an option to create a new app, click it.
+4. Enter a unique application name and select your region.
+5. Click on the Create App button.
+6. Click settings and select Config Vars.
+7. Click Reveal Config Vars enter the Key as "ALLOWED_HOST" and Value as "versus-bac55e8730b2.herokuapp.com" and press the add button.
+8. Add CLOUDINARY_URL as another config var and click add.
+9. Next, add Postgres DATABASE_URL and click add.
+10. After that add Django project SECRET_KEY.
+12. Same way Set DISABLE_COLLECTSTATIC to 1 and click add.
+13. Add two more of them as CLIENT_ORIGIN, CSRF_TRUSTED_ORIGINS and set values to "https://versus-bac55e8730b2.herokuapp.com"
+14. Go to the top of the page and select the deploy option.
+15. Select Github as the deployment method.
+16. Confirm to connect with GitHub and authorize Heroku from Github.
+17. In the search bar type the repository name and click the connect button.
+18. Scroll to the bottom of the deploy page and either click Enable Automatic Deploys for automatic deploys or Deploy Branch to deploy manually. Manually deployed branches will need re-deploying each time the repo is updated.
+19. Click View to view the deployed site.
 
 ### Forking the GitHub Repository
+With Forking one can make a copy of a repository and view or make changes in it without affecting the original repository. Following are the steps to do this.
+1. Log in to GitHub and locate [Versus](https://github.com/MBilalQureshi/versus-drf-m5) repository.
+2. At the top right side of the page just below the navigation bar, locate the fork button.
+3. You will now have a copy of the repository.
 
 ### Making a Local Clone
+1. Log in to GitHub and locate [Versus](https://github.com/MBilalQureshi/versus-drf-m5) repository.
+2. Just below the repository name, click "Code".
+3. There is an option to copy the HTTPS link. Press the copy icon.
+5. Open Git Bash on the local machine.
+4. Change the current working directory to the location where we want the cloned directory to be made.
+5. Type git clone on bash and paste the HTTPS URL we copied earlier.
+6. Press Enter. local clone will be created.
 
 ## Credits
 ### Extra Help
