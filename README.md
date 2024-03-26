@@ -99,24 +99,6 @@ All the images are fetched from the Cloudinary database except sign-in and sign-
 
 ### Wireframes
 
-## Data Model
-- The profile has a one-to-one relation with the User model and because of the signal a user object is created when a profile is created.
-- The User model has a one-to-many relationship with the Friend model as one user can have many friends.
-- The User model has a one-to-many relationship with the vote model as a user can have many votes on multiple posts.
-- The User model has a one-to-many relationship with comments as a user can have multiple comments.
-- The User model has a one-to-many relationship with the product as a user can have multiple products related posts.
-- The Product has many-to-one relations as one product post can have many comments.
-- The Product model has a one-to-many relationship with the vote as one product post can have many votes.
-
-
-The database schema is available below.
-<details>
-
-<summary>Versus Database Schema</summary>
-
-![Database Schema](docs/readme_images/database_schema.webp)
-
-</details>
 
 The database schema is designed using [Drawio](https://app.diagrams.net/).
 
@@ -150,8 +132,8 @@ Custom page 400 Bad request page is added in case the user tries to enter invali
 - Javascript
 
 ### Frameworks - Libraries - Programs Used
-- [ReatJS]()
-- [Django REST framework]()
+- [ReatJS](https://react.dev/)Front-end JavaScript library for building user interfaces based on UI components.
+- [React Bootstrap](https://react-bootstrap.github.io/) is a component-based library that provides native Bootstrap components as pure React components. Used to create a responsive application/component UI.
 - [GitHub](https://github.com/) is used to host the repository and agile tool.
 - [GitPod](https://gitpod.io/) is used to develop project and organize version control.
 - [Heroku](https://www.heroku.com/) used to deploy the live project.
@@ -173,10 +155,10 @@ Custom page 400 Bad request page is added in case the user tries to enter invali
 - [Favicon](https://favicon.io/) is used to create the favicon.
 - [Responsinator](http://www.responsinator.com/) is used to verify the responsiveness of the website on different devices.
 - [Chrome Dev Tools](https://developer.chrome.com/docs/devtools/) is used for overall development and bug locating/fixing, including testing responsiveness, performance, and confirming the webpage's accessibility using lighthouse.
-- [Font Awesome](https://fontawesome.com/) is used for icons used all over the project.
+- [Font Awesome](https://fontawesome.com/) is used for icons all over the project.
 - [Grammerly](https://app.grammarly.com/) is used to proofread the README.md and testing.md.
-- [Gunicorn](https://gunicorn.org/) is a Python WSGI HTTP Server for our project.
-- [freeformatter](https://www.freeformatter.com/) is used to format html.
+- [Gunicorn](https://gunicorn.org/) is a Python WSGI HTTP Server for our project. This helps to run project on Heroku.
+- [Prettier](https://prettier.io/) is used to format react code.
 
 ## Deployment
 
