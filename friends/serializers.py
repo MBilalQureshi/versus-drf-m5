@@ -6,7 +6,7 @@ from .models import Friend
 class FriendSerializer(serializers.ModelSerializer):
     """
     Serializer for the Friend model
-    Create method handles the unique constraint on 'owner' and 'followed'
+    Create method handles the unique constraint on 'owner' and 'request'
     """
     owner = serializers.ReadOnlyField(source='owner.username')
     requested_name = serializers.ReadOnlyField(source='request.username')

@@ -5,10 +5,11 @@ from .models import Friend
 
 class FriendList(generics.ListCreateAPIView):
     """
-    List all followers, i.e. all instances of a user
-    following another user'.
-    Create a follower, i.e. follow a user if logged in.
-    Perform_create: associate the current logged in user with a follower.
+    List all friends, i.e. all instances of a user
+    send friend requests to another user'.
+    Create a friend, i.e. befriend a user if logged in.
+    Perform_create: associate the current logged in user
+    with a request reciever.
     """
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = FriendSerializer
@@ -19,9 +20,9 @@ class FriendList(generics.ListCreateAPIView):
 
 class FriendDetail(generics.RetrieveDestroyAPIView):
     """
-    Retrieve a follower
-    No Update view, as we either follow or unfollow users
-    Destroy a follower, i.e. unfollow someone if owner
+    Retrieve a request reciever
+    No Update view, as we either friend or unfriend users
+    Destroy a request reciever, i.e. unfriend someone if owner
     """
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = FriendSerializer

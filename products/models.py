@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 
 
 class Product(models.Model):
+    """
+    Product(Post) model, related to 'owner', i.e. a User instance.
+    """
     CATEGORIES = [
     (0, 'Others'),
     (1, 'Electronics'),
@@ -40,7 +43,6 @@ class Product(models.Model):
     category_name = models.CharField(max_length=100)
     privacy = models.BooleanField(default=False)
 
-    
     class Meta:
         ordering = ['-created_at']
 

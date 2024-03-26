@@ -2,12 +2,13 @@ from rest_framework import serializers
 from .models import Vote
 from django.db import IntegrityError
 
+"""
+Serializer for vote model
+Validate if up-vote is active there should be no down-vote and vice versa.
+"""
 class VoteSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
     def validate(self, attrs):
-        """
-        Validate if up-vote is active there should be no down-vote and vice versa.
-        """
         up_vote = attrs.get('up_vote')
         down_vote = attrs.get('down_vote')
 

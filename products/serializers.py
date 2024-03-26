@@ -3,6 +3,9 @@ from .models import Product
 from votes.models import Vote
 
 class ProductSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Product model
+    """
     is_owner = serializers.SerializerMethodField()
     owner = serializers.ReadOnlyField(source = 'owner.username')
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')

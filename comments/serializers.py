@@ -11,7 +11,6 @@ class CommentSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source = 'owner.profile.id')
     profile_image = serializers.ReadOnlyField(source = 'owner.profile.image.url')
-
     created_at = serializers.SerializerMethodField()
     updated_at = serializers.SerializerMethodField()
 
@@ -32,6 +31,5 @@ class CommentDetailSerializer(CommentSerializer):
     """
     Serializer for the Comment model used in Detail view
     Product is a read only field so that we dont have to set it on each update
-    product is already in comment model so direct associan. we'll say like product.id
     """
     product = serializers.ReadOnlyField(source='product.id')

@@ -5,6 +5,8 @@ from products.models import Product
 
 class Vote(models.Model):
     """
+    Vote model, user can eiter up vote
+    or down vote the product's post
     """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

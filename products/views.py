@@ -13,7 +13,8 @@ from django.db.models import Q
 
 class ProductList(generics.ListCreateAPIView):
     '''
-    List all Products data
+    List all Products data and create new
+    product post as logged in user
     '''
     serializer_class = ProductSerializer
     permission_classes = [
@@ -46,6 +47,11 @@ class ProductList(generics.ListCreateAPIView):
         "vote__owner__profile",
         'owner__profile',
     ]
+    """
+    Chat gpt helped in making this query set
+    Showing only those post that are public and private to those
+    who is friend with current user only
+    """
     def get_queryset(self):
         user = self.request.user
         up_votes_subquery = Vote.objects.filter(product=OuterRef('pk'), up_vote=True).values('product').annotate(up_vote_count=Count('pk')).values('up_vote_count')
@@ -73,17 +79,9 @@ class ProductList(generics.ListCreateAPIView):
 
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     '''
-    Product data can be updated/deleted the products owner is
+    Product data can be updated/deleted if the products owner is
     logged in user
     '''
-    # ISSUE: in case of 404 the fields are still showing
-    # queryset = Product.objects.all()
-    # up_votes_subquery = Vote.objects.filter(product=OuterRef('pk'), up_vote=True).values('product').annotate(up_vote_count=Count('pk')).values('up_vote_count')
-    # queryset = Product.objects.annotate(
-    #     up_votes_count=Subquery(up_votes_subquery, output_field=IntegerField()),
-    #     down_votes_count=Count(Case(When(vote__down_vote=True, then=1), output_field=IntegerField()), distinct=True),
-    #     comments_count=Count('comment', distinct=True)
-    # ).order_by('-created_at')
     def get_queryset(self):
         user = self.request.user
         up_votes_subquery = Vote.objects.filter(product=OuterRef('pk'), up_vote=True).values('product').annotate(up_vote_count=Count('pk')).values('up_vote_count')

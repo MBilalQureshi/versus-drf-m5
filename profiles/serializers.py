@@ -3,6 +3,9 @@ from .models import Profile
 from votes.models import Vote
 from friends.models import Friend
 
+"""
+Serializer of Profile model
+"""
 class ProfileSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()

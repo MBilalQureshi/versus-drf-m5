@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 
 class Friend(models.Model):
     """
-    Follower model, related to 'owner' and 'followed'.
-    'owner' is a User that is following a User.
-    'followed' is a User that is followed by 'owner'.
+    Friend model, related to 'owner' and 'request'.
+    'owner' is a User that is request sender to a User.
+    'request' is a User that is recieving request by 'owner'.
     We need the related_name attribute so that django can differentiate.
-    between 'owner' and 'followed' who both are User model instances.
+    between 'owner' and 'request' who both are User model instances.
     'unique_together' makes sure a user can't 'double follow' the same user.
     """
     owner = models.ForeignKey(

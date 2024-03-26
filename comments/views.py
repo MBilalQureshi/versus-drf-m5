@@ -6,7 +6,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 class CommentList(generics.ListCreateAPIView):
     """
-    List comments or create a comment if logged in.
+    List all comments or create a comment if logged in.
     """
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -19,7 +19,7 @@ class CommentList(generics.ListCreateAPIView):
 
 class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     """
-    Retrieve a comment, or update or delete it by id if you own it.
+    Retrieve a comment, or update or delete it if logged in user owns it.
     """
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = CommentDetailSerializer

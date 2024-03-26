@@ -15,6 +15,9 @@ class VoteList(generics.ListCreateAPIView):
         serializer.save(owner=self.request.user)
 
 class VoteDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Votes data can be fetched, updated and deleted by the owner
+    """
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = VoteSerializer
     queryset = Vote.objects.all()
