@@ -67,7 +67,6 @@ function PostsPage({ message, filter = "" }) {
 
   // Get all categories on page load
   useEffect(() => {
-    // Set categories data once mounted on page load
     const handleMount = async () => {
       try {
         const { data } = await axiosRes.get("/categories/");
@@ -83,7 +82,6 @@ function PostsPage({ message, filter = "" }) {
   const fetchPostByCategory = async (label) => {
     try {
       const { data } = await axiosReq.get(`/products/posts/?search=${label}`);
-      console.log("first");
       setPosts(data);
       setHasLoaded(true);
     } catch (err) {

@@ -1,4 +1,4 @@
-import Container from "react-bootstrap/esm/Container";
+import Container from "react-bootstrap/Container";
 import styles from "./App.module.css";
 import NavBar from "./components/NavBar";
 import { Route, Switch } from "react-router-dom";

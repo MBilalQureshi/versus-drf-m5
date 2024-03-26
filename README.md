@@ -61,6 +61,7 @@ Users can create posts in which they can add an image, content add a post title 
 - As a user, I can select the category of the post that best defines it so that others can understand which category the product belongs to.
 - As a user, I can upload an image in a post so that others can upvote/downvote by viewing it.
 - As a user, I must know the rules for adding a post so that I can add a post without any validation errors or interruptions.
+- As a user, I can set posts to private and public so that public posts can only be seen by all and private posts can only be seen by friends.
 
 ### EPIC: User Navbar
 Users can interact with the nav bar icons and redirect to other web pages. Users can also sign out by clicking its icon.
@@ -83,17 +84,41 @@ GitHub Projects was used to manage the development process using the agile appro
 
 The user stories seen above are based on the items mentioned on the project board.
 
-### Design
+## Design
+The design of this website is very simple yet elegant and the color scheme gives a very relaxing vibe to attract more users.
 
-#### Colour Scheme
+### Color Scheme
+The color palette is generated using [COOLORS](https://coolors.co/).
 
-#### Imagery
+![Color Palette](/docs/readme_images/coolers-versus.png)
 
-#### Fonts
+The color scheme of the website gives a very good contrast after placing the main items on the web page and the main purpose of this color scheme is to give effect of an enthusiasm to the site users.
 
-#### Wireframes
+### Imagery
+All the images are fetched from the Cloudinary database except sign-in and sign-up which are fetched from online sources. Read the credits for more details.
+
+### Wireframes
 
 ## Data Model
+- The profile has a one-to-one relation with the User model and because of the signal a user object is created when a profile is created.
+- The User model has a one-to-many relationship with the Friend model as one user can have many friends.
+- The User model has a one-to-many relationship with the vote model as a user can have many votes on multiple posts.
+- The User model has a one-to-many relationship with comments as a user can have multiple comments.
+- The User model has a one-to-many relationship with the product as a user can have multiple products related posts.
+- The Product has many-to-one relations as one product post can have many comments.
+- The Product model has a one-to-many relationship with the vote as one product post can have many votes.
+
+
+The database schema is available below.
+<details>
+
+<summary>Versus Database Schema</summary>
+
+![Database Schema](docs/readme_images/database_schema.webp)
+
+</details>
+
+The database schema is designed using [Drawio](https://app.diagrams.net/).
 
 ## Testing
 
