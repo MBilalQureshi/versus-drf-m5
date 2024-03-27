@@ -3,10 +3,11 @@ from .models import Profile
 from votes.models import Vote
 from friends.models import Friend
 
-"""
-Serializer of Profile model
-"""
+
 class ProfileSerializer(serializers.ModelSerializer):
+    """
+    Serializer of Profile model
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     posts_count = serializers.ReadOnlyField()
@@ -35,7 +36,8 @@ class ProfileSerializer(serializers.ModelSerializer):
         user_posts = obj.owner.product_set.all()
         total_upvotes = 0
         for post in user_posts:
-            upvotes_for_post = Vote.objects.filter(product=post, up_vote=True).count()
+            upvotes_for_post = Vote.objects.filter(product=post,
+                                                   up_vote=True).count()
             total_upvotes += upvotes_for_post
         return total_upvotes
 
@@ -48,7 +50,8 @@ class ProfileSerializer(serializers.ModelSerializer):
         user_posts = obj.owner.product_set.all()
         total_downvotes = 0
         for post in user_posts:
-            downvotes_for_post = Vote.objects.filter(product=post, down_vote=True).count()
+            downvotes_for_post = Vote.objects.filter(product=post,
+                                                     down_vote=True).count()
             total_downvotes += downvotes_for_post
         return total_downvotes
 
@@ -59,7 +62,8 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = [
-            'id', 'owner', 'created_at', 'updated_at', 'name', 'content', 'image', 
-            'is_owner', 'posts_count', 'total_upvotes', 'total_up_votes_given', 'total_up_votes_received',
+            'id', 'owner', 'created_at', 'updated_at', 'name', 'content',
+            'image', 'is_owner', 'posts_count', 'total_upvotes',
+            'total_up_votes_given', 'total_up_votes_received',
             'total_down_votes_given', 'total_down_votes_received', 'sender_id'
         ]

@@ -3,6 +3,7 @@ from versus_drf_api.permissions import IsOwnerOrReadOnly
 from .serializers import FriendSerializer
 from .models import Friend
 
+
 class FriendList(generics.ListCreateAPIView):
     """
     List all friends, i.e. all instances of a user
@@ -17,6 +18,7 @@ class FriendList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
 
 class FriendDetail(generics.RetrieveDestroyAPIView):
     """

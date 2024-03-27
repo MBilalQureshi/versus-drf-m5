@@ -2,18 +2,23 @@ from rest_framework import serializers
 from .models import Vote
 from django.db import IntegrityError
 
-"""
-Serializer for vote model
-Validate if up-vote is active there should be no down-vote and vice versa.
-"""
+
 class VoteSerializer(serializers.ModelSerializer):
+    """
+    Serializer for vote model
+    Validate if up-vote is active there should be no down-vote and vice versa.
+    """
+
     owner = serializers.ReadOnlyField(source="owner.username")
+
     def validate(self, attrs):
-        up_vote = attrs.get('up_vote')
-        down_vote = attrs.get('down_vote')
+        up_vote = attrs.get("up_vote")
+        down_vote = attrs.get("down_vote")
 
         if up_vote and down_vote:
-            raise serializers.ValidationError("Kindly select only one, upvote or downvote")
+            raise serializers.ValidationError(
+                "Kindly select only one, upvote or downvote"
+            )
 
         if not up_vote and not down_vote:
             raise serializers.ValidationError("Kindly select upvote or downvote")
@@ -23,11 +28,12 @@ class VoteSerializer(serializers.ModelSerializer):
         try:
             return super().create(validated_data)
         except IntegrityError:
-            raise serializers.ValidationError({
-                'detail': 'You cannot vote again on same product, Kindly update or delete ypur current vote on product'
-            })
+            raise serializers.ValidationError(
+                {
+                    "detail": "You cannot vote again on same product, Kindly update or deyour current vote on product"
+                }
+            )
 
     class Meta:
         model = Vote
-        fields = ['id', 'created_at', 'owner', 'product', 'up_vote', 'down_vote']
-
+        fields = ["id", "created_at", "owner", "product", "up_vote", "down_vote"]

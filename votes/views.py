@@ -3,6 +3,7 @@ from versus_drf_api.permissions import IsOwnerOrReadOnly
 from .models import Vote
 from .serializers import VoteSerializer
 
+
 class VoteList(generics.ListCreateAPIView):
     """
     List Vote or create a Vote if logged in.
@@ -10,9 +11,10 @@ class VoteList(generics.ListCreateAPIView):
     serializer_class = VoteSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Vote.objects.all()
-    
+
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
 
 class VoteDetail(generics.RetrieveUpdateDestroyAPIView):
     """

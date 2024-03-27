@@ -1,11 +1,12 @@
-from django.db.models import Count,IntegerField, Subquery, OuterRef, IntegerField
-from django.db.models.functions import Coalesce  
+from django.db.models import Count, IntegerField, Subquery, OuterRef
+from django.db.models.functions import Coalesce
 from rest_framework import generics, filters
 from .models import Profile
 from .serializers import ProfileSerializer
 from versus_drf_api.permissions import IsOwnerOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 from votes.models import Vote
+
 
 class ProfileList(generics.ListAPIView):
     '''
@@ -34,6 +35,7 @@ class ProfileList(generics.ListAPIView):
         'total_upvotes',
     ]
 
+
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     '''
     Profile data can be updated if owner
@@ -49,4 +51,3 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
     ).order_by('-created_at')
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = ProfileSerializer
-
