@@ -5,6 +5,9 @@ from rest_framework.test import APITestCase
 
 
 class ProductListViewTests(APITestCase):
+    """
+    Testing products posts list view
+    """
     def setUp(self):
         User.objects.create_user(username="test", password="test123")
 
@@ -48,6 +51,9 @@ class ProductListViewTests(APITestCase):
 
 
 class ProductDetailViewTests(APITestCase):
+    """
+    Testing products posts detail view
+    """
     def setUp(self):
         test = User.objects.create_user(username="test", password="test123")
         brian = User.objects.create_user(username="brian", password="test123")

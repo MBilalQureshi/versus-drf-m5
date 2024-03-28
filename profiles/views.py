@@ -30,9 +30,16 @@ class ProfileList(generics.ListAPIView):
         DjangoFilterBackend,
     ]
 
+    filterset_fields = [
+        "owner__request_sender__request__profile",
+        "owner__request_reciever__owner__profile",
+    ]
+
     ordering_fields = [
         'posts_count',
         'total_upvotes',
+        "owner__request_sender__created_at",
+        "owner__request_reciever__created_at",
     ]
 
 
