@@ -152,15 +152,8 @@ Testing and results can be found [here](/FRONTEND_TESTING.md)
 
 ## Security Features and Defensive Design
 
-### Database Security
-The database URL and secret key are stored in the env file. This prevents unwanted connections to the database.
-
 ### Custom error 404 page:
 Custom page 400 Bad request page is added in case the user tries to enter invalid URLs.
-
-### User Authentication
-- dj-rest-auth is used for Authentication purposes.
-- jwt refresh token is used for verifying if a user is still authenticated after a specified time, check if the refresh token is still valid.
 
 ### Form Validation
 - The submit button will not work unless all the fields are filled with proper data and warning signs will also appear if data is not valid or fields are empty.

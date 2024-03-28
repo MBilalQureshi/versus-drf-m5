@@ -14,6 +14,7 @@ import ProfilePage from "./pages/profiles/ProfilePage";
 import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
+import CategoryPosts from "./pages/posts/CategoryPosts";
 
 function App() {
   // Get current user from CurrentUserContext
@@ -30,7 +31,14 @@ function App() {
             exact
             path="/"
             render={() => (
-              <PostsPage message="No results found. Ajdust the search keyword." />
+              <PostsPage message="No results found. Ajdust the search keyword."/>
+            )}
+          />
+          <Route
+            exact
+            path="/category/posts/:label"
+            render={() => (
+              <CategoryPosts message="No results found. Ajdust the search keyword."/>
             )}
           />
           <Route
@@ -38,7 +46,7 @@ function App() {
             path="/trending"
             render={() => (
               <PostsPage
-                message="No results found. Ajdust the search keyword or follow a user."
+                message="No results found. Ajdust the search keyword."
                 filter={"&ordering=-up_votes_count&"}
               />
             )}

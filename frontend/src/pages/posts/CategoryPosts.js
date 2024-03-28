@@ -15,10 +15,10 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import PopularProfiles from "../profiles/PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink, useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 // This component shows all the possible posts
-function PostsPage({ message, filter = "" }) {
+function CategoryPosts({ message, filter = "" }) {
   // 1- message prop is active when there is no post to show
   // 2- filter is to apply which for showing posts, by default its empty string
 
@@ -40,19 +40,30 @@ function PostsPage({ message, filter = "" }) {
   // Set query state for searching posts
   const [query, setQuery] = useState("");
 
+  // Fetch category lable from URL
+  const { label } = useParams();
+
   // Fetch posts on mount once page loads
   useEffect(() => {
     const fetchPosts = async () => {
-      try {
-        const { data } = await axiosReq.get(
-          `/products/posts/?${filter}search=${query}`
-        );
-        setPosts(data);
-        setHasLoaded(true);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+        try {
+          let responseData;
+          if (query.length > 0) {
+            const { data } = await axiosReq.get(
+              `/products/posts/?${filter}search=${query}`
+            );
+            responseData = data;
+          } else {
+            const { data } = await axiosReq.get(`/products/posts/?search=${label}`
+            );
+            responseData = data;
+          }
+          setPosts(responseData);
+          setHasLoaded(true);
+        } catch (err) {
+          console.log(err);
+        }
+      };
 
     // Set post loading time while searching
     setHasLoaded(false);
@@ -64,7 +75,7 @@ function PostsPage({ message, filter = "" }) {
     return () => {
       clearTimeout(timer);
     };
-  }, [filter, query, pathname, currentUser]);
+  }, [filter, query, pathname, currentUser, label]);
 
   // Get all categories on page load
   useEffect(() => {
@@ -148,4 +159,4 @@ function PostsPage({ message, filter = "" }) {
   );
 }
 
-export default PostsPage;
+export default CategoryPosts;

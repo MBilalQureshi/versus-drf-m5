@@ -18,3 +18,12 @@ The database schema is available below.
 </details>
 
 The database schema is designed using [Drawio](https://app.diagrams.net/).
+
+## Security Features and Defensive Design
+
+### Database Security
+The database URL and secret key are stored in the env file. This prevents unwanted connections to the database.
+
+### User Authentication
+- dj-rest-auth is used for Authentication purposes.
+- jwt refresh token is used for verifying if a user is still authenticated after a specified time, check if the refresh token is still valid.
