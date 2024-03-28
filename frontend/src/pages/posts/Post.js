@@ -167,7 +167,7 @@ const Post = (props) => {
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
         {content && <Card.Text>Description: {content}</Card.Text>}
-        {category_name && <Card.Text>Catgory: {category_name}</Card.Text>}
+        {category_name && <Card.Text>Category: {category_name}</Card.Text>}
         {price && <Card.Text>Price: {price} &#8364;</Card.Text>}
         {location && <Card.Text>Location: {location}</Card.Text>}
         {privacy === true ? (
@@ -268,7 +268,7 @@ const Post = (props) => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>Post Total up votes</th>
+                <th>Post Total Up votes</th>
                 <th>Post Total Down votes</th>
               </tr>
             </thead>
