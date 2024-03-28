@@ -16,3 +16,5 @@ The database schema is available below.
 ![Database Schema](docs/readme_images/database_schema.webp)
 
 </details>
+
+The database schema is designed using [Drawio](https://app.diagrams.net/).

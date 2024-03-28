@@ -98,9 +98,53 @@ The color scheme of the website gives a very good contrast after placing the mai
 All the images are fetched from the Cloudinary database except sign-in and sign-up which are fetched from online sources. Read the credits for more details.
 
 ### Wireframes
+<details>
+<summary>Landing Page</summary>
 
+The landing page shows public posts even when the user is still not logged in. Once logged in user can also view the most trending posts based on up votes and also voted section which contains all the posts on which the user had voted.
 
-The database schema is designed using [Drawio](https://app.diagrams.net/).
+![Landing Page](docs/wireframes/home_trending_voted.png)
+</details>
+
+<details>
+<summary>Product Post Page</summary>
+
+All the data related to a single post is shown here and also once the user has logged in, the user can comment or vote on the post directly from here.
+
+![Product Post Page](docs/wireframes/post_comment.png)
+</details>
+
+<details>
+<summary>Add Post Page</summary>
+
+Users can create a post on products via this page. Rules are also mentioned here.
+
+![Add Post Page](docs/wireframes/add_post.png)
+</details>
+
+<details>
+<summary>Profile Page</summary>
+
+User can make all sorts of changes to their profile from here once logged in. All the posts are also present here on the profile page.
+
+![Profile Page](docs/wireframes/profile.png)
+</details>
+
+<details>
+<summary>Sign in Page</summary>
+
+Users access all the features of the website once signed in via this page.
+
+![Sign in Page](docs/wireframes/signin.png)
+</details>
+
+<details>
+<summary>Sign up Page</summary>
+
+New users can sign up from here to access the website all features.
+
+![Sign up Page](docs/wireframes/signup.png)
+</details>
 
 ## Testing
 
