@@ -110,7 +110,7 @@ The landing page shows public posts even when the user is still not logged in. O
 <summary>Product Post Page</summary>
 
 All the data related to a single post is shown here and also once the user has logged in, the user can comment or vote on the post directly from here.
-
+ 
 ![Product Post Page](docs/wireframes/post_comment.png)
 </details>
 
