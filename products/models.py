@@ -38,7 +38,7 @@ class Product(models.Model):
         upload_to='images/', default='../default_post_vzxkyq', blank=True
     )
     category = models.IntegerField(choices=CATEGORIES, default=0)
-    price = models.DecimalField(max_digits=6, decimal_places=2, blank=False)
+    price = models.DecimalField(max_digits=12, decimal_places=2, blank=False)
     location = models.CharField(max_length=80, blank=False)
     category_name = models.CharField(max_length=100)
     privacy = models.BooleanField(default=False)
