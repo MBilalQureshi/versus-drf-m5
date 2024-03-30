@@ -6,7 +6,7 @@ On this platform, users can show their passion for how they feel towards specifi
 
 So, to enjoy full features simply register yourself and sign in to the world of Versus.
 
-<!-- ![Site Mockup](docs/readme_images/mockup.png) -->
+![Site Mockup](docs/readme_images/mockup.png)
 
 The live site can be found here - [Versus](https://versus-bac55e8730b2.herokuapp.com/)
 
