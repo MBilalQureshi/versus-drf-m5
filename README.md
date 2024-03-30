@@ -10,7 +10,70 @@ So, to enjoy full features simply register yourself and sign in to the world of 
 
 The live site can be found here - [Versus](https://versus-bac55e8730b2.herokuapp.com/)
 
-## Table of Contents
+- [Versus](#versus)
+  * [Table of Contents](#table-of-contents)
+  * [User Experience (UX)](#user-experience--ux-)
+    + [EPIC: User Profiles](#epic--user-profiles)
+      - [User Stories](#user-stories)
+      - [Future Release User Story](#future-release-user-story)
+    + [EPIC: Home Posts Page, Trending and Voted](#epic--home-posts-page--trending-and-voted)
+      - [User Stories](#user-stories-1)
+    + [EPIC: Post Page](#epic--post-page)
+      - [User Stories](#user-stories-2)
+    + [EPIC: Users Comments](#epic--users-comments)
+      - [User Stories](#user-stories-3)
+    + [EPIC: Create Post](#epic--create-post)
+      - [User Stories](#user-stories-4)
+    + [EPIC: User Navbar](#epic--user-navbar)
+      - [User Stories](#user-stories-5)
+    + [EPIC: Sign-in/ Sign-up](#epic--sign-in--sign-up)
+      - [User Stories](#user-stories-6)
+  * [Agile Methodology](#agile-methodology)
+  * [Design](#design)
+    + [Color Scheme](#color-scheme)
+    + [Imagery](#imagery)
+    + [Wireframes](#wireframes)
+  * [Testing](#testing)
+  * [Security Features and Defensive Design](#security-features-and-defensive-design)
+    + [Custom error 404 page:](#custom-error-404-page-)
+    + [Form Validation](#form-validation)
+  * [Features](#features)
+    + [Header](#header)
+      - [Logo](#logo)
+      - [Navigation bar](#navigation-bar)
+    + [Home Page](#home-page)
+    + [Search Bar](#search-bar)
+    + [Most Up Voted Profiles](#most-up-voted-profiles)
+    + [Category List](#category-list)
+    + [Add Post Page](#add-post-page)
+    + [Edit Post Page](#edit-post-page)
+    + [Trending Page](#trending-page)
+    + [Voted Page](#voted-page)
+    + [Profile Page](#profile-page)
+    + [Edit Profile Page](#edit-profile-page)
+    + [Change Password Page](#change-password-page)
+    + [Change Username Page](#change-username-page)
+    + [Comment Section](#comment-section)
+    + [Edit Comment](#edit-comment)
+    + [Sign Up Page](#sign-up-page)
+    + [Sign in Page](#sign-in-page)
+    + [Sign out Modal, Model # 1](#sign-out-modal--model---1)
+    + [Post Creation Rules, Model # 2](#post-creation-rules--model---2)
+    + [Website rules modal on Sign Up,  Model # 3](#website-rules-modal-on-sign-up---model---3)
+  * [Libraries and Technologies Used](#libraries-and-technologies-used)
+    + [Languages](#languages)
+    + [Frameworks - Libraries - Programs Used - Packages Used](#frameworks---libraries---programs-used---packages-used)
+  * [Deployment](#deployment)
+    + [Combining existing DRF and React projects into the same workspace](#combining-existing-drf-and-react-projects-into-the-same-workspace)
+    + [Ready unified DRF and React before deployment](#ready-unified-drf-and-react-before-deployment)
+    + [Heroku](#heroku)
+    + [Forking the GitHub Repository](#forking-the-github-repository)
+    + [Making a Local Clone](#making-a-local-clone)
+  * [Credits](#credits)
+    + [Code](#code)
+    + [Online Documentation](#online-documentation)
+    + [Media](#media)
+    + [Acknowledgments](#acknowledgments)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -25,6 +88,9 @@ The milestone is about user profiles. Their number of up/down votes, number of p
 - As a user, I can edit my profile so that I can change my profile image and add a bio.
 - As a user, I can change the username so that I am known by a different name when other users see my profile.
 - As a user, I can change my password so that I can upgrade the security of my profile.
+
+#### Future Release User Story
+- As a user, I can accept friend requests so that I can keep track of people who can see my private posts. [#41](https://github.com/MBilalQureshi/versus-drf-m5/issues/41)
 
 ### EPIC: Home Posts Page, Trending and Voted
 A list of posts will be shown on this page and users will be able to search for posts based on title, username, price, and category. Almost the same tasks will be performed on these three pages. A list of popular profiles based on the highest number of upvotes can also be seen.
@@ -76,7 +142,7 @@ Users can interact with the nav bar icons and redirect to other web pages. Users
 ### EPIC: Sign-in/ Sign-up
 This milestone covers Signup/ Sign-up.
 #### User Stories
-- As a user, I can sign up so that I can post products and get people to vote on them and also vote on other people's products
+- As a user, I can sign up so that I can post products and get people to vote on them and also vote on other people's products.
 - As a user, I can sign in so that I can view the latest posts or add new posts.
 
 ## Agile Methodology
@@ -358,34 +424,25 @@ Custom page 400 Bad request page is added in case the user tries to enter invali
 - CSS
 - Javascript
 
-### Frameworks - Libraries - Programs Used
-- [ReatJS](https://react.dev/)Front-end JavaScript library for building user interfaces based on UI components.
+### Frameworks - Libraries - Programs Used - Packages Used
+- [ReatJS](https://react.dev/) is a front-end JavaScript library for building user interfaces based on UI components.
 - [React Bootstrap](https://react-bootstrap.github.io/) is a component-based library that provides native Bootstrap components as pure React components. Used to create a responsive application/component UI.
+- [Axios](https://axios-http.com/) is a simple promise based HTTP client for the browser and node.js. Axios provides a simple to use library in a small package with a very extensible interface.
+- [jwt-decode](https://github.com/auth0/jwt-decode) is used to decode and extract information from a JWT token.
+- [react-router-dom](https://www.npmjs.com/package/react-router-dom) is routing library for the React JavaScript library. Used to display different components based on the URL entered in the browser.
 - [GitHub](https://github.com/) is used to host the repository and agile tool.
 - [GitPod](https://gitpod.io/) is used to develop project and organize version control.
 - [Heroku](https://www.heroku.com/) used to deploy the live project.
-- [PEP8 Online](https://pep8ci.herokuapp.com/#) used to validate all the Python code.
 - [Google Fonts](https://fonts.google.com/) is used to change the fonts of the project.
-- [W3C](https://www.w3.org/) - Used for HTML & CSS Validation.
-- [Jshint](https://jshint.com/) - used to validate javascript.
-- [Django](https://www.djangoproject.com/) framework is used for the development of this project.
-- [Django-allauth](https://django-allauth.readthedocs.io/en/latest/installation.html) is the authentication library used to create the user accounts.
-- [Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/) used to manage Django Forms.
-- [Cloudinary](https://cloudinary.com/) is used as an image hosting service. Product images are uploaded there.
-- [PostgreSQL](https://www.postgresql.org/) is used as the database for this project.
-- [Bootstrap 5](https://getbootstrap.com/docs/4.6/getting-started/introduction/): is a CSS framwork and is used for styling in project.
-- [Summernote](https://summernote.org/) editor is mainly used when adding product details on the admin panel which is to be later seen on the product details page.
 - [Balsamiq](https://balsamiq.com/) is used to generate wireframe images for this project.
 - [Techsini](https://techsini.com/multi-mockup/index.php) is used for generating site mockup.
 - [Coolors](https://coolors.co/) is used to create a color palette.
-- [Drawio](https://app.diagrams.net/) is used to make database schema.
 - [Favicon](https://favicon.io/) is used to create the favicon.
-- [Responsinator](http://www.responsinator.com/) is used to verify the responsiveness of the website on different devices.
 - [Chrome Dev Tools](https://developer.chrome.com/docs/devtools/) is used for overall development and bug locating/fixing, including testing responsiveness, performance, and confirming the webpage's accessibility using lighthouse.
 - [Font Awesome](https://fontawesome.com/) is used for icons all over the project.
-- [Grammerly](https://app.grammarly.com/) is used to proofread the README.md and testing.md.
-- [Gunicorn](https://gunicorn.org/) is a Python WSGI HTTP Server for our project. This helps to run project on Heroku.
+- [Grammerly](https://app.grammarly.com/) is used to proofread the all the md files.
 - [Prettier](https://prettier.io/) is used to format react code.
+- [Canva](https://www.canva.com/) helped me in creating new logo for project.
 
 ## Deployment
 
@@ -442,4 +499,37 @@ With Forking one can make a copy of a repository and view or make changes in it 
 6. Press Enter. local clone will be created.
 
 ## Credits
-### Extra Help
+### Code
+- The main inspiration and concepts for this project are taken from the Code Institute's Advanced Front End Course - Moments walkthrough.
+### Online Documentation
+- [React Bootstrap](https://react-bootstrap-v4.netlify.app/getting-started/introduction/) codes helped me in building parts of projects rapidly.
+- React Documentations.
+- React Bootstrap code snippets.
+
+### Media
+[pexels](https://www.pexels.com/) helped a lot in finding the product images mentioned below.
+  <details>
+  <summary>Images List by pexels</summary>
+
+  - [Image 1](https://www.pexels.com/photo/assorted-color-bubble-jackets-hanged-16170/)
+  - [Image 2](https://www.pexels.com/photo/assorted-gold-plated-table-figurines-1099816/).
+  - [Image 3](https://www.pexels.com/photo/blue-glass-vase-220987/)
+  - [Image 4](https://www.pexels.com/photo/green-plant-in-close-up-photography-13521384/)
+  - [Image 5](https://www.pexels.com/photo/assortment-of-colorful-guns-for-game-5217754/)
+  - [Image 6](https://www.pexels.com/photo/cactus-in-brown-vase-1302305/)
+  - [Image 7](https://www.pexels.com/photo/car-interior-of-tesla-17345646/)
+  - [Image 8](https://www.pexels.com/photo/space-gray-iphone-8-818043/)
+  - [Image 9](https://www.pexels.com/photo/silver-iphone-on-a-green-grass-191841/)
+  - [Image 10](https://www.pexels.com/photo/photo-of-a-gray-dell-laptop-displaying-pexels-webpage-811587/)
+  - [Image 11](https://www.pexels.com/photo/woman-printing-photos-on-paper-while-forking-at-home-7014397/)
+  - [Image 12](https://www.pexels.com/photo/person-holding-pringles-potato-chips-bottle-1450480/)
+  - [Image 13](https://www.pexels.com/photo/ikea-showroom-of-bedroom-11244064/)
+  - [Image 14](https://www.pexels.com/photo/a-person-holding-colgate-toothpaste-box-5612670/)
+  - [Image 15](https://www.pexels.com/photo/gold-global-plates-342945/)
+  - [Image 16](https://www.pexels.com/photo/box-of-soap-near-jar-17596996/)
+  - [Image 17](https://www.pexels.com/photo/hair-treatment-bottles-in-box-on-table-17576517/)
+  </details>
+
+### Acknowledgments
+- Code Institute tutors helped a lot and pointed me in the right direction.
+- My Mentor Antonio Rodriguez for helpful feedback during project development.

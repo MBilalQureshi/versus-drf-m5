@@ -27,3 +27,10 @@ The database URL and secret key are stored in the env file. This prevents unwant
 ### User Authentication
 - dj-rest-auth is used for Authentication purposes.
 - jwt refresh token is used for verifying if a user is still authenticated after a specified time, check if the refresh token is still valid.
+
+### Frameworks - Libraries - Programs Used - Packages Used
+- [PEP8 Online](https://pep8ci.herokuapp.com/#) used to validate all the Python code.
+- [Cloudinary](https://cloudinary.com/) is used as an image hosting service. Product images are uploaded there.
+- [PostgreSQL](https://www.postgresql.org/) is used as the database for this project.
+- [Drawio](https://app.diagrams.net/) is used to make database schema.
+- [Gunicorn](https://gunicorn.org/) is a Python WSGI HTTP Server for our project. This helps to run project on Heroku.
