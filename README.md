@@ -160,6 +160,196 @@ Custom page 400 Bad request page is added in case the user tries to enter invali
 - Based on the data entered, every form in the project will be validated before moving forward. Characters will only take characters, symbols and integers as input but only in their relevant fields.
 
 ## Features
+### Header
+![header](docs/readme_images/header.png)
+
+#### Logo
+- The logo is almost on the left side of the nav bar. The VS sign defines products posted on the site. It can be the best or the worst depending upon the votes.
+- Users can switch to the home page by clicking it.
+#### Navigation bar
+
+### Home Page
+
+![Home Page](docs/readme_images/home.png)
+- The home page contains a list of all the public posts if signed out.
+- Once signed in, the user can see private posts as well if he/she is a friend of the user who had private posts.
+- The home page also shows popular profiles who have the highest number of votes.
+- Users can click on the category section to search for specific categories of products.
+- Users cannot vote or comment on the posts if logged out.
+- Users can vote and comment on posts once logged in.
+- All the navbar items are clickable and the user can switch to it easily.
+- Users can add friends directly from the home page.
+- Users can see the profiles if he/she clicks on the profile avatar or name on top of each post.
+
+### Search Bar
+
+![Search Bar](docs/readme_images/search_bar.png)
+- The posts on the page are searchable based on the following
+    - Title
+    - Content
+    - price
+    - Category
+    - Location.
+
+- The posts are searchable on the following pages
+    - Home
+    - Trending
+    - Category
+    - Voted
+
+### Most Up Voted Profiles
+
+![Most Up Voted Profiles](docs/readme_images/most_poular_profiles.png)
+- This component shows profiles with the highest to lowest number of votes.
+- Users can add/remove friends directly from here if logged in.
+- Users can also see this section if logged out but the option of adding or removing friends is removed.
+- Users can see the profiles if he/she clicks on the profile avatar. 
+
+### Category List
+
+![Category List](docs/readme_images/filter_by_category.png)
+- A list of categories can be seen here which are clickable.
+- Users switch to the category page on a category is clicked from here.
+- The Category section is here as an aid so that users can switch to posts based on specific categories.
+
+### Add Post Page
+
+![Add Post Page](docs/readme_images/add_post.png)
+- Users always have the option to set posts as private.
+- Private posts are only visible to friends.
+- An image size should not exceed 2 MB.
+- The image can still be changed before posting.
+- Users can add content to the post it can either be a product description or just if the user wants to ask something specifically about the post and wants others' opinions.
+- Users must tell the price of the product.
+- Users must also tell the location where this product is found in the post.
+- Users must select a category of the product before posting.
+- Users can cancel and go back to home.
+- Users can create posts after all fields are filled by clicking Create Post.
+- Users can also see the rules of creating a post by clicking post creation rules.
+
+### Edit Post Page
+
+![Edit Post Page](docs/readme_images/edit_post.png)
+- During Edit user had all the options mentioned in the add post page. All the fields of editing posts are set to actual post data.
+    - Users always have the option to set posts as private.
+    - Private posts are only visible to friends.
+    - An image size should not exceed 2 MB.
+    - The image can still be changed before posting.
+    - Users can add content to the post it can either be a product description or just if the user wants to ask something specifically about the post and wants others' opinions.
+    - Users must tell the price of the product.
+    - Users must also tell the location where this product is found in the post.
+    - Users must select a category of the product before posting.
+    - Users can cancel and go back to home.
+    - Users can create posts after all fields are filled by clicking Create Post.
+    Users can also see the rules of creating a post by clicking post creation rules.
+
+### Trending Page
+![Trending Page](docs/readme_images/trending.png)
+- This page shows the content mentioned in the following
+    - Search Bar
+    - Most Up Voted Profiles
+    - Category List
+- Trending shows filtered posts based on all the posts that are trending with the highest number of upvotes.
+- This page is only accessible to users who are signed in.
+
+### Voted Page
+![Voted Page](docs/readme_images/voted.png)
+- This page shows the content mentioned in the following
+    - Search Bar
+    - Most Up Voted Profiles
+    - Category List
+- The Voted page shows posts that the current user had voted on.
+- The votes can either be negative or positive.
+- This page is only accessible to users who are signed in.
+
+### Profile Page
+![Profile Page](docs/readme_images/profile.png)
+- This page shows the content mentioned in "Most Up Voted Profiles".
+- The user Profile page has the following content
+    - Avatar
+    - Total posts
+    - Total upvotes
+    - Total down votes
+    - User's bio
+    - Option to edit profile
+    - Option to change username
+    - Option to change password
+- Below all the profile-related data all the posts are also available.
+- If the profile is related to other users editing the profile option is unavailable.
+- If the profile is related to other users there is an add friend option available.
+- Users can click on profile posts to switch to that specific post as well.
+- Logged-in users can upvote or downvote from here as well.
+
+### Edit Profile Page
+
+![Edit Profile Page](docs/readme_images/profile_update.png)
+- Once the user clicks on the edit profile page user can add the following to the profile
+    - Profile image (This field is pre-populated if the profile picture already exists)
+    - User's Bio (This field is pre-populated if the bio already exists)
+
+### Change Password Page
+
+![Change Password Page](docs/readme_images/change_password.png)
+- The logged-in user can change their password from here by entering a new password.
+- The user must enter a new password again before confirming it
+
+### Change Username Page
+
+![Change Username Page](docs/readme_images/change_username.png)
+- The user can change the username by selecting it from the change username from the profile.
+- The username should be unique.
+
+### Comment Section
+![Comment Section](docs/readme_images/comment.png)
+- Once the user clicks on a specific post, the user is redirected to that specific post.
+- The user can comment on posts from here only if logged in.
+- The logged-out users are not able to comment.
+- Users can edit or delete comments from here
+
+### Edit Comment
+![Edit Comment](docs/readme_images/edit_comment.png)
+- The users can only edit their comments.
+- The users can only delete their comments.
+- The users edit their comments while remaining on the same page.
+
+### Sign Up Page
+
+![Sign Up Page](docs/readme_images/sign_up.png)
+- All new users can sign up from here to see all the features of the website.
+- Users must provide their unique username.
+- Users must enter a new password.
+- Users must enter the password again before signing up.
+- Users can see the rules here as well before signing up.
+- All the data will be validated before proceeding.
+- Once all data is validated user will be redirected to the sign-in page.
+
+### Sign in Page
+
+![Sign in Page](docs/readme_images/sign_in.png)
+- Users must provide their unique username.
+- Users must enter a new password.
+- Once validated user will be redirected to the home page.
+
+### Sign out Modal, Model # 1
+
+![Sign out Modal](docs/readme_images/modal_signout.png)
+- The logged-in user can sign out directly from the navbar.
+- The user will be asked if the user is sure to sign out inside the modal.
+- The user can press cancel to avoid signing out.
+- The user can press signout and will be redirected to the home page.
+
+### Post Creation Rules, Model # 2
+
+![Post Creation Rules model](docs/readme_images/modal_post_rules.png)
+- There is a specific set of rules to follow before posting. All users must follow it.
+- The user can click on the "Post creation rules" button to see all the rules.
+- The user can click close or cross button to close the modal.
+
+### Website rules modal on Sign Up,  Model # 3
+![Website rules modal on Sign Up](docs/readme_images/modal_sign_up.png)
+- There is a specific set of rules to follow before signing up. All users must follow it.
+- The user can click on the "Click here to see rules" button to see all the rules.
+- The user can click close or cross button to close the modal.
 
 ## Libraries and Technologies Used
 ### Languages
