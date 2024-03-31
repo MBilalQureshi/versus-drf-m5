@@ -34,3 +34,8 @@ The database URL and secret key are stored in the env file. This prevents unwant
 - [PostgreSQL](https://www.postgresql.org/) is used as the database for this project.
 - [Drawio](https://app.diagrams.net/) is used to make database schema.
 - [Gunicorn](https://gunicorn.org/) is a Python WSGI HTTP Server for our project. This helps to run project on Heroku.
+
+## Testing
+
+### Python
+No errors were found when running Python files through [Pep8](https://pep8ci.herokuapp.com/#).
