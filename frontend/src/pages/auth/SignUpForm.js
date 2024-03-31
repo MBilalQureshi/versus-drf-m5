@@ -166,6 +166,7 @@ const SignUpForm = () => {
       >
         <Image
           className={`${appStyles.FillerImage}`}
+          alt="products images in single frame"
           src={
             "https://miro.medium.com/v2/resize:fit:720/format:webp/1*ypN4LtX6QxMqQW4FT2lNyQ.png"
           }

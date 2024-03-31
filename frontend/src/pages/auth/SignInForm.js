@@ -123,6 +123,7 @@ function SignInForm() {
       >
         <Image
           className={`${appStyles.FillerImage}`}
+          alt="products images in single frame"
           src={"https://i.ytimg.com/vi/xPgG5iC9XJY/maxresdefault.jpg"}
         />
       </Col>
