@@ -1,3 +1,21 @@
+# Versus API
+
+The backend of Versus is powered by Django REST framework. This API serves as the bridge between frontend and backend for User authentication, autherization, management of user profiles, adding and listing of posts and processing search quries. This API ensures seamless communication between database and frontend to facilitate excellent user experience.
+
+The live site can be found here - [Versus](https://versus-bac55e8730b2.herokuapp.com/)
+
+## Table of Contents
+
+## Other .md file links
+
+### Frontend
+
+Navigate to the [FRONTEND README](/README.md) file.
+
+### Frontend Testing
+
+Navigate to the [FRONTEND TESTING README](/FRONTEND_TESTING.md) file.
+
 ## Data Model
 - The profile has a one-to-one relation with the User model and because of the signal a user object is created when a profile is created.
 - The User model has a one-to-many relationship with the Friend model as one user can have many friends.
