@@ -279,7 +279,7 @@ const Post = (props) => {
               </tr>
             </tbody>
           </Table>
-          <Link to={`/products/posts/${id}`}>
+          <Link to={`/products/posts/${id}`} aria-label="Comment">
             <i className="far fa-comments" />
           </Link>
           {comments_count}

@@ -10,6 +10,7 @@ So, to enjoy full features simply register yourself and sign in to the world of 
 
 The live site can be found here - [Versus](https://versus-bac55e8730b2.herokuapp.com/)
 
+## Table of Contents
 - [Versus](#versus)
   * [Table of Contents](#table-of-contents)
   * [User Experience (UX)](#user-experience--ux-)
@@ -533,3 +534,5 @@ With Forking one can make a copy of a repository and view or make changes in it 
 ### Acknowledgments
 - Code Institute tutors helped a lot and pointed me in the right direction.
 - My Mentor Antonio Rodriguez for helpful feedback during project development.
+
+[Back to top](#top)
