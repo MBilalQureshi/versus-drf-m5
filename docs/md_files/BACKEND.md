@@ -90,9 +90,9 @@ Navigate to the [FRONTEND TESTING README](/docs/md_files/FRONTEND_TESTING.md) fi
 1. As a **user** I can **switch to other parts of DRF API by providing a valid URL** so that **I can switch to other pages**.
 2. As a **user** I can **navigate to paginated data as well** so that **I can view remaiing posts or data**.
 
-Click [here](https://github.com/users/MBilalQureshi/projects/7) to see Kanban Board.
+Click [here](https://github.com/users/MBilalQureshi/projects/7) to see backend Kanban Board.
 
-Click[here](https://github.com/users/MBilalQureshi/projects/8) to see frontend Kanban Board.
+Click [here](https://github.com/users/MBilalQureshi/projects/8) to see frontend Kanban Board.
 
 ## Data Model
 - The profile has a one-to-one relation with the User model and because of the signal a user object is created when a profile is created.
@@ -109,7 +109,7 @@ The database schema is available below.
 
 <summary>Versus Database Schema</summary>
 
-![Database Schema](docs/readme_images/database_schema.webp)
+![Database Schema](/docs/readme_images/database_schema.webp)
 
 </details>
 
@@ -132,7 +132,7 @@ The database URL and secret key are stored in the env file. This prevents unwant
 No errors were found when running Python files through [Pep8](https://pep8ci.herokuapp.com/#).
 
 ### Manual Testing
-<strong>Note: </strong>All the manual testing was performed before applying changes as mentioned in "[Ready unified projects before deployment](https://code-institute-students.github.io/advfe-unified-workspace/deployment/00-deployment)" to avoid conflicts in URL. if you want to perform manual testing kindly change the code in the following files mentioned [here](docs/md_files/WITHOUT_DEPLOY_SETTINGS.md).
+<strong>Note: </strong>All the manual testing was performed before applying changes as mentioned in "[Ready unified projects before deployment](https://code-institute-students.github.io/advfe-unified-workspace/deployment/00-deployment)" to avoid conflicts in URL. if you want to perform manual testing kindly change the code in the following files mentioned [here](/docs/md_files/WITHOUT_DEPLOY_SETTINGS.md).
 
 - I confirmed that the root welcome message is shown correctly.
 - I confirmed all URLs are manually tested and are working correctly.
@@ -187,7 +187,7 @@ except IntegrityError:
     )
 ```
 
-- I was struggling with creating query sets in profiles and products. Following were the cases
+- I was struggling with creating query sets in profile and product view. Following were the cases
     - Fetching profiles with the highest upvotes to the lowest.
     - Showing only those posts that are public and private to those who are friends with current users only.
 
@@ -196,7 +196,7 @@ except IntegrityError:
 Profile
 queryset = Profile.objects.annotate(posts_count=Count('owner__product', distinct=True),total_upvotes=Coalesce((Vote.objects.filter(up_vote=True).values('total_upvotes')), 0)).order_by('-total_upvotes')
 ```
-I updated this solution multiple times, before asking chatgpt. My code for the profile was removed before the commit hence not available.
+I updated this solution multiple times, before asking chatgpt. My code for the product view was removed before the commit hence not available.
 
 
 **Fix:** Chat gpt helped me in creating the querysets for this purpose. Kindly see the profile and product views for details.

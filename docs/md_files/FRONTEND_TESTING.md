@@ -30,63 +30,63 @@
 
 Web site was run through [W3C HTML Validator](https://validator.w3.org/). The result can be seen below.
 
-![HTML Validation](docs/testing_images/html.png)
+![HTML Validation](/docs/testing_images/html.png)
 
 ### CSS
 [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) found no error in the CSS files. The result can be seen below.
 
-![CSS Validation](docs/testing_images/css.png)
+![CSS Validation](/docs/testing_images/css.png)
 
 ### Lighthouse Report
 The deployed project was run through Lighthouse on Google Chrome.
 
 - Home Desktop
 
-![Light house](docs/testing_images/home_desktop.png)
+![Light house](/docs/testing_images/home_desktop.png)
 
 - Home Mobile
 
-![Light house](docs/testing_images/home_mobile.png)
+![Light house](/docs/testing_images/home_mobile.png)
 
 - Add Post Desktop
 
-![Light house](docs/testing_images/post_create_desktop.png)
+![Light house](/docs/testing_images/post_create_desktop.png)
 
 - Add Post Mobile
 
-![Light house](docs/testing_images/post_create_mobile.png)
+![Light house](/docs/testing_images/post_create_mobile.png)
 
 - Edit Post Desktop
 
-![Light house](docs/testing_images/post_edit_desktop.png)
+![Light house](/docs/testing_images/post_edit_desktop.png)
 
 - Edit Post Mobile
 
-![Light house](docs/testing_images/post_edit_desktop.png)
+![Light house](/docs/testing_images/post_edit_desktop.png)
 
 - Trending Desktop
 
-![Light house](docs/testing_images/trending_desktop.png)
+![Light house](/docs/testing_images/trending_desktop.png)
 
 - Trending Mobile
 
-![Light house](docs/testing_images/trending_mobile.png)
+![Light house](/docs/testing_images/trending_mobile.png)
 
 - Voted Desktop
 
-![Light house](docs/testing_images/voted_desktop.png)
+![Light house](/docs/testing_images/voted_desktop.png)
 
 - Voted Mobile
 
-![Light house](docs/testing_images/voted_mobile.png)
+![Light house](/docs/testing_images/voted_mobile.png)
 
 - Profile Desktop
 
-![Light house](docs/testing_images/profile_desktop.png)
+![Light house](/docs/testing_images/profile_desktop.png)
 
 - Profile Mobile
 
-![Light house](docs/testing_images/profile_mobile.png)
+![Light house](/docs/testing_images/profile_mobile.png)
 
 ## Manual Testing
 

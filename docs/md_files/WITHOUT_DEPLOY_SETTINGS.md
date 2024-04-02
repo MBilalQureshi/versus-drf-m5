@@ -256,4 +256,4 @@ export const axiosRes = axios.create();
 export const axiosReq = axios.create();
 ```
 ## utils.js
-fetchMoreData URL must also be updated to work seamlessly if infinite scroll is triggered
+fetchMoreData has URL must also be updated to work seamlessly if infinite scroll is triggered.
