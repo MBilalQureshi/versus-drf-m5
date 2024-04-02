@@ -34,56 +34,43 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEBUG' in os.environ
+DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOST'),'localhost']
+ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOST'), 'localhost']
 
-CSRF_TRUSTED_ORIGINS=[os.environ.get('CSRF_TRUSTED_ORIGINS'),'http://localhost:8000/']
+CSRF_TRUSTED_ORIGINS = [
+    os.environ.get('CSRF_TRUSTED_ORIGINS'),
+    'http://localhost:8000/'
+    ]
 
-# CORS_ORIGIN_WHITELIST = [
-#     'http://localhost:8000/'
-# ]
-
-# use session if in development, use JWT Tokens IF IN PRODUCTION
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [(
         'rest_framework.authentication.SessionAuthentication'
         if 'DEV' in os.environ
         else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
     )],
-    # Pagination is really easy to set up  with REST Framework. In settings.py, 
-    # I’ll set it to PageNumberPagination with the page  size set to ten inside the REST_FRAMEWORK object.
+
     'DEFAULT_PAGINATION_CLASS':
         'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE' : 10,
-    # e.g 02 Aug 2024 https://www.django-rest-framework.org/api-guide/settings/#date-and-time-formatting
-    # https://docs.python.org/3/library/time.html#time.strftime
-    'DATETIME_FORMAT' : '%d %b %Y'
-}  
+    'PAGE_SIZE': 10,
+    'DATETIME_FORMAT': '%d %b %Y'
+}
 
-# Ensure only JSON is rendered in Development
 if 'DEV' not in os.environ:
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
         'rest_framework.renderers.JSONRenderer',
-]
+        ]
 
-# REST_USE_JWT = True
-# JWT_AUTH_SECURE = True
-# JWT_AUTH_COOKIE = 'my-app-auth'
-# JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
-
-# overrides default USER_DETAILS_SERIALIZER https://dj-rest-auth.readthedocs.io/en/latest/configuration.html
 REST_AUTH = {
-    # 'USER_DETAILS_SERIALIZER': 'dj_rest_auth.serializers.UserDetailsSerializer',
     'USE_JWT': True,
     'JWT_AUTH_SECURE': True,
-    'USER_DETAILS_SERIALIZER': 'versus_drf_api.serializers.CurrentUserSerializer',
+    'USER_DETAILS_SERIALIZER':
+        'versus_drf_api.serializers.CurrentUserSerializer',
     'JWT_AUTH_COOKIE': 'my-app-auth',
     'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',
     'JWT_AUTH_HTTPONLY': False,
 }
 
-# Now that we have the two parts of our application within the same workspace, the CORS issues with the original separate projects are no longer a problem. This is because both parts of the project will come from the same base URL. Therefore, we can remove most of the code in the Django project relating to CORS.
 CORS_ALLOWED_ORIGINS = [os.environ.get('CLIENT_ORIGIN')]
 
 SITE_ID = 1
@@ -167,16 +154,20 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.'
+                'password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.'
+                'password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'NumericPasswordValidator',
     },
 ]
 
