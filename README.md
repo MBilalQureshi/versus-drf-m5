@@ -64,6 +64,11 @@ The live site can be found here - [Versus](https://versus-bac55e8730b2.herokuapp
     + [Sign out Modal, Model # 1](#sign-out-modal--model---1)
     + [Post Creation Rules, Model # 2](#post-creation-rules--model---2)
     + [Website rules modal on Sign Up,  Model # 3](#website-rules-modal-on-sign-up---model---3)
+  * [Reusable React Components](#reusable-react-components)
+    + [Asset](#asset)
+    + [Avatar](#avatar)
+    + [Modal Handler](#modal-handler)
+    + [More Dropdown](#more-dropdown)
   * [Libraries and Technologies Used](#libraries-and-technologies-used)
     + [Languages](#languages)
     + [Frameworks - Libraries - Programs Used - Packages Used](#frameworks---libraries---programs-used---packages-used)
@@ -430,6 +435,32 @@ Custom page 400 Bad request page is added in case the user tries to enter invali
 - There is a specific set of rules to follow before signing up. All users must follow it.
 - The user can click on the "Click here to see rules" button to see all the rules.
 - The user can click close or cross button to close the modal.
+
+## Reusable React Components
+
+### Asset
+Asset component is used in many parts of the website before content is loaded. It had three parts mentioned below.
+- The Spinner appears before the content is loaded.
+- The Image appears if no content is found.
+- message appears below the image when no content is found.
+
+### Avatar
+Avatar acts as the user's image which is mostly beside usernames. This component sets the following.
+- Source as what is the avatar's image origin.
+- Image width
+- Image height
+- Avatar alternate name
+
+### Modal Handler
+This shows and closes the data inside a modal.
+- Instructions or rules as the content of the modal
+- Title as what should be the name of the modal.
+
+### More Dropdown
+This component provides the following options to users
+- The user can click on three dots and can edit the profile by selecting one of the options.
+- The user can edit or delete a comment.
+- The user can edit or delete a post.
 
 ## Libraries and Technologies Used
 ### Languages

@@ -1,4 +1,5 @@
 # Testing
+All the testing related frontend part of the project can be found here.
 
 ## Table of Contents
 - [Testing](#testing)
