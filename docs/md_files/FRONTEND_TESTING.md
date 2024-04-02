@@ -1,4 +1,6 @@
 # Testing
+
+## Table of Contents
 - [Testing](#testing)
   * [Table of Contents](#table-of-contents)
   * [Validator Testing](#validator-testing)
@@ -21,9 +23,6 @@
   * [Unfixed bugs](#unfixed-bugs)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
-
-## Table of Contents
 
 ## Validator Testing
 
