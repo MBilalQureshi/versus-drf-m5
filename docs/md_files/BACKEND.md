@@ -25,6 +25,7 @@ The live site can be found here - [Versus](https://versus-bac55e8730b2.herokuapp
   * [Future Feature](#future-feature)
   * [Testing](#testing)
     + [CI Python Linter](#ci-python-linter)
+  * [Automated Testing](#automated-testing)
     + [Manual Testing](#manual-testing)
     + [Testing Endpoints](#testing-endpoints)
     + [Bugs](#bugs)
@@ -131,8 +132,13 @@ The database URL and secret key are stored in the env file. This prevents unwant
 ### CI Python Linter
 No errors were found when running Python files through [Pep8](https://pep8ci.herokuapp.com/#).
 
+## Automated Testing
+Automated test was performed specifically on Navbar. All tests ran successfully and no issue was detected.
+
+<strong>Note:</strong> To avoid conflicts in URLs, If you want to perform automated testing kindly change the code in the following files mentioned [here](/docs/md_files/WITHOUT_DEPLOY_SETTINGS.md). Code can also be found here. baseURL from handlers.js was also removed as drf and frontend exists in same project.
+
 ### Manual Testing
-<strong>Note: </strong>All the manual testing was performed before applying changes as mentioned in "[Ready unified projects before deployment](https://code-institute-students.github.io/advfe-unified-workspace/deployment/00-deployment)" to avoid conflicts in URL. if you want to perform manual testing kindly change the code in the following files mentioned [here](/docs/md_files/WITHOUT_DEPLOY_SETTINGS.md).
+<strong>Note: </strong>All the manual testing was performed before applying changes as mentioned in "[Ready unified projects before deployment](https://code-institute-students.github.io/advfe-unified-workspace/deployment/00-deployment)" to avoid conflicts in URL. if you want to perform manual testing kindly change the code in the following files mentioned [here](/docs/md_files/WITHOUT_DEPLOY_SETTINGS.md). Code can also be found here.
 
 - I confirmed that the root welcome message is shown correctly.
 - I confirmed all URLs are manually tested and are working correctly.

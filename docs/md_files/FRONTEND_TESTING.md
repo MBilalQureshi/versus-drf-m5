@@ -1,12 +1,11 @@
 # Testing
-
-## Table of Contents
 - [Testing](#testing)
   * [Table of Contents](#table-of-contents)
   * [Validator Testing](#validator-testing)
     + [HTML](#html)
     + [CSS](#css)
     + [Lighthouse Report](#lighthouse-report)
+  * [Automated Testing](#automated-testing)
   * [Manual Testing](#manual-testing)
     + [Navigation](#navigation)
     + [Home Page](#home-page)
@@ -23,6 +22,8 @@
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
+
+## Table of Contents
 
 ## Validator Testing
 
@@ -87,6 +88,11 @@ The deployed project was run through Lighthouse on Google Chrome.
 - Profile Mobile
 
 ![Light house](/docs/testing_images/profile_mobile.png)
+
+## Automated Testing
+Automated test was performed specifically on products application. All tests ran successfully and no issue was detected.
+
+<strong>Note:</strong> Switch to local database before performing tests.
 
 ## Manual Testing
 
