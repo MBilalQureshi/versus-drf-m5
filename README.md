@@ -231,6 +231,9 @@ New users can sign up from here to access the website all features.
 ![Sign up Page](docs/wireframes/signup.png)
 </details>
 
+### Fonts
+DM Sans is the primary font for this website, secondary font is set to sans-serif.
+
 ## Testing
 
 Testing and results can be found [here](/docs/md_files/FRONTEND_TESTING.md)

@@ -132,7 +132,7 @@ The database URL and secret key are stored in the env file. This prevents unwant
 ### CI Python Linter
 No errors were found when running Python files through [Pep8](https://pep8ci.herokuapp.com/#).
 
-## Automated Testing
+### Automated Testing
 Automated test was performed specifically on Navbar. All tests ran successfully and no issue was detected.
 
 <strong>Note:</strong> To avoid conflicts in URLs, If you want to perform automated testing kindly change the code in the following files mentioned [here](/docs/md_files/WITHOUT_DEPLOY_SETTINGS.md). Code can also be found here. baseURL from handlers.js was also removed as drf and frontend exists in same project.
