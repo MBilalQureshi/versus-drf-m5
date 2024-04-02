@@ -194,9 +194,8 @@ The deployed project was run through Lighthouse on Google Chrome.
 ## Unfixed bugs
 - No known unfixed bugs.
 
-
 Return to the [FRONTEND README](/README.md) file.
 
-Return to the [BACKEND README](/BACKEND.md) file.
+Return to the [BACKEND README](/docs/md_files/BACKEND.md) file.
 
 [Back to top](#top)

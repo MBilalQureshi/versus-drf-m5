@@ -30,7 +30,7 @@ class VoteSerializer(serializers.ModelSerializer):
         except IntegrityError:
             raise serializers.ValidationError(
                 {
-                    "detail": "You cannot vote again on same product, Kindly update or deyour current vote on product"
+                    "detail": "You cannot vote again on same product, Kindly update or delete your current vote on product"
                 }
             )
 

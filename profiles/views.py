@@ -11,6 +11,8 @@ from votes.models import Vote
 class ProfileList(generics.ListAPIView):
     '''
     List all profiles data
+    Chat gpt helped in creating total_upvotes.
+    Fetching profiles with highest up votes to lowest.
     '''
     queryset = Profile.objects.annotate(
         posts_count=Count('owner__product', distinct=True),

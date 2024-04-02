@@ -85,11 +85,11 @@ The live site can be found here - [Versus](https://versus-bac55e8730b2.herokuapp
 
 ### Frontend Testing
 
-Navigate to the [FRONTEND TESTING README](/FRONTEND_TESTING.md) file.
+Navigate to the [FRONTEND TESTING README](/docs/md_files/FRONTEND_TESTING.md) file.
 
 ### Backend
 
-Navigate to the [BACKEND README](/BACKEND.md) file.
+Navigate to the [BACKEND README](/docs/md_files/BACKEND.md) file.
 
 ## User Experience (UX)
 A visitor to Versus is most probably someone who wants to buy a product and post that product just to find what others think about that product, is it worth buying or if that product information is already there that visitor could get exact information by viewing the post.
@@ -228,7 +228,7 @@ New users can sign up from here to access the website all features.
 
 ## Testing
 
-Testing and results can be found [here](/FRONTEND_TESTING.md)
+Testing and results can be found [here](/docs/md_files/FRONTEND_TESTING.md)
 
 ## Security Features and Defensive Design
 
