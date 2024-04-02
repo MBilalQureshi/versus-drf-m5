@@ -37,6 +37,7 @@ The live site can be found here - [Versus](https://versus-bac55e8730b2.herokuapp
     + [Color Scheme](#color-scheme)
     + [Imagery](#imagery)
     + [Wireframes](#wireframes)
+    + [Fonts](#fonts)
   * [Testing](#testing)
   * [Security Features and Defensive Design](#security-features-and-defensive-design)
     + [Custom error 404 page:](#custom-error-404-page-)
